@@ -1,5 +1,5 @@
 <template>
-  <section class="relative bg-gray-900 overflow-hidden">
+  <section class="relative bg-gray-900 overflow-hidden pt-16 md:pt-20">
     <div
       class="absolute inset-0 bg-gradient-to-r from-dark-gold-900 to-transparent opacity-50"></div>
     <div class="container mx-auto px-6 py-24 relative z-10">

@@ -1,5 +1,6 @@
 <template>
-  <header class="bg-gray-900 border-b border-dark-gold-800">
+  <header
+    class="fixed top-0 left-0 right-0 z-50 bg-gray-900 border-b border-dark-gold-800 shadow-lg">
     <div class="container mx-auto px-6 py-4">
       <div class="flex items-center justify-between">
         <a href=""
@@ -36,14 +37,74 @@
           <a
             href=""
             type="button"
-            class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 me-2 mb-2">
+            class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
             <Icon icon="weui:shop-filled" width="24" height="24" />
-            Shop Now
+            <span class="hidden md:inline ml-2">Shop Now</span>
           </a>
+
+          <button
+            @click="isMenuOpen = !isMenuOpen"
+            class="md:hidden text-dark-gold-300 focus:outline-none"
+            aria-label="Toggle menu">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                :d="
+                  isMenuOpen
+                    ? 'M6 18L18 6M6 6l12 12'
+                    : 'M4 6h16M4 12h16M4 18h16'
+                " />
+            </svg>
+          </button>
         </div>
       </div>
+
+      <!-- Burger button -->
+      <transition
+        enter-active-class="transition ease-out duration-100"
+        enter-from-class="transform opacity-0 scale-95"
+        enter-to-class="transform opacity-100 scale-100"
+        leave-active-class="transition ease-in duration-75"
+        leave-from-class="transform opacity-100 scale-100"
+        leave-to-class="transform opacity-0 scale-95">
+        <div v-show="isMenuOpen" class="md:hidden mt-4 pb-4">
+          <div class="flex flex-col space-y-3">
+            <a
+              href="#"
+              class="text-dark-gold-300 hover:text-dark-gold-100 px-3 py-2"
+              >Home</a
+            >
+            <a
+              href="#"
+              class="text-dark-gold-300 hover:text-dark-gold-100 px-3 py-2"
+              >Collections</a
+            >
+            <a
+              href="#"
+              class="text-dark-gold-300 hover:text-dark-gold-100 px-3 py-2"
+              >About</a
+            >
+            <a
+              href="#"
+              class="text-dark-gold-300 hover:text-dark-gold-100 px-3 py-2"
+              >Contact</a
+            >
+          </div>
+        </div>
+      </transition>
     </div>
   </header>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+
+const isMenuOpen = ref(false);
+</script>
