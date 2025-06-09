@@ -1,14 +1,11 @@
 <template>
-  <footer class="bg-gray-900 border-t border-dark-gold-800">
+  <footer class="bg-black border-t border-amber-300">
     <div class="container mx-auto px-6 py-12">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
         <div>
-          <h3 class="text-xl font-bold text-dark-gold-400 mb-4">
-            LUXE PARFUME
-          </h3>
+          <h3 class="text-xl font-bold text-dark-gold-400 mb-4">FEGANCE</h3>
           <p class="text-gray-400">
-            Crafting exquisite fragrances since 2010. Our passion is creating
-            scents that inspire and captivate.
+            Make a first impression with a memorable fragrance. Be elegant ✨
           </p>
         </div>
 
@@ -16,31 +13,18 @@
           <h4 class="text-lg font-semibold text-white mb-4">Shop</h4>
           <ul class="space-y-2">
             <li>
-              <a
-                href="#"
-                class="text-gray-400 hover:text-dark-gold-300 transition"
-                >All Products</a
+              <a href="#" class="text-gray-400 hover:text-amber-300 transition"
+                >Shopee</a
               >
             </li>
             <li>
-              <a
-                href="#"
-                class="text-gray-400 hover:text-dark-gold-300 transition"
-                >New Arrivals</a
+              <a href="#" class="text-gray-400 hover:text-amber-300 transition"
+                >Tokopedia</a
               >
             </li>
             <li>
-              <a
-                href="#"
-                class="text-gray-400 hover:text-dark-gold-300 transition"
-                >Best Sellers</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="text-gray-400 hover:text-dark-gold-300 transition"
-                >Gift Sets</a
+              <a href="#" class="text-gray-400 hover:text-amber-300 transition"
+                >Tiktok Shop</a
               >
             </li>
           </ul>
@@ -50,30 +34,22 @@
           <h4 class="text-lg font-semibold text-white mb-4">Company</h4>
           <ul class="space-y-2">
             <li>
-              <a
-                href="#"
-                class="text-gray-400 hover:text-dark-gold-300 transition"
+              <a href="#" class="text-gray-400 hover:text-amber-300 transition"
                 >About Us</a
               >
             </li>
             <li>
-              <a
-                href="#"
-                class="text-gray-400 hover:text-dark-gold-300 transition"
+              <a href="#" class="text-gray-400 hover:text-amber-300 transition"
                 >Our Story</a
               >
             </li>
             <li>
-              <a
-                href="#"
-                class="text-gray-400 hover:text-dark-gold-300 transition"
+              <a href="#" class="text-gray-400 hover:text-amber-300 transition"
                 >Sustainability</a
               >
             </li>
             <li>
-              <a
-                href="#"
-                class="text-gray-400 hover:text-dark-gold-300 transition"
+              <a href="#" class="text-gray-400 hover:text-amber-300 transition"
                 >Contact</a
               >
             </li>
@@ -96,9 +72,7 @@
             </button>
           </div>
           <div class="flex space-x-4 mt-4">
-            <a
-              href="#"
-              class="text-gray-400 hover:text-dark-gold-300 transition">
+            <a href="#" class="text-gray-400 hover:text-amber-300 transition">
               <svg
                 class="h-6 w-6"
                 fill="currentColor"
@@ -110,9 +84,7 @@
                   clip-rule="evenodd" />
               </svg>
             </a>
-            <a
-              href="#"
-              class="text-gray-400 hover:text-dark-gold-300 transition">
+            <a href="#" class="text-gray-400 hover:text-amber-300 transition">
               <svg
                 class="h-6 w-6"
                 fill="currentColor"
@@ -124,9 +96,7 @@
                   clip-rule="evenodd" />
               </svg>
             </a>
-            <a
-              href="#"
-              class="text-gray-400 hover:text-dark-gold-300 transition">
+            <a href="#" class="text-gray-400 hover:text-amber-300 transition">
               <svg
                 class="h-6 w-6"
                 fill="currentColor"
@@ -141,30 +111,15 @@
       </div>
 
       <div
-        class="border-t border-dark-gold-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+        class="border-t border-amber-300 mt-12 pt-8 flex flex-col md:flex-row justify-center items-center">
         <p class="text-gray-500 text-sm">
-          © 2023 Luxe Parfume. All rights reserved.
+          © {{ currentYear }} Fegance. All rights reserved.
         </p>
-        <div class="flex space-x-6 mt-4 md:mt-0">
-          <a
-            href="#"
-            class="text-gray-500 hover:text-dark-gold-300 text-sm transition"
-            >Privacy Policy</a
-          >
-          <a
-            href="#"
-            class="text-gray-500 hover:text-dark-gold-300 text-sm transition"
-            >Terms of Service</a
-          >
-          <a
-            href="#"
-            class="text-gray-500 hover:text-dark-gold-300 text-sm transition"
-            >Shipping Policy</a
-          >
-        </div>
       </div>
     </div>
   </footer>
 </template>
 
-<script setup></script>
+<script setup>
+const currentYear = new Date().getFullYear();
+</script>

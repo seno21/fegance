@@ -1,5 +1,5 @@
 <template>
-  <section class="py-16 bg-gray-800">
+  <section class="py-16 bg-gray-50">
     <div class="container mx-auto px-6">
       <div class="text-center mb-16">
         <h2 class="text-3xl font-bold text-dark-gold-400 mb-4">
@@ -13,7 +13,7 @@
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div
-          class="bg-gray-700 p-8 rounded-lg border border-dark-gold-800 hover:border-dark-gold-500 transition">
+          class="bg-gray-700 p-8 rounded-lg border border-amber-300-800 hover:border-dark-gold-500 transition">
           <div class="text-dark-gold-400 mb-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -35,7 +35,7 @@
         </div>
 
         <div
-          class="bg-gray-700 p-8 rounded-lg border border-dark-gold-800 hover:border-dark-gold-500 transition">
+          class="bg-gray-700 p-8 rounded-lg border border-amber-300-800 hover:border-dark-gold-500 transition">
           <div class="text-dark-gold-400 mb-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +57,7 @@
         </div>
 
         <div
-          class="bg-gray-700 p-8 rounded-lg border border-dark-gold-800 hover:border-dark-gold-500 transition">
+          class="bg-gray-700 p-8 rounded-lg border border-amber-300-800 hover:border-dark-gold-500 transition">
           <div class="text-dark-gold-400 mb-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -1,34 +1,26 @@
 <template>
   <header
-    class="fixed top-0 left-0 right-0 z-50 bg-gray-900 border-b border-dark-gold-800 shadow-lg">
-    <div class="container mx-auto px-6 py-4">
+    class="fixed top-0 left-0 right-0 z-50 bg-gray-950 border-b border-amber-300 shadow-md">
+    <div class="container mx-auto px-6 py-1">
       <div class="flex items-center justify-between">
         <a href=""
           ><img
-            class="h-22 w-auto py-2"
+            class="h-20 w-auto py-2"
             src="/public/images/icon-brand.svg"
             alt="brand"
         /></a>
 
         <nav class="hidden md:flex space-x-8 text-xl">
-          <a
-            href="#"
-            class="text-dark-gold-300 hover:text-dark-gold-100 transition"
+          <a href="#" class="text-dark-gold-300 hover:text-amber-300 transition"
             >Home</a
           >
-          <a
-            href="#"
-            class="text-dark-gold-300 hover:text-dark-gold-100 transition"
+          <a href="#" class="text-dark-gold-300 hover:text-amber-300 transition"
             >Collections</a
           >
-          <a
-            href="#"
-            class="text-dark-gold-300 hover:text-dark-gold-100 transition"
+          <a href="#" class="text-dark-gold-300 hover:text-amber-300 transition"
             >About</a
           >
-          <a
-            href="#"
-            class="text-dark-gold-300 hover:text-dark-gold-100 transition"
+          <a href="#" class="text-dark-gold-300 hover:text-amber-300 transition"
             >Contact</a
           >
         </nav>
@@ -37,9 +29,8 @@
           <a
             href=""
             type="button"
-            class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
+            class="text-dark-gold-300 hover:text-amber-300 transition">
             <Icon icon="weui:shop-filled" width="24" height="24" />
-            <span class="hidden md:inline ml-2">Shop Now</span>
           </a>
 
           <button

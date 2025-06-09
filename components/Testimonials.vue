@@ -1,5 +1,5 @@
 <template>
-  <section class="py-16 bg-gray-800">
+  <section class="py-16 bg-amber-50">
     <div class="container mx-auto px-6">
       <div class="text-center mb-16">
         <h2 class="text-3xl font-bold text-dark-gold-400 mb-4">
@@ -15,7 +15,7 @@
         <div
           v-for="(testimonial, index) in testimonials"
           :key="index"
-          class="bg-gray-700 p-6 rounded-lg border border-dark-gold-800">
+          class="bg-gray-700 p-6 rounded-lg border border-amber-300">
           <div class="flex items-center mb-4">
             <div
               class="h-12 w-12 rounded-full bg-gray-600 overflow-hidden mr-4">
