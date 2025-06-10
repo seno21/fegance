@@ -2,10 +2,10 @@
   <section class="py-16 bg-gray-50">
     <div class="container mx-auto px-6">
       <div class="text-center mb-16">
-        <h2 class="text-3xl font-bold text-dark-gold-400 mb-4">
+        <h2 class="text-3xl font-bold text-amber-400 mb-4">
           Why Choose Our Fragrances
         </h2>
-        <p class="text-gray-300 max-w-2xl mx-auto">
+        <p class="text-black max-w-2xl mx-auto">
           Crafted with passion and precision, our perfumes are a symphony of
           rare ingredients and masterful blending.
         </p>

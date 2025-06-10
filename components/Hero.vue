@@ -15,8 +15,8 @@
             together in a flacon.
           </p>
           <button
-            class="bg-amber-300 hover:bg-dark-gold-500 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
-            Explore Collection
+            class="bg-amber-300 hover:bg-dark-gold-500 text-black font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
+            Our Story
           </button>
         </div>
         <div class="md:w-1/2 flex justify-center">

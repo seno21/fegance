@@ -73,7 +73,7 @@
               >Home</a
             >
             <a
-              href="#"
+              href="#products"
               class="text-dark-gold-300 hover:text-dark-gold-100 px-3 py-2"
               >Collections</a
             >

@@ -1,12 +1,11 @@
 <template>
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50" id="products">
     <div class="container mx-auto px-6">
       <div class="text-center mb-16">
-        <h2 class="text-3xl font-bold text-dark-gold-400 mb-4">
-          Our Signature Collection
-        </h2>
-        <p class="text-gray-300 max-w-2xl mx-auto">
-          Each fragrance tells a story. Discover yours.
+        <h2 class="text-3xl font-bold text-amber-400 mb-4">Our Collection</h2>
+        <p class="text-black max-w-2xl mx-auto">
+          One scent, a thousand stories. Discover the fragrance that defines
+          you.
         </p>
       </div>
 
@@ -61,19 +60,19 @@
 const products = [
   {
     name: "Deep In The Night (DITN)",
-    price: "120 K",
+    price: "Rp 120K",
     description: "A rich blend of oud, spices and amber.",
     image: "perfume-1.jpg",
   },
   {
     name: "Golden Amber",
-    price: "$95",
+    price: "Rp 135K",
     description: "Warm amber with hints of vanilla and musk.",
     image: "perfume-2.jpg",
   },
   {
     name: "Midnight Jasmine",
-    price: "$110",
+    price: "Rp 150K",
     description: "Floral jasmine with dark woody undertones.",
     image: "perfume-3.jpg",
   },
