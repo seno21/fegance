@@ -15,7 +15,7 @@
             >Home</a
           >
           <a href="#" class="text-dark-gold-300 hover:text-amber-300 transition"
-            >Collections</a
+            >Collection</a
           >
           <a href="#" class="text-dark-gold-300 hover:text-amber-300 transition"
             >About</a
@@ -37,22 +37,14 @@
             @click="isMenuOpen = !isMenuOpen"
             class="md:hidden text-dark-gold-300 focus:outline-none"
             aria-label="Toggle menu">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                :d="
-                  isMenuOpen
-                    ? 'M6 18L18 6M6 6l12 12'
-                    : 'M4 6h16M4 12h16M4 18h16'
-                " />
-            </svg>
+            <Icon
+              :icon="
+                isMenuOpen
+                  ? 'radix-icons:cross-1'
+                  : 'stash:burger-classic-duotone'
+              "
+              width="32"
+              height="32" />
           </button>
         </div>
       </div>

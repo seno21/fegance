@@ -2,10 +2,10 @@
   <section class="py-16 bg-gray-50" id="products">
     <div class="container mx-auto px-6">
       <div class="text-center mb-16">
-        <h2 class="text-3xl font-bold text-amber-400 mb-4">Our Collection</h2>
+        <h2 class="text-3xl font-bold text-amber-400 mb-4">Collections</h2>
         <p class="text-black max-w-2xl mx-auto">
-          One scent, a thousand stories. Discover the fragrance that defines
-          you.
+          Enjoy the art in every spray. Crafted with heart, for souls who
+          appreciate the beauty of scent.
         </p>
       </div>
 
@@ -45,11 +45,21 @@
               </span>
               <a
                 href="#"
-                class="text-white bg-amber-300 hover:bg-amber-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                Add to cart
+                class="text-black bg-amber-300 hover:bg-amber-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                Detail
               </a>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="grid py-7">
+        <div class="container mx-auto px-6 py-10 text-center">
+          <a
+            href=""
+            class="mt-10 bg-amber-300 hover:bg-dark-gold-500 text-black text-2xl font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
+            <Icon icon="weui:shop-filled" width="24" height="24" />
+            More Collection
+          </a>
         </div>
       </div>
     </div>
@@ -60,18 +70,18 @@
 const products = [
   {
     name: "Deep In The Night (DITN)",
-    price: "Rp 120K",
+    price: "Rp 125K",
     description: "A rich blend of oud, spices and amber.",
     image: "perfume-1.jpg",
   },
   {
-    name: "Golden Amber",
-    price: "Rp 135K",
+    name: "Dusk Exlixir",
+    price: "Rp 125K",
     description: "Warm amber with hints of vanilla and musk.",
     image: "perfume-2.jpg",
   },
   {
-    name: "Midnight Jasmine",
+    name: "Silent Infusion",
     price: "Rp 150K",
     description: "Floral jasmine with dark woody undertones.",
     image: "perfume-3.jpg",

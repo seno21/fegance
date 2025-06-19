@@ -17,13 +17,6 @@
           :key="index"
           class="bg-gray-100 p-6 rounded-lg shadow-xl">
           <div class="flex items-center mb-4">
-            <div
-              class="h-12 w-12 rounded-full bg-gray-600 overflow-hidden mr-4">
-              <img
-                :src="`/images/avatar/${testimonial.avatar}`"
-                :alt="testimonial.name"
-                class="h-full w-full object-cover" />
-            </div>
             <div>
               <h4 class="font-bold text-black">{{ testimonial.name }}</h4>
               <p class="text-yellow-700 text-shadow-xl text-sm">
