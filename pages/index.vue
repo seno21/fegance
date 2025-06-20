@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-900 text-gray-100">
+  <div class="min-h-screen bg-amber-100 text-gray-100">
     <Header />
     <main>
       <Hero />

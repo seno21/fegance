@@ -70,13 +70,13 @@
 const products = [
   {
     name: "Deep In The Night (DITN)",
-    price: "Rp 125K",
+    price: "Rp 130K",
     description: "A rich blend of oud, spices and amber.",
     image: "perfume-1.jpg",
   },
   {
     name: "Dusk Exlixir",
-    price: "Rp 125K",
+    price: "Rp 130K",
     description: "Warm amber with hints of vanilla and musk.",
     image: "perfume-2.jpg",
   },
