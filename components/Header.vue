@@ -59,26 +59,10 @@
         leave-to-class="transform opacity-0 scale-95">
         <div v-show="isMenuOpen" class="md:hidden mt-4 pb-4">
           <div class="flex flex-col space-y-3">
-            <a
-              href="#"
-              class="text-dark-gold-300 hover:text-dark-gold-100 px-3 py-2"
-              >Home</a
-            >
-            <a
-              href="#products"
-              class="text-dark-gold-300 hover:text-dark-gold-100 px-3 py-2"
-              >Collections</a
-            >
-            <a
-              href="#"
-              class="text-dark-gold-300 hover:text-dark-gold-100 px-3 py-2"
-              >About</a
-            >
-            <a
-              href="#"
-              class="text-dark-gold-300 hover:text-dark-gold-100 px-3 py-2"
-              >Contact</a
-            >
+            <a href="#" class="px-3 py-2">Home</a>
+            <a href="#products" class="px-3 py-2">Collections</a>
+            <a href="#" class="px-3 py-2">About</a>
+            <a href="#" class="px-3 py-2">Contact</a>
           </div>
         </div>
       </transition>

@@ -56,7 +56,7 @@
         <div class="container mx-auto px-6 py-10 text-center">
           <a
             href=""
-            class="mt-10 bg-amber-300 hover:bg-dark-gold-500 text-black text-2xl font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
+            class="mt-10 bg-amber-300 hover:bg-amber-500 text-black text-2xl font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
             <Icon icon="weui:shop-filled" width="24" height="24" />
             More Collection
           </a>

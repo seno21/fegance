@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "dark-gold": {
+        amber: {
           50: "#faf8f0",
           100: "#f3efdb",
           200: "#e8dfb8",
