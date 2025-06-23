@@ -70,21 +70,27 @@
 const products = [
   {
     name: "Deep In The Night (DITN)",
-    price: "Rp 130K",
+    price: "Rp 135K",
     description: "A rich blend of oud, spices and amber.",
-    image: "perfume-1.jpg",
+    image: "deep-in-the-night.jpeg",
   },
   {
     name: "Dusk Exlixir",
-    price: "Rp 130K",
+    price: "Rp 135K",
     description: "Warm amber with hints of vanilla and musk.",
-    image: "perfume-2.jpg",
+    image: "dusk-elixir.jpeg",
   },
   {
     name: "Silent Infusion",
-    price: "Rp 150K",
+    price: "Rp 145K",
     description: "Floral jasmine with dark woody undertones.",
-    image: "perfume-3.jpg",
+    image: "silent-infusion.jpeg",
+  },
+  {
+    name: "Perfect Man",
+    price: "Rp 145K",
+    description: "Floral jasmine with dark woody undertones.",
+    image: "perfect-man.jpeg",
   },
 ];
 </script>
