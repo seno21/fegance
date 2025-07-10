@@ -11,8 +11,10 @@
         /></a>
 
         <nav class="hidden md:flex space-x-8 text-xl">
-          <a href="#" class="text-dark-gold-300 hover:text-amber-300 transition"
-            >Home</a
+          <NuxtLink
+            to="/"
+            class="text-dark-gold-300 hover:text-amber-300 transition"
+            >Home</NuxtLink
           >
           <a href="#" class="text-dark-gold-300 hover:text-amber-300 transition"
             >Collection</a
@@ -21,6 +23,22 @@
             >About</a
           >
           <a href="#" class="text-dark-gold-300 hover:text-amber-300 transition"
+            >Contact</a
+          >
+          <a href="/" class="text-dark-gold-300 hover:text-amber-300 transition"
+            >Home</a
+          >
+          <a href="#" class="text-dark-gold-300 hover:text-amber-300 transition"
+            >Collection</a
+          >
+          <a
+            href="/about"
+            class="text-dark-gold-300 hover:text-amber-300 transition"
+            >About</a
+          >
+          <a
+            href="/contact"
+            class="text-dark-gold-300 hover:text-amber-300 transition"
             >Contact</a
           >
         </nav>
