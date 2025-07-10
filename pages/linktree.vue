@@ -4,7 +4,6 @@
     <main>
       <Linktree />
     </main>
-    <Footer />
   </div>
 </template>
 

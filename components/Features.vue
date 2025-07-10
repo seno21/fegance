@@ -3,11 +3,17 @@
     <div class="container mx-auto px-6">
       <div class="text-center mb-16">
         <h2 class="text-3xl font-bold text-amber-400 mb-4">
-          Why Choose Our Fragrances
+          Why Choose Fegance
         </h2>
-        <p class="text-black max-w-2xl mx-auto">
-          Enjoy the art in every spray. Crafted with heart, for souls who
-          appreciate the beauty of scent.
+        <p class="text-black max-w-7xl mx-auto">
+          We believe that within every spritz of perfume lies a hidden hope — a
+          hope to appear more graceful, confident, and elegant. Each scent is
+          more than just fragrance; it's an invisible message that reflects
+          one's character, uniqueness, and the dreams they long to fulfill.
+          Perfume becomes our silent language, leaving a lasting impression
+          without a single word. Because for us, perfume is more than just a
+          scent. It is hope in liquid form — strengthening every step and
+          celebrating one's true identity.
         </p>
       </div>
 
