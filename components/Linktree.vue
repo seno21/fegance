@@ -40,9 +40,12 @@
 
 <script setup>
 const links = [
-  { label: "Shopee", url: "https://shopee.co.id/fegance" },
-  { label: "Tokopedia", url: "https://tokopedia.com/fegance" },
-  { label: "Tiktok Shop", url: "https://www.fegance.com/" },
+  {
+    label: "Shopee",
+    url: "https://s.shopee.co.id/8zu7pFAAim?share_channel_code=1",
+  },
+  // { label: "Tokopedia", url: "https://tokopedia.com/fegance" },
+  // { label: "Tiktok Shop", url: "https://www.fegance.com/" },
   { label: "WhatsApp", url: "https://wa.me/6285172372101" },
   { label: "Instagram", url: "https://instagram.com/fegance.id" },
   { label: "Official Site", url: "https://www.fegance.com/" },

@@ -16,30 +16,25 @@
             class="text-dark-gold-300 hover:text-amber-300 transition"
             >Home</NuxtLink
           >
-          <a href="#" class="text-dark-gold-300 hover:text-amber-300 transition"
-            >Collection</a
-          >
-          <a href="#" class="text-dark-gold-300 hover:text-amber-300 transition"
-            >About</a
-          >
-          <a href="#" class="text-dark-gold-300 hover:text-amber-300 transition"
-            >Contact</a
-          >
-          <a href="/" class="text-dark-gold-300 hover:text-amber-300 transition"
-            >Home</a
-          >
-          <a href="#" class="text-dark-gold-300 hover:text-amber-300 transition"
-            >Collection</a
-          >
-          <a
-            href="/about"
+          <NuxtLink
+            to="/catalog"
             class="text-dark-gold-300 hover:text-amber-300 transition"
-            >About</a
+            >Catalog</NuxtLink
           >
-          <a
-            href="/contact"
+          <NuxtLink
+            to="/"
             class="text-dark-gold-300 hover:text-amber-300 transition"
-            >Contact</a
+            >Shop</NuxtLink
+          >
+          <NuxtLink
+            to="/about"
+            class="text-dark-gold-300 hover:text-amber-300 transition"
+            >About</NuxtLink
+          >
+          <NuxtLink
+            to="/contact"
+            class="text-dark-gold-300 hover:text-amber-300 transition"
+            >Contact</NuxtLink
           >
         </nav>
 

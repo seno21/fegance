@@ -34,8 +34,10 @@
           <h4 class="text-lg font-semibold text-amber-400 mb-4">Company</h4>
           <ul class="space-y-2">
             <li>
-              <a href="#" class="text-gray-400 hover:text-amber-300 transition"
-                >Our Story</a
+              <NuxtLink
+                to="/story"
+                class="text-dark-gold-300 hover:text-amber-300 transition"
+                >Our Story</NuxtLink
               >
             </li>
             <li>

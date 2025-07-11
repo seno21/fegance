@@ -19,7 +19,7 @@
           <a href="#">
             <!-- Gambar dibungkus dalam container dengan tinggi tetap -->
             <div
-              class="h-56 flex items-center justify-center overflow-hidden bg-white">
+              class="h-56 py-2 flex items-center justify-center overflow-hidden bg-white">
               <img
                 class="object-contain rounded h-full transition transform hover:scale-105"
                 :src="`/images/product/${product.image}`"
