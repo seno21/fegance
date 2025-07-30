@@ -35,7 +35,7 @@
         </div>
         <div class="order-1 md:order-2">
           <img
-            src="/images/hero.jpg"
+            src="/images/hero/brand.svg"
             alt="The Genesis of Fegance"
             class="w-full h-auto rounded-lg shadow-xl object-cover transform hover:scale-105 transition-transform duration-500" />
         </div>
@@ -45,7 +45,7 @@
         class="grid md:grid-cols-2 gap-12 lg:gap-24 items-center mb-20 md:mb-32">
         <div>
           <img
-            src="/images/hero.jpg"
+            src="/images/hero/brand.svg"
             alt="The Art of Perfumery"
             class="w-full h-auto rounded-lg shadow-xl object-cover transform hover:scale-105 transition-transform duration-500" />
         </div>
@@ -89,7 +89,7 @@
         </div>
         <div class="order-1 md:order-2">
           <img
-            src="/images/hero.jpg"
+            src="/images/hero/brand.svg"
             alt="Future Vision of Fegance"
             class="w-full h-auto rounded-lg shadow-xl object-cover transform hover:scale-105 transition-transform duration-500" />
         </div>
