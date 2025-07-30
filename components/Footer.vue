@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-black border-t border-amber-300">
+  <footer class="bg-gray-950 border-t border-amber-300">
     <div class="container mx-auto px-6 py-12">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
         <div>
@@ -13,17 +13,17 @@
           <h4 class="text-lg font-semibold text-amber-400 mb-4">Shop</h4>
           <ul class="space-y-2">
             <li>
-              <a href="#" class="text-gray-400 hover:text-amber-300 transition"
+              <a href="#" class="text-gray-400 hover:text-yellow-300 transition"
                 >Shopee</a
               >
             </li>
             <li>
-              <a href="#" class="text-gray-400 hover:text-amber-300 transition"
+              <a href="#" class="text-gray-400 hover:text-yellow-300 transition"
                 >Tokopedia</a
               >
             </li>
             <li>
-              <a href="#" class="text-gray-400 hover:text-amber-300 transition"
+              <a href="#" class="text-gray-400 hover:text-yellow-300 transition"
                 >Tiktok Shop</a
               >
             </li>
@@ -36,17 +36,17 @@
             <li>
               <NuxtLink
                 to="/story"
-                class="text-dark-gold-300 hover:text-amber-300 transition"
+                class="text-dark-gold-300 hover:text-yellow-300 transition"
                 >Our Story</NuxtLink
               >
             </li>
             <li>
-              <a href="#" class="text-gray-400 hover:text-amber-300 transition"
+              <a href="#" class="text-gray-400 hover:text-yellow-300 transition"
                 >Community</a
               >
             </li>
             <li>
-              <a href="#" class="text-gray-400 hover:text-amber-300 transition"
+              <a href="#" class="text-gray-400 hover:text-yellow-300 transition"
                 >Contact</a
               >
             </li>
@@ -62,13 +62,13 @@
             updates.
           </p>
           <div class="flex space-x-4 mt-4">
-            <a href="#" class="text-gray-400 hover:text-amber-300 transition">
+            <a href="#" class="text-gray-400 hover:text-yellow-300 transition">
               <Icon icon="basil:instagram-outline" width="24" height="24" />
             </a>
-            <a href="#" class="text-gray-400 hover:text-amber-300 transition">
+            <a href="#" class="text-gray-400 hover:text-yellow-300 transition">
               <Icon icon="akar-icons:tiktok-fill" width="24" height="24" />
             </a>
-            <a href="#" class="text-gray-400 hover:text-amber-300 transition">
+            <a href="#" class="text-gray-400 hover:text-yellow-300 transition">
               <Icon icon="grommet-icons:threads" width="24" height="24" />
             </a>
           </div>

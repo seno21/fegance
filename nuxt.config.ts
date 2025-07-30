@@ -1,4 +1,3 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   app: {
     head: {
@@ -7,13 +6,9 @@ export default defineNuxtConfig({
   },
   compatibilityDate: "2025-05-15",
   devtools: { enabled: true },
-  modules: [
-    "@nuxt/ui",
-    "nuxt-icon-tw",
-    "@nuxtjs/tailwindcss",
-    "@nuxtjs/tailwindcss",
-    "nuxt-icon-tw",
-  ],
+
+  modules: ["@nuxt/ui", "nuxt-icon-tw", "@nuxtjs/tailwindcss"],
+
   tailwindcss: {
     exposeConfig: true,
     viewer: true,

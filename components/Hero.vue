@@ -1,21 +1,65 @@
 <template>
-  <section class="bg-center bg-no-repeat bg-[url('/public/images/hero.jpg')] bg-gray-400 bg-blend-multiply">
-    <div class="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
-      <h1 class="mb-4 font-extrabold tracking-tight leading-none text-white text-3xl md:text-5xl lg:text-6xl">Be Elegant With Us</h1>
-      <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">
-        Fegance Project was born from a hobby and hope to introduce that perfume is not just about smelling good or lasting long, but rather a reflection of identity, artwork, and self-confidence that come together in a flacon.
-      </p>
-      <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
-        <NuxtLink to="/story" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-amber-400 hover:bg-amber-500 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-          Our Story
-          <Icon class="ml-1" icon="famicons:book-sharp" width="24" height="24" />
-        </NuxtLink>
-        <a href="#" class="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 sm:ms-4 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400">
-          Our Collection
-        </a>
+  <section class="bg-white lg:grid lg:h-screen lg:place-content-center">
+    <div
+      class="mx-auto w-screen max-w-screen-xl px-6 py-16 sm:py-24 md:grid md:grid-cols-2 md:items-center md:gap-36">
+      <!-- TEKS -->
+      <div class="max-w-prose text-left">
+        <h1 class="text-4xl font-bold text-gray-900 sm:text-6xl">
+          Impress with a <strong class="text-amber-300">Signature</strong>
+          Scent
+        </h1>
+
+        <p class="mt-4 text-base text-pretty text-gray-700 sm:text-lg/relaxed">
+          We believe that fragrance is hope — a hope to appear more graceful,
+          confident, and elegant. To us, it is an art of leaving an impression
+          without words — a way to empower every step and celebrate one’s true
+          identity.
+        </p>
+
+        <div class="mt-4 flex gap-4 sm:mt-6">
+          <a
+            class="inline-block rounded border border-amber-300 bg-amber-300 px-5 py-3 font-medium text-gray-950 shadow-sm transition-colors hover:bg-amber-700"
+            href="#">
+            Shop Now
+          </a>
+          <a
+            class="inline-block rounded border border-gray-200 px-5 py-3 font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-50 hover:text-gray-900"
+            href="#">
+            Our Story
+          </a>
+        </div>
+      </div>
+
+      <!-- SLIDER -->
+      <div class="px-7 py-10">
+        <Swiper
+          :modules="[Autoplay]"
+          :spaceBetween="20"
+          :slidesPerView="1"
+          :loop="true"
+          :autoplay="{ delay: 3000, disableOnInteraction: false }"
+          class="max-w-md">
+          <SwiperSlide>
+            <img
+              src="/public/images/hero/PM.jpeg"
+              alt="Slide 1"
+              class="rounded-lg w-full max-w-[500px] aspect-[3/4] object-cover" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img
+              src="/public/images/hero/PM.jpeg"
+              alt="Slide 2"
+              class="rounded-lg w-full max-w-[500px] aspect-[3/4] object-cover" />
+          </SwiperSlide>
+          <!-- Tambahkan lebih banyak slide jika perlu -->
+        </Swiper>
       </div>
     </div>
   </section>
 </template>
 
-<script setup></script>
+<script setup>
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
+</script>

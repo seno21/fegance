@@ -5,7 +5,6 @@
       <Hero />
       <Features />
       <Products />
-      <Testimonials />
     </main>
     <Footer />
   </div>

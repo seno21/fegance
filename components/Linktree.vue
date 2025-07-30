@@ -1,6 +1,5 @@
 <template>
-  <div
-    class="min-h-screen bg-gradient-to-b from-gray-50 to-gray-400 flex flex-col items-center py-10 px-4">
+  <div class="min-h-screen bg-gray-50 flex flex-col items-center md:py-10 px-4">
     <!-- Brand Logo -->
     <img
       src="/public/images/icon-brand.svg"
