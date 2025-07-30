@@ -41,13 +41,13 @@
           class="max-w-md">
           <SwiperSlide>
             <img
-              src="/public/images/hero/PM.jpeg"
+              src="/images/hero/PM.jpeg"
               alt="Slide 1"
               class="rounded-lg w-full max-w-[500px] aspect-[3/4] object-cover" />
           </SwiperSlide>
           <SwiperSlide>
             <img
-              src="/public/images/hero/PM.jpeg"
+              src="/images/hero/PM.jpeg"
               alt="Slide 2"
               class="rounded-lg w-full max-w-[500px] aspect-[3/4] object-cover" />
           </SwiperSlide>

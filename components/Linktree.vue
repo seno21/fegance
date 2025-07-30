@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-gray-50 flex flex-col items-center md:py-10 px-4">
     <!-- Brand Logo -->
     <img
-      src="/public/images/icon-brand.svg"
+      src="/images/icon-brand.svg"
       alt="Brand Logo"
       class="w-36 h-36 rounded-full shadow-md shadow-amber-400 bg-gray-700 mb-4 mt-32" />
 

@@ -6,7 +6,7 @@
           <a class="block text-amber-300 dark:text-teal-300" href="#">
             <img
               class="h-20 w-auto py-3"
-              src="/public/images/icon-brand.svg"
+              src="/images/icon-brand.svg"
               alt="brand" />
           </a>
         </div>
