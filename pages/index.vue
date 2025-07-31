@@ -1,13 +1,11 @@
 <template>
-  <div class="min-h-screen bg-amber-100 text-gray-100">
-    <Header />
-    <main>
-      <Hero />
-      <Features />
-      <Products />
-    </main>
-    <Footer />
-  </div>
+  <Header />
+  <main>
+    <Hero />
+    <!-- <Features /> -->
+    <Products />
+  </main>
+  <Footer />
 </template>
 
 <script setup></script>
