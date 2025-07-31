@@ -3,14 +3,14 @@
   <section>
     <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
       <header>
-        <h2 class="text-xl font-bold text-gray-900 sm:text-3xl">
-          Product Collection
+        <h2 class="text-xl font-bold text-gray-900 sm:text-4xl">
+          See Our Product Collection
         </h2>
 
         <p class="mt-4 max-w-md text-gray-500">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque
-          praesentium cumque iure dicta incidunt est ipsam, officia dolor fugit
-          natus?
+          Each spritz reveals a part of who you are — a signature scent that
+          tells your essence. Make every encounter more meaningful, and let this
+          fragrance become your unforgettable identity.
         </p>
       </header>
 
@@ -62,7 +62,7 @@
     <div class="mx-auto m-3 flex justify-center">
       <button
         type="button"
-        class="block w-1/8 rounded-sm bg-gray-900 px-4 py-3 text-lg font-semibold text-white transition hover:bg-gray-300 hover:text-black hover:scale-x-105">
+        class="block mx-3 w-full md:w-1/8 rounded-sm bg-gray-900 px-4 py-3 text-lg font-semibold text-white transition hover:bg-gray-300 hover:text-black hover:scale-x-105">
         View All
       </button>
     </div>
