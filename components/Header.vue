@@ -15,68 +15,60 @@
           <nav aria-label="Global" class="hidden md:block">
             <ul class="flex items-center gap-6 text-md">
               <li>
-                <a
-                  class="text-amber-500 transition hover:text-amber-500/75 dark:text-white dark:hover:text-white/75"
-                  href="#">
+                <NuxtLink
+                  class="text-amber-500 transition hover:text-amber-500/75 dark:text-white dark:hover:text-amber-300"
+                  to="/">
                   Home
-                </a>
+                </NuxtLink>
               </li>
 
               <li>
-                <a
-                  class="text-amber-500 transition hover:text-amber-500/75 dark:text-white dark:hover:text-white/75"
-                  href="#">
+                <NuxtLink
+                  class="text-amber-500 transition hover:text-amber-500/75 dark:text-white dark:hover:text-amber-300"
+                  to="/catalog">
                   Catalog
-                </a>
+                </NuxtLink>
               </li>
 
               <li>
-                <a
-                  class="text-amber-500 transition hover:text-amber-500/75 dark:text-white dark:hover:text-white/75"
-                  href="#">
+                <NuxtLink
+                  class="text-amber-500 transition hover:text-amber-500/75 dark:text-white dark:hover:text-amber-300"
+                  to="/shop">
                   Shop
-                </a>
+                </NuxtLink>
               </li>
 
               <li>
-                <a
-                  class="text-amber-500 transition hover:text-amber-500/75 dark:text-white dark:hover:text-white/75"
-                  href="#">
-                  Blog
-                </a>
-              </li>
-
-              <li>
-                <a
-                  class="text-amber-500 transition hover:text-amber-500/75 dark:text-white dark:hover:text-white/75"
-                  href="#">
+                <NuxtLink
+                  class="text-amber-500 transition hover:text-amber-500/75 dark:text-white dark:hover:text-amber-300"
+                  to="/faq">
                   FAQ
-                </a>
+                </NuxtLink>
               </li>
             </ul>
           </nav>
 
           <div class="flex items-center gap-4">
             <div class="sm:flex sm:gap-4">
-              <a
+              <NuxtLink
                 class="rounded-md bg-amber-300 px-5 py-2.5 text-sm font-medium text-gray-900 shadow-sm dark:hover:bg-amber-500"
                 href="#">
                 Login
-              </a>
+              </NuxtLink>
 
               <div class="hidden sm:flex">
-                <a
-                  class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-amber-300 dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
+                <NuxtLink
+                  class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-amber-300 dark:bg-gray-800 dark:text-white dark:hover:text-amber-300"
                   href="#">
                   Register
-                </a>
+                </NuxtLink>
               </div>
             </div>
 
             <div class="block md:hidden">
               <button
                 @click="isMenuOpen = !isMenuOpen"
-                class="rounded-sm bg-gray-100 p-2 text-amber-600 transition hover:text-amber-600/75 dark:bg-gray-800 dark:text-white dark:hover:text-white/75">
+                class="rounded-sm bg-gray-100 p-2 text-amber-600 transition hover:text-amber-600/75 dark:bg-gray-800 dark:text-white dark:hover:text-amber-300">
                 <svg
                   v-if="!isMenuOpen"
                   xmlns="http://www.w3.org/2000/svg"
@@ -120,10 +112,9 @@
       <div v-show="isMenuOpen" class="md:hidden mt-4 pb-4">
         <div class="flex flex-col space-y-3">
           <NuxtLink class="px-3 py-2" to="/">Home</NuxtLink>
-          <NuxtLink class="px-3 py-2" to="/">Catalog</NuxtLink>
-          <NuxtLink class="px-3 py-2" to="/">Shop</NuxtLink>
-          <NuxtLink class="px-3 py-2" to="/">Blog</NuxtLink>
-          <NuxtLink class="px-3 py-2" to="/">FAQ</NuxtLink>
+          <NuxtLink class="px-3 py-2" to="/catalog">Catalog</NuxtLink>
+          <NuxtLink class="px-3 py-2" to="/shop">Shop</NuxtLink>
+          <NuxtLink class="px-3 py-2" to="/faq">FAQ</NuxtLink>
         </div>
       </div>
     </transition>

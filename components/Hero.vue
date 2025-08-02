@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-white lg:grid lg:h-screen lg:place-content-center">
+  <section class="bg-gray-100 lg:grid lg:h-screen lg:place-content-center">
     <div
       class="mx-auto w-screen max-w-screen-xl px-6 py-16 sm:py-24 flex flex-col-reverse md:grid md:grid-cols-2 md:items-center md:gap-36">
       <!-- TEKS -->
@@ -17,16 +17,16 @@
         </p>
 
         <div class="mt-4 flex gap-4 sm:mt-6">
-          <a
+          <NuxtLink
             class="inline-block rounded border border-amber-300 bg-amber-300 px-5 py-3 font-medium text-gray-950 shadow-sm transition-colors hover:bg-amber-700"
-            href="#">
+            to="/shop">
             Shop Now
-          </a>
-          <a
+          </NuxtLink>
+          <NuxtLink
             class="inline-block rounded border border-gray-200 px-5 py-3 font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-50 hover:text-gray-900"
-            href="#">
+            to="/story">
             Our Story
-          </a>
+          </NuxtLink>
         </div>
       </div>
 

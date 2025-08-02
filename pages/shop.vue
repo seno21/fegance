@@ -1,10 +1,7 @@
 <template>
   <Header />
   <main>
-    <Hero />
-    <!-- <Features /> -->
-    <Products />
-    <Community />
+    <Shop />
   </main>
   <Footer />
 </template>

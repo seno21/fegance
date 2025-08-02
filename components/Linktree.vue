@@ -14,14 +14,14 @@
 
     <!-- Link List -->
     <div class="flex flex-col gap-4 w-full max-w-lg">
-      <a
+      <NuxtLink
         v-for="link in links"
         :key="link.label"
         :href="link.url"
         target="_blank"
-        class="bg-amber-200 border border-black text-black px-10 py-6 rounded-full shadow hover:bg-amber-500 text-center font-bold transition">
+        class="bg-amber-300 border border-black text-black px-10 py-6 rounded-lg shadow hover:bg-amber-500 text-center font-bold transition">
         {{ link.label }}
-      </a>
+      </NuxtLink>
     </div>
 
     <!-- Address/Map -->
@@ -41,7 +41,7 @@
 const links = [
   {
     label: "Shopee",
-    url: "https://s.shopee.co.id/8zu7pFAAim?share_channel_code=1",
+    url: "https://s.shopee.co.id/9KXVdiM3y4?share_channel_code=1",
   },
   // { label: "Tokopedia", url: "https://tokopedia.com/fegance" },
   // { label: "Tiktok Shop", url: "https://www.fegance.com/" },

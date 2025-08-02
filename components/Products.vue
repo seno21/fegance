@@ -2,12 +2,12 @@
   <!-- New -->
   <section>
     <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-      <header>
+      <header class="text-center mb-10">
         <h2 class="text-xl font-bold text-gray-900 sm:text-4xl">
-          See Our Product Collection
+          Product Collection
         </h2>
 
-        <p class="mt-4 max-w-md text-gray-500">
+        <p class="mx-auto mt-4 max-w-2xl text-gray-700">
           Each spritz reveals a part of who you are — a signature scent that
           tells your essence. Make every encounter more meaningful, and let this
           fragrance become your unforgettable identity.
@@ -60,47 +60,55 @@
       </ul>
     </div>
     <div class="mx-auto m-3 flex justify-center">
-      <button
-        type="button"
-        class="block mx-3 w-full md:w-1/8 rounded-sm bg-gray-900 px-4 py-3 text-lg font-semibold text-white transition hover:bg-gray-300 hover:text-black hover:scale-x-105">
-        View All
-      </button>
+      <NuxtLink
+        class="group rounded-2xl relative inline-flex w-70 items-center justify-center overflow-hidden border bg-gray-700 border-gray-700 px-8 py-3 focus:outline-none focus:ring-3"
+        to="/shop">
+        <span
+          class="absolute inset-y-0 left-0 w-[2px] bg-amber-300 transition-all group-hover:w-full"></span>
+
+        <span
+          class="relative text-md font-semibold text-amber-400 transition-colors group-hover:text-black">
+          View All
+        </span>
+      </NuxtLink>
     </div>
   </section>
 </template>
 
 <script setup>
+import { NuxtLink } from "#components";
+
 const products = [
   {
     name: "Deep In The Night (DITN)",
-    price: "Rp 135K",
+    price: "Rp 120.000",
     description: "A rich blend of oud, spices and amber.",
-    image: "deep-in-the-night.jpeg",
-    detailImage: "dusk-elixir.jpeg",
+    image: "DITN.jpeg",
+    detailImage: "DITN2.jpeg",
   },
   {
     name: "Dusk Exlixir",
-    price: "Rp 135K",
+    price: "Rp 120.000",
     description: "Warm amber with hints of vanilla and musk.",
-    image: "dusk-elixir.jpeg",
-    detailImage: "dusk-elixir.jpeg",
+    image: "DE2.jpeg",
+    detailImage: "DE1.jpeg",
   },
   {
     name: "Silent Infusion",
     price: "Rp 145K",
     description: "Floral jasmine with dark woody undertones.",
-    image: "silent-infusion.jpeg",
-    detailImage: "dusk-elixir.jpeg",
+    image: "SI1.jpeg",
+    detailImage: "SI2.jpeg",
   },
   {
     name: "Perfect Man",
     price: "Rp 145K",
     description: "Floral jasmine with dark woody undertones.",
-    image: "perfect-man.jpeg",
-    detailImage: "dusk-elixir.jpeg",
+    image: "PM1.jpeg",
+    detailImage: "PM3.jpeg",
   },
   {
-    name: "Perfect Man",
+    name: "Plus (+62)",
     price: "Rp 145K",
     description: "Floral jasmine with dark woody undertones.",
     image: "perfect-man.jpeg",
