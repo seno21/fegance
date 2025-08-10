@@ -107,12 +107,5 @@ const products = [
     image: "PM1.jpeg",
     detailImage: "PM3.jpeg",
   },
-  {
-    name: "Plus (+62)",
-    price: "Rp 145K",
-    description: "Floral jasmine with dark woody undertones.",
-    image: "perfect-man.jpeg",
-    detailImage: "dusk-elixir.jpeg",
-  },
 ];
 </script>

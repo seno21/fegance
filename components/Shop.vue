@@ -279,14 +279,6 @@ const products = [
     detailImage: "PM3.jpeg",
     stockStatus: "in-stock",
   },
-  {
-    name: "Plus (+62)",
-    price: "Rp 145.000",
-    description: "Floral jasmine with dark woody undertones.",
-    image: "perfect-man.jpeg",
-    detailImage: "dusk-elixir.jpeg",
-    stockStatus: "pre-order",
-  },
 ];
 
 const selectedSort = ref("");

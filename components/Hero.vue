@@ -4,9 +4,8 @@
       class="mx-auto w-screen max-w-screen-xl px-6 py-16 sm:py-24 flex flex-col-reverse md:grid md:grid-cols-2 md:items-center md:gap-36">
       <!-- TEKS -->
       <div class="max-w-prose text-left">
-        <h1 class="text-4xl font-bold text-gray-900 sm:text-6xl">
-          Impress with a <strong class="text-amber-300">Signature</strong>
-          Scent
+        <h1 class="text-4xl font-bold text-gray-900 sm:text-5xl">
+          Make It Memorable with <strong class="text-amber-300">Fegance</strong>
         </h1>
 
         <p class="mt-4 text-base text-pretty text-gray-700 sm:text-lg/relaxed">

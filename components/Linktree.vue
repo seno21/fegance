@@ -44,7 +44,7 @@ const links = [
     url: "https://s.shopee.co.id/9KXVdiM3y4?share_channel_code=1",
   },
   // { label: "Tokopedia", url: "https://tokopedia.com/fegance" },
-  // { label: "Tiktok Shop", url: "https://www.fegance.com/" },
+  { label: "Tiktok Shop", url: "https://www.fegance.com/" },
   { label: "WhatsApp", url: "https://wa.me/6285172372101" },
   { label: "Instagram", url: "https://instagram.com/fegance.id" },
   { label: "Official Site", url: "https://www.fegance.com/" },
