@@ -124,7 +124,7 @@ const socials = [
             Visit
           </h4>
           <p class="text-sm text-white/70 leading-relaxed">
-            Jl. Sudirman No. 123
+            Jl. Nataswara Rt01,Rw01
             <br />
             Jakarta Pusat
             <br />
