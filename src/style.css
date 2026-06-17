@@ -1,0 +1,203 @@
+@import "tailwindcss";
+
+/* =========================================================================
+   DESIGN TOKENS — Single source of truth
+   Color palette, typography, radii, shadows. Mirror dari design.md.
+   Pakai @theme Tailwind 4 supaya bisa dipanggil sbg utility (bg-gold, dll).
+   ========================================================================= */
+
+@theme {
+  /* Brand Colors */
+  --color-gold: #c9a227;
+  --color-gold-hover: #d4af37;
+  --color-gold-soft: #e8d89a;
+  --color-ink: #111111;
+  --color-ink-soft: #444444;
+  --color-muted: #666666;
+  --color-faint: #999999;
+  --color-line: #e5e5e5;
+  --color-canvas: #ffffff;
+  --color-cream: #faf7f2;
+  --color-surface: #f7f7f7;
+  --color-surface-2: #f3f0ea;
+
+  /* Typography */
+  --font-display: "DM Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Radii */
+  --radius-card: 20px;
+  --radius-pill: 9999px;
+
+  /* Shadows — restrained, not gaudy */
+  --shadow-soft: 0 1px 2px rgba(17, 17, 17, 0.04), 0 4px 16px rgba(17, 17, 17, 0.04);
+  --shadow-lift: 0 8px 30px rgba(17, 17, 17, 0.08), 0 2px 8px rgba(17, 17, 17, 0.04);
+  --shadow-glow: 0 0 0 1px rgba(201, 162, 39, 0.18), 0 18px 40px -10px rgba(201, 162, 39, 0.25);
+}
+
+/* =========================================================================
+   BASE RESETS
+   ========================================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background-color: var(--color-canvas);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+/* =========================================================================
+   UTILITY HELPERS
+   ========================================================================= */
+
+/* Hairline divider — softer than border-1 on dark backgrounds */
+.hairline {
+  background: linear-gradient(90deg, transparent, var(--color-line) 20%, var(--color-line) 80%, transparent);
+  height: 1px;
+}
+
+.hairline-dark {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12) 20%, rgba(255, 255, 255, 0.12) 80%, transparent);
+  height: 1px;
+}
+
+/* Gold underline accent (kecil di bawah section title) */
+.gold-rule {
+  width: 48px;
+  height: 1px;
+  background: var(--color-gold);
+  display: inline-block;
+}
+
+/* Eyebrow label (small uppercase gold text) */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+/* Display heading sizes — fluid */
+.h-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+/* Section spacing rhythm */
+.section {
+  padding-top: 96px;
+  padding-bottom: 96px;
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding-top: 128px;
+    padding-bottom: 128px;
+  }
+}
+
+/* Subtle gold glow for product card hover */
+.glow-gold {
+  box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.35), 0 18px 40px -10px rgba(201, 162, 39, 0.28);
+}
+
+/* Animated gold dot for badges */
+.dot-gold {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--color-gold);
+  box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.18);
+  animation: pulse-soft 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse-soft {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.18); }
+  50% { box-shadow: 0 0 0 8px rgba(201, 162, 39, 0.05); }
+}
+
+/* Smooth fade for testimonial transitions */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+/* Logo in navbar */
+.logo-mark {
+  height: 1.5rem;
+  width: auto;
+  display: block;
+}
+@media (min-width: 1024px) {
+  .logo-mark {
+    height: 2rem;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
