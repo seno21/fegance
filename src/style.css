@@ -180,13 +180,13 @@ a {
 
 /* Logo in navbar */
 .logo-mark {
-  height: 1.5rem;
+  height: 2.25rem;
   width: auto;
   display: block;
 }
 @media (min-width: 1024px) {
   .logo-mark {
-    height: 2rem;
+    height: 2.5rem;
   }
 }
 
