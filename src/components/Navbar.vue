@@ -37,6 +37,11 @@ function goHome() {
   router.push("/");
 }
 
+function goToCollection() {
+  closeMenu();
+  router.push("/product");
+}
+
 onMounted(() => {
   window.addEventListener("scroll", handleScroll, { passive: true });
   handleScroll();
@@ -48,7 +53,7 @@ onUnmounted(() => {
 
 const navLinks = [
   { label: "Home", target: "top", action: "home" as const },
-  { label: "Collection", target: "products" },
+  { label: "Collection", target: "", action: "collection" as const },
   { label: "Families", target: "families" },
   { label: "Story", target: "story" },
   { label: "Contact", target: "contact" },
@@ -84,7 +89,11 @@ const navLinks = [
             v-for="link in navLinks"
             :key="link.label"
             @click="
-              link.action === 'home' ? goHome() : scrollToSection(link.target!)
+              link.action === 'home'
+                ? goHome()
+                : link.action === 'collection'
+                  ? goToCollection()
+                  : scrollToSection(link.target!)
             "
             class="group relative text-[13px] font-medium tracking-wide text-ink hover:text-gold transition-colors duration-200"
           >
@@ -118,7 +127,7 @@ const navLinks = [
           </button>
 
           <button
-            @click="scrollToSection('products')"
+            @click="goToCollection()"
             class="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 text-[12px] font-semibold tracking-wider uppercase bg-ink text-canvas rounded-pill hover:bg-gold hover:text-ink transition-all duration-300"
           >
             Shop Now
@@ -178,14 +187,18 @@ const navLinks = [
             v-for="link in navLinks"
             :key="link.label"
             @click="
-              link.action === 'home' ? goHome() : scrollToSection(link.target!)
+              link.action === 'home'
+                ? goHome()
+                : link.action === 'collection'
+                  ? goToCollection()
+                  : scrollToSection(link.target!)
             "
             class="block w-full text-left py-3 text-base font-medium text-ink hover:text-gold transition-colors border-b border-line/60 last:border-0"
           >
             {{ link.label }}
           </button>
           <button
-            @click="scrollToSection('products')"
+            @click="goToCollection()"
             class="w-full mt-4 py-3.5 text-[12px] font-semibold tracking-wider uppercase bg-ink text-canvas rounded-pill hover:bg-gold hover:text-ink transition-colors"
           >
             Shop Now

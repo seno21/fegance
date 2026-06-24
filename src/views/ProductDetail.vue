@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from "vue";
+import { ref, computed, onMounted, onUnmounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { products } from "@/data/products";
 import Navbar from "@/components/Navbar.vue";
@@ -47,8 +47,56 @@ watch(
   },
 );
 
+// --- Main image hover zoom ---
+const mainZoomPos = ref({ x: 50, y: 50 });
+const isMainZoomed = ref(false);
+
+function handleMainZoomMove(e: MouseEvent) {
+  const el = e.currentTarget as HTMLElement;
+  const rect = el.getBoundingClientRect();
+  mainZoomPos.value = {
+    x: ((e.clientX - rect.left) / rect.width) * 100,
+    y: ((e.clientY - rect.top) / rect.height) * 100,
+  };
+}
+
+// --- Lightbox ---
+const showLightbox = ref(false);
+const isZoomed = ref(false);
+const zoomPos = ref({ x: 50, y: 50 });
+
+function openLightbox() {
+  showLightbox.value = true;
+  document.body.style.overflow = "hidden";
+}
+
+function closeLightbox() {
+  showLightbox.value = false;
+  isZoomed.value = false;
+  document.body.style.overflow = "";
+}
+
+function handleZoomMove(e: MouseEvent) {
+  const el = e.currentTarget as HTMLElement;
+  const rect = el.getBoundingClientRect();
+  zoomPos.value = {
+    x: ((e.clientX - rect.left) / rect.width) * 100,
+    y: ((e.clientY - rect.top) / rect.height) * 100,
+  };
+}
+
+function onKeydown(e: KeyboardEvent) {
+  if (e.key === "Escape") closeLightbox();
+}
+
 onMounted(() => {
   window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+  document.addEventListener("keydown", onKeydown);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("keydown", onKeydown);
+  document.body.style.overflow = "";
 });
 </script>
 
@@ -89,12 +137,24 @@ onMounted(() => {
             data-aos-duration="800"
           >
             <div
-              class="relative aspect-[4/5] rounded-3xl overflow-hidden bg-surface shadow-soft"
+              class="relative aspect-[4/5] rounded-3xl overflow-hidden bg-surface shadow-soft cursor-crosshair"
+              @click="openLightbox"
+              @mousemove="handleMainZoomMove"
+              @mouseenter="isMainZoomed = true"
+              @mouseleave="isMainZoomed = false"
             >
               <img
                 :src="product.image"
                 :alt="product.name"
-                class="w-full h-full object-cover"
+                class="w-full h-full object-cover transition-transform duration-75 select-none"
+                :class="{ 'scale-[2.5]': isMainZoomed }"
+                :style="{
+                  transformOrigin: `${mainZoomPos.x}% ${mainZoomPos.y}%`,
+                }"
+                draggable="false"
+              />
+              <div
+                class="absolute inset-0 bg-black/0 hover:bg-black/5 transition-colors duration-300"
               />
               <div
                 v-if="product.isBestseller || product.isNew"
@@ -161,8 +221,9 @@ onMounted(() => {
                 rel="noopener noreferrer"
                 class="btn-brand btn-shopee flex-1 inline-flex items-center justify-center gap-2.5 px-5 py-3.5 text-[11px] font-semibold tracking-[0.16em] uppercase rounded-pill transition-all duration-200"
               >
-                <svg class="w-4.5 h-4.5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M7 2C5.346 2 4 3.346 4 5v14c0 1.654 1.346 3 3 3h10c1.654 0 3-1.346 3-3V5c0-1.654-1.346-3-3-3H7zm0 2h10c.552 0 1 .449 1 1v14c0 .551-.448 1-1 1H7c-.552 0-1-.449-1-1V5c0-.551.448-1 1-1zm2 3a1 1 0 00-1 1v4a1 1 0 002 0V8a1 1 0 00-1-1zm6 0a1 1 0 00-1 1v4a1 1 0 002 0V8a1 1 0 00-1-1zm-3 0a1 1 0 00-1 1v4a1 1 0 002 0V8a1 1 0 00-1-1zm-3 6a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zm6 0a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1zm-3 0a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1z"/>
+                <svg class="w-4.5 h-4.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4H6zM3 6h18" />
+                  <path d="M16 10a4 4 0 01-8 0" />
                 </svg>
                 Shopee
               </a>
@@ -181,7 +242,7 @@ onMounted(() => {
                 :href="product.whatsappLink"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="btn-brand btn-whatsapp flex-1 inline-flex items-center justify-center gap-2.5 px-5 py-3.5 text-[11px] font-semibold tracking-[0.16em] uppercase rounded-pill transition-all duration-200 text-white"
+                class="btn-brand btn-whatsapp flex-1 inline-flex items-center justify-center gap-2.5 px-5 py-3.5 text-[11px] font-semibold tracking-[0.16em] uppercase rounded-pill transition-all duration-200"
               >
                 <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
@@ -345,6 +406,46 @@ onMounted(() => {
     </main>
 
     <FooterSection />
+
+    <!-- Lightbox overlay -->
+    <Teleport to="body">
+      <Transition name="lightbox">
+        <div
+          v-if="showLightbox"
+          class="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center"
+          @click="closeLightbox"
+        >
+          <button
+            @click="closeLightbox"
+            class="absolute top-6 right-6 z-10 text-white/60 hover:text-white transition-colors"
+            aria-label="Close zoom"
+          >
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          <div
+            class="relative max-w-[90vw] max-h-[90vh] overflow-hidden rounded-2xl"
+            @click.stop
+          >
+            <img
+              :src="product.image"
+              :alt="product.name"
+              class="max-w-[90vw] max-h-[90vh] object-contain transition-transform duration-75 cursor-crosshair select-none"
+              :class="{ 'scale-[2]': isZoomed }"
+              :style="{
+                transformOrigin: `${zoomPos.x}% ${zoomPos.y}%`,
+              }"
+              draggable="false"
+              @mousemove="handleZoomMove"
+              @mouseenter="isZoomed = true"
+              @mouseleave="isZoomed = false"
+            />
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
   </div>
 </template>
 
@@ -352,6 +453,7 @@ onMounted(() => {
 .btn-shopee {
   border: 1.5px solid #EE4D2D;
   color: #EE4D2D;
+  background: transparent;
 }
 .btn-shopee:hover {
   background: #EE4D2D;
@@ -359,7 +461,7 @@ onMounted(() => {
 }
 
 .btn-tiktok {
-  background: #fff;
+  background: transparent;
   color: #010101;
   border: 1.5px solid #010101;
 }
@@ -369,9 +471,24 @@ onMounted(() => {
 }
 
 .btn-whatsapp {
-  background: #25D366;
+  background: transparent;
+  color: #25D366;
+  border: 1.5px solid #25D366;
 }
 .btn-whatsapp:hover {
-  background: #1da851;
+  background: #25D366;
+  color: #fff;
+}
+
+/* Lightbox transitions */
+.lightbox-enter-active {
+  transition: opacity 0.3s ease;
+}
+.lightbox-leave-active {
+  transition: opacity 0.25s ease;
+}
+.lightbox-enter-from,
+.lightbox-leave-to {
+  opacity: 0;
 }
 </style>

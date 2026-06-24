@@ -94,7 +94,7 @@ const year = new Date().getFullYear();
           <div class="mt-9 flex flex-col sm:flex-row gap-3 sm:gap-4">
             <button
               @click="scrollToProducts"
-              class="group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-[12px] font-semibold tracking-[0.18em] uppercase bg-ink text-canvas rounded-pill hover:bg-gold hover:text-ink transition-all duration-300"
+              class="group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-[12px] font-semibold tracking-[0.18em] uppercase bg-ink text-gold rounded-pill hover:bg-gold hover:text-ink transition-all duration-300"
             >
               View Collection
               <svg
@@ -117,36 +117,6 @@ const year = new Date().getFullYear();
             >
               Our Story
             </button>
-          </div>
-
-          <!-- Stats -->
-          <div class="mt-14 pt-8 border-t border-line/80">
-            <dl class="grid grid-cols-3 gap-4 sm:gap-8 max-w-md">
-              <div>
-                <dt class="text-xs tracking-wider uppercase text-faint">
-                  Signature
-                </dt>
-                <dd class="mt-1 font-display text-3xl text-ink">
-                  50<span class="text-gold">+</span>
-                </dd>
-              </div>
-              <div class="border-l border-line/80 pl-4 sm:pl-8">
-                <dt class="text-xs tracking-wider uppercase text-faint">
-                  Loyal Clients
-                </dt>
-                <dd class="mt-1 font-display text-3xl text-ink">
-                  10K<span class="text-gold">+</span>
-                </dd>
-              </div>
-              <div class="border-l border-line/80 pl-4 sm:pl-8">
-                <dt class="text-xs tracking-wider uppercase text-faint">
-                  Avg. Rating
-                </dt>
-                <dd class="mt-1 font-display text-3xl text-ink">
-                  4.9<span class="text-gold">/5</span>
-                </dd>
-              </div>
-            </dl>
           </div>
         </div>
 

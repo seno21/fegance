@@ -4,6 +4,9 @@ const stats = [
   { value: "8+", label: "Master Perfumers" },
   { value: "12", label: "Countries Sourced" },
 ];
+import filosofi from "@/assets/landing/filosofi-aksen2.jpeg";
+import filosofiAksen3 from "@/assets/landing/filosofi-aksen3.jpeg";
+import filosofiAksen2 from "@/assets/landing/filosofi.jpg";
 </script>
 
 <template>
@@ -22,7 +25,7 @@ const stats = [
               class="col-span-8 aspect-[3/4] rounded-2xl overflow-hidden bg-surface"
             >
               <img
-                src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800&h=1000&fit=crop"
+                :src="filosofi"
                 alt="Fegance atelier"
                 class="w-full h-full object-cover"
                 loading="lazy"
@@ -32,7 +35,7 @@ const stats = [
             <div class="col-span-4 flex flex-col gap-3 sm:gap-4">
               <div class="aspect-square rounded-2xl overflow-hidden bg-surface">
                 <img
-                  src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400&h=400&fit=crop"
+                  :src="filosofiAksen3"
                   alt="Crafting process"
                   class="w-full h-full object-cover"
                   loading="lazy"
@@ -42,7 +45,7 @@ const stats = [
                 class="aspect-[3/4] rounded-2xl overflow-hidden bg-surface relative"
               >
                 <img
-                  src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=600&fit=crop"
+                  :src="filosofiAksen2"
                   alt="Signature bottle"
                   class="w-full h-full object-cover"
                   loading="lazy"
@@ -58,11 +61,11 @@ const stats = [
                   "
                 />
                 <div class="absolute bottom-3 left-3 right-3 text-canvas">
-                  <p class="font-display text-base leading-tight">Since 2020</p>
+                  <p class="font-display text-base leading-tight">Since 2025</p>
                   <p
                     class="text-[10px] tracking-wider uppercase opacity-80 mt-0.5"
                   >
-                    Jakarta
+                    Cirebon
                   </p>
                 </div>
               </div>
@@ -121,7 +124,7 @@ const stats = [
             class="mt-8 space-y-5 text-sm sm:text-base leading-relaxed text-ink-soft"
           >
             <p>
-              Founded in 2020, Fegance was born from a passion for the art of
+              Founded in 2025, Fegance was born from a passion for the art of
               perfumery. We believe a scent is more than fragrance — it is
               identity, mood, and memory distilled into something you wear.
             </p>
