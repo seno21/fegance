@@ -23,7 +23,7 @@ function formatPrice(n: number) {
 
 const year = new Date().getFullYear();
 
-import brandFace from "@/assets/landing/brand-face.jpg";
+import brandFace from "@/assets/landing/brand-face.jpeg";
 </script>
 
 <template>
@@ -115,7 +115,7 @@ import brandFace from "@/assets/landing/brand-face.jpg";
             </button>
             <button
               @click="scrollToStory"
-              class="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-[12px] font-semibold tracking-[0.18em] uppercase bg-transparent text-ink border border-ink/15 rounded-pill hover:border-gold hover:text-gold transition-all duration-300"
+              class="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-[12px] font-semibold tracking-[0.18em] uppercase bg-transparent text-gold border border-gold rounded-pill hover:bg-gold hover:text-ink transition-all duration-300"
             >
               Our Story
             </button>

@@ -123,7 +123,7 @@ function formatPrice(n: number) {
             <p class="mt-1.5 text-xs sm:text-sm text-muted line-clamp-2 leading-relaxed">
               {{ product.shortDescription }}
             </p>
-            <div class="mt-4 flex items-baseline justify-between">
+            <div class="mt-4 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-0">
               <p class="font-display text-lg sm:text-xl text-gold">
                 {{ formatPrice(product.price) }}
               </p>
