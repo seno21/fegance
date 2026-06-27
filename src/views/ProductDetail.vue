@@ -220,9 +220,9 @@ onUnmounted(() => {
                 :href="product.shopeeLink"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="btn-brand btn-shopee flex-1 inline-flex items-center justify-center gap-2.5 px-5 py-3.5 text-[11px] font-semibold tracking-[0.16em] uppercase rounded-pill transition-all duration-200"
+                class="btn-brand btn-shopee flex-1 inline-flex items-center justify-center gap-2.5 px-5 py-3.5 text-[11px] font-semibold tracking-[0.16em] uppercase rounded-pill transition-all duration-200 group"
               >
-                <img :src="logoShopee" alt="Shopee" class="w-4.5 h-4.5 shrink-0 object-contain" />
+                <img :src="logoShopee" alt="Shopee" class="w-4.5 h-4.5 shrink-0 object-contain filter group-hover:brightness-0 group-hover:invert transition-all duration-200" />
                 Shopee
               </a>
               <a
@@ -465,7 +465,7 @@ onUnmounted(() => {
 }
 .btn-tiktok:hover {
   background: #010101;
-  color: #fff;
+  color: #fff !important;
 }
 
 .btn-whatsapp {
