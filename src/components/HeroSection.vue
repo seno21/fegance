@@ -22,6 +22,8 @@ function formatPrice(n: number) {
 }
 
 const year = new Date().getFullYear();
+
+import brandFace from "@/assets/landing/brand-face.jpg";
 </script>
 
 <template>
@@ -132,7 +134,7 @@ const year = new Date().getFullYear();
               class="relative aspect-[4/5] rounded-[28px] overflow-hidden bg-surface shadow-lift"
             >
               <img
-                src="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=900&h=1100&fit=crop"
+                :src="brandFace"
                 alt="Fegance signature perfume"
                 class="w-full h-full object-cover"
               />

@@ -4,9 +4,9 @@ const stats = [
   { value: "8+", label: "Master Perfumers" },
   { value: "12", label: "Countries Sourced" },
 ];
-import filosofi from "@/assets/landing/filosofi-aksen2.jpeg";
+import filosofi from "@/assets/landing/filosofi-aksen2.jpg";
 import filosofiAksen3 from "@/assets/landing/filosofi-aksen3.jpeg";
-import filosofiAksen2 from "@/assets/landing/filosofi.jpg";
+import filosofiAksen2 from "@/assets/landing/filosofi.jpeg";
 </script>
 
 <template>
