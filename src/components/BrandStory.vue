@@ -95,10 +95,10 @@ import filosofiAksen2 from "@/assets/landing/filosofi.jpeg";
               </div>
               <div>
                 <p class="font-display text-lg text-ink leading-none">
-                  5 Years
+                  In-House
                 </p>
                 <p class="text-[10px] tracking-wider uppercase text-faint mt-1">
-                  of Craftsmanship
+                  Crafted
                 </p>
               </div>
             </div>
