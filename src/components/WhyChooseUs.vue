@@ -9,25 +9,25 @@ const pillars: Pillar[] = [
   {
     title: "Masterfully Crafted",
     description:
-      "Each fragrance is composed by our in-house perfumers, blending rare absolutes and natural essences with obsessive care.",
+      "Every fragrance is developed by our perfumers—from concept to final blend—ensuring every bottle carries its own identity.",
     icon: "sparkles",
   },
   {
-    title: "Sustainably Sourced",
+    title: "Long-Lasting Performance",
     description:
-      "From responsibly managed farms to recyclable glass, we choose suppliers who honour the people and places behind every note.",
+      "Designed to deliver impressive projection and longevity, so your signature scent stays with you throughout the day.",
     icon: "leaf",
   },
   {
-    title: "Complimentary Shipping",
+    title: "Premium Packaging",
     description:
-      "Free insured delivery across Indonesia on every order — because anticipation should feel as good as the unboxing.",
+      "Every order is carefully prepared and securely packaged for a refined unboxing experience.",
     icon: "truck",
   },
   {
-    title: "30-Day Returns",
+    title: "Satisfaction Promises",
     description:
-      "Try it on your skin, wear it for a week. If it is not your signature, send it back for a full refund, no questions asked.",
+      "If your fragrance isn't the right match, we're here to help with exchanges or dedicated customer support.",
     icon: "shield",
   },
 ];

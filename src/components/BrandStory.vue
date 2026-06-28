@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const stats = [
-  { value: "100%", label: "Natural Ingredients" },
-  { value: "8+", label: "Master Perfumers" },
-  { value: "12", label: "Countries Sourced" },
+  { value: "Every Bottle", label: "Handcrafted" },
+  { value: "Signature Scents", label: "Inspired of" },
+  { value: "INDONESIA", label: "Made In" },
 ];
 import filosofi from "@/assets/landing/filosofi-aksen2.jpg";
 import filosofiAksen3 from "@/assets/landing/filosofi-aksen3.jpeg";
@@ -144,7 +144,7 @@ import filosofiAksen2 from "@/assets/landing/filosofi.jpeg";
               <dt class="text-[10px] tracking-[0.2em] uppercase text-faint">
                 {{ stat.label }}
               </dt>
-              <dd class="mt-1.5 font-display text-3xl sm:text-4xl text-ink">
+              <dd class="mt-1.5 font-display text-xl sm:text-xl text-ink">
                 {{ stat.value }}
               </dd>
             </div>

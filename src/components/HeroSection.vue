@@ -24,6 +24,13 @@ function formatPrice(n: number) {
 const year = new Date().getFullYear();
 
 import brandFace from "@/assets/landing/brand-face.jpeg";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const goToProducts = () => {
+  router.push("/product");
+};
 </script>
 
 <template>
@@ -95,7 +102,7 @@ import brandFace from "@/assets/landing/brand-face.jpeg";
 
           <div class="mt-9 flex flex-col sm:flex-row gap-3 sm:gap-4">
             <button
-              @click="scrollToProducts"
+              @click="goToProducts"
               class="group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-[12px] font-semibold tracking-[0.18em] uppercase bg-ink text-gold rounded-pill hover:bg-gold hover:text-ink transition-all duration-300"
             >
               View Collection

@@ -1,3 +1,10 @@
+export interface ProductPerformance {
+  type: string
+  sillage: string
+  projection: string
+  longevity: string
+}
+
 export interface Product {
   id: number
   name: string
@@ -16,6 +23,7 @@ export interface Product {
   shopeeLink: string
   tiktokLink: string
   whatsappLink: string
+  performance: ProductPerformance
   isNew?: boolean
   isBestseller?: boolean
 }
@@ -42,7 +50,7 @@ export const products: Product[] = [
     id: 1,
     name: 'Midnight Gold',
     slug: 'midnight-gold',
-    price: 249000,
+    price: 75000,
     image: 'https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=800&h=800&fit=crop',
     shortDescription: 'Elegant woody fragrance with a touch of gold.',
     description:
@@ -56,13 +64,19 @@ export const products: Product[] = [
     shopeeLink: 'https://shopee.co.id/',
     tiktokLink: 'https://shop.tiktok.com/',
     whatsappLink: 'https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Midnight%20Gold',
+    performance: {
+      type: 'Gen XY (Masculine)',
+      sillage: 'Medium to strong',
+      projection: '2-3 meters',
+      longevity: '3-4 hours outdoors, up to 6 hours indoors'
+    },
     isBestseller: true,
   },
   {
     id: 2,
     name: 'Velvet Rose',
     slug: 'velvet-rose',
-    price: 279000,
+    price: 65000,
     image: 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&h=800&fit=crop',
     shortDescription: 'Romantic floral bouquet with velvety finish.',
     description:
@@ -76,12 +90,18 @@ export const products: Product[] = [
     shopeeLink: 'https://shopee.co.id/',
     tiktokLink: 'https://shop.tiktok.com/',
     whatsappLink: 'https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Velvet%20Rose',
+    performance: {
+      type: 'Floral Rose (Feminine)',
+      sillage: 'Moderate',
+      projection: '1.5 meters',
+      longevity: '5-6 hours'
+    },
   },
   {
     id: 3,
     name: 'Ocean Noir',
     slug: 'ocean-noir',
-    price: 259000,
+    price: 55000,
     image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&h=800&fit=crop',
     shortDescription: 'Fresh aquatic scent with dark undertones.',
     description:
@@ -95,13 +115,19 @@ export const products: Product[] = [
     shopeeLink: 'https://shopee.co.id/',
     tiktokLink: 'https://shop.tiktok.com/',
     whatsappLink: 'https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Ocean%20Noir',
+    performance: {
+      type: 'Fresh Aquatic (Masculine)',
+      sillage: 'Medium',
+      projection: '1-2 meters',
+      longevity: '4-5 hours'
+    },
     isNew: true,
   },
   {
     id: 4,
     name: 'Crystal Bloom',
     slug: 'crystal-bloom',
-    price: 299000,
+    price: 85000,
     image: 'https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=800&h=800&fit=crop',
     shortDescription: 'Crystalline floral with sparkling freshness.',
     description:
@@ -115,12 +141,18 @@ export const products: Product[] = [
     shopeeLink: 'https://shopee.co.id/',
     tiktokLink: 'https://shop.tiktok.com/',
     whatsappLink: 'https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Crystal%20Bloom',
+    performance: {
+      type: 'Floral Fresh (Feminine)',
+      sillage: 'Intimate to moderate',
+      projection: '1 meter',
+      longevity: '4-5 hours'
+    },
   },
   {
     id: 5,
     name: 'Ember Oud',
     slug: 'ember-oud',
-    price: 349000,
+    price: 100000,
     image: 'https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800&h=800&fit=crop',
     shortDescription: 'Rich smoky oud with warm spices.',
     description:
@@ -134,13 +166,19 @@ export const products: Product[] = [
     shopeeLink: 'https://shopee.co.id/',
     tiktokLink: 'https://shop.tiktok.com/',
     whatsappLink: 'https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Ember%20Oud',
+    performance: {
+      type: 'Oriental Woody (Unisex)',
+      sillage: 'Strong',
+      projection: '2-3 meters',
+      longevity: '8-12 hours'
+    },
     isBestseller: true,
   },
   {
     id: 6,
     name: 'Iris Garden',
     slug: 'iris-garden',
-    price: 269000,
+    price: 45000,
     image: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=800&h=800&fit=crop',
     shortDescription: 'Powdery floral elegance with green accords.',
     description:
@@ -154,12 +192,18 @@ export const products: Product[] = [
     shopeeLink: 'https://shopee.co.id/',
     tiktokLink: 'https://shop.tiktok.com/',
     whatsappLink: 'https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Iris%20Garden',
+    performance: {
+      type: 'Floral Green (Feminine)',
+      sillage: 'Moderate',
+      projection: '1.5 meters',
+      longevity: '5-6 hours'
+    },
   },
   {
     id: 7,
     name: 'Amber Nights',
     slug: 'amber-nights',
-    price: 319000,
+    price: 80000,
     image: 'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=800&h=800&fit=crop',
     shortDescription: 'Warm amber vanilla for evening allure.',
     description:
@@ -173,13 +217,19 @@ export const products: Product[] = [
     shopeeLink: 'https://shopee.co.id/',
     tiktokLink: 'https://shop.tiktok.com/',
     whatsappLink: 'https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Amber%20Nights',
+    performance: {
+      type: 'Oriental Warm (Unisex)',
+      sillage: 'Strong',
+      projection: '2 meters',
+      longevity: '7-9 hours'
+    },
     isNew: true,
   },
   {
     id: 8,
     name: 'Citrus Sky',
     slug: 'citrus-sky',
-    price: 219000,
+    price: 50000,
     image: 'https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&h=800&fit=crop',
     shortDescription: 'Bright citrus blend for an uplifting feel.',
     description:
@@ -193,6 +243,12 @@ export const products: Product[] = [
     shopeeLink: 'https://shopee.co.id/',
     tiktokLink: 'https://shop.tiktok.com/',
     whatsappLink: 'https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Citrus%20Sky',
+    performance: {
+      type: 'Citrus Aromatic (Unisex/Masculine)',
+      sillage: 'Medium',
+      projection: '1 meter',
+      longevity: '4-6 hours'
+    },
   },
 ]
 
