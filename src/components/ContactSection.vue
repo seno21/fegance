@@ -9,8 +9,8 @@ interface Contact {
 const contacts: Contact[] = [
   {
     name: "WhatsApp",
-    handle: "+62 896 6149 9225",
-    link: "https://wa.me/6289661499225",
+    handle: "+62 851 7237 2101",
+    link: "https://wa.me/6285172372101",
     external: true,
   },
   {

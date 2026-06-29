@@ -59,7 +59,7 @@ function formatPrice(n: number) {
     <AnnouncementBar />
     <Navbar />
 
-    <main class="pt-24 lg:pt-32 pb-20 lg:pb-28">
+    <main class="pt-6 lg:pt-10 pb-20 lg:pb-28">
       <!-- Hero banner -->
       <div class="bg-cream border-b border-line">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 text-center">

@@ -34,7 +34,7 @@ const goToProducts = () => {
 </script>
 
 <template>
-  <section class="relative pt-28 lg:pt-36 pb-16 lg:pb-24 overflow-hidden">
+  <section class="relative pt-12 lg:pt-16 pb-16 lg:pb-24 overflow-hidden">
     <!-- Decorative background -->
     <div aria-hidden="true" class="absolute inset-0 -z-10">
       <div class="absolute inset-0 bg-cream" />

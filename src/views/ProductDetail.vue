@@ -106,7 +106,7 @@ onUnmounted(() => {
     <AnnouncementBar />
     <Navbar />
 
-    <main class="pt-24 lg:pt-32 pb-20 lg:pb-28">
+    <main class="pt-6 lg:pt-10 pb-20 lg:pb-28">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Breadcrumb / back -->
         <button
@@ -138,7 +138,7 @@ onUnmounted(() => {
             data-aos-duration="800"
           >
             <div
-              class="relative aspect-[4/5] rounded-3xl overflow-hidden bg-surface shadow-soft cursor-crosshair"
+              class="relative aspect-square sm:aspect-[4/5] rounded-3xl overflow-hidden bg-surface shadow-soft cursor-crosshair"
               @click="openLightbox"
               @mousemove="handleMainZoomMove"
               @mouseenter="isMainZoomed = true"

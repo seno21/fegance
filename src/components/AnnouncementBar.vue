@@ -43,7 +43,7 @@ function close() {
         leave-to-class="opacity-0"
         mode="out-in"
       >
-        <p :key="index" class="text-center font-medium">
+        <p :key="index" class="text-center font-medium px-8">
           {{ messages[index] }}
         </p>
       </Transition>
