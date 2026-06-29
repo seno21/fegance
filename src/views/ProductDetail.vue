@@ -48,10 +48,15 @@ watch(
   },
 );
 
-// --- Main image hover zoom ---
+// --- Main image hover & touch zoom ---
 const mainZoomPos = ref({ x: 50, y: 50 });
 const isMainZoomed = ref(false);
+const isTouchingMain = ref(false);
+let mainTouchStartX = 0;
+let mainTouchStartY = 0;
+let mainHasMoved = false;
 
+// Mouse hover (desktop)
 function handleMainZoomMove(e: MouseEvent) {
   const el = e.currentTarget as HTMLElement;
   const rect = el.getBoundingClientRect();
@@ -61,10 +66,58 @@ function handleMainZoomMove(e: MouseEvent) {
   };
 }
 
-// --- Lightbox ---
+// Touch events (mobile)
+function handleMainTouchStart(e: TouchEvent) {
+  if (!e.touches.length) return;
+  const touch = e.touches[0];
+  if (!touch) return;
+  isTouchingMain.value = true;
+  isMainZoomed.value = true;
+  mainTouchStartX = touch.clientX;
+  mainTouchStartY = touch.clientY;
+  mainHasMoved = false;
+  updateMainTouchPos(e);
+}
+function handleMainTouchMove(e: TouchEvent) {
+  if (!isTouchingMain.value) return;
+  const touch = e.touches[0];
+  if (!touch) return;
+  const dx = touch.clientX - mainTouchStartX;
+  const dy = touch.clientY - mainTouchStartY;
+  if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+    mainHasMoved = true;
+  }
+  updateMainTouchPos(e);
+}
+function handleMainTouchEnd() {
+  isTouchingMain.value = false;
+  isMainZoomed.value = false;
+}
+
+function updateMainTouchPos(e: TouchEvent) {
+  if (!e.touches.length) return;
+  const touch = e.touches[0];
+  if (!touch) return;
+  const el = e.currentTarget as HTMLElement;
+  const rect = el.getBoundingClientRect();
+  mainZoomPos.value = {
+    x: Math.max(0, Math.min(100, ((touch.clientX - rect.left) / rect.width) * 100)),
+    y: Math.max(0, Math.min(100, ((touch.clientY - rect.top) / rect.height) * 100)),
+  };
+}
+
+// Click handler: only open lightbox if no drag movement occurred
+function handleMainClick() {
+  if (!mainHasMoved) {
+    openLightbox();
+  }
+}
+
+// --- Lightbox --- (with touch support)
 const showLightbox = ref(false);
 const isZoomed = ref(false);
 const zoomPos = ref({ x: 50, y: 50 });
+const isTouchingLightbox = ref(false);
 
 function openLightbox() {
   showLightbox.value = true;
@@ -85,6 +138,35 @@ function handleZoomMove(e: MouseEvent) {
     y: ((e.clientY - rect.top) / rect.height) * 100,
   };
 }
+
+// Touch support for lightbox
+function handleLightboxTouchStart(e: TouchEvent) {
+  if (!e.touches.length) return;
+  isTouchingLightbox.value = true;
+  isZoomed.value = true;
+  updateLightboxTouchPos(e);
+}
+function handleLightboxTouchMove(e: TouchEvent) {
+  if (!isTouchingLightbox.value) return;
+  if (e.cancelable) e.preventDefault();
+  updateLightboxTouchPos(e);
+}
+function handleLightboxTouchEnd() {
+  isTouchingLightbox.value = false;
+  isZoomed.value = false;
+}
+function updateLightboxTouchPos(e: TouchEvent) {
+  if (!e.touches.length) return;
+  const touch = e.touches[0];
+  if (!touch) return;
+  const el = e.currentTarget as HTMLElement;
+  const rect = el.getBoundingClientRect();
+  zoomPos.value = {
+    x: Math.max(0, Math.min(100, ((touch.clientX - rect.left) / rect.width) * 100)),
+    y: Math.max(0, Math.min(100, ((touch.clientY - rect.top) / rect.height) * 100)),
+  };
+}
+
 
 function onKeydown(e: KeyboardEvent) {
   if (e.key === "Escape") closeLightbox();
@@ -139,10 +221,13 @@ onUnmounted(() => {
           >
             <div
               class="relative aspect-square sm:aspect-[4/5] rounded-3xl overflow-hidden bg-surface shadow-soft cursor-crosshair"
-              @click="openLightbox"
+              @click="handleMainClick"
               @mousemove="handleMainZoomMove"
               @mouseenter="isMainZoomed = true"
               @mouseleave="isMainZoomed = false"
+              @touchstart.passive="handleMainTouchStart"
+              @touchmove="handleMainTouchMove"
+              @touchend.passive="handleMainTouchEnd"
             >
               <img
                 :src="product.image"
@@ -506,6 +591,9 @@ onUnmounted(() => {
               @mousemove="handleZoomMove"
               @mouseenter="isZoomed = true"
               @mouseleave="isZoomed = false"
+              @touchstart="handleLightboxTouchStart"
+              @touchmove="handleLightboxTouchMove"
+              @touchend.passive="handleLightboxTouchEnd"
             />
           </div>
         </div>
