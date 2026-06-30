@@ -11,6 +11,7 @@
     "type-check": "vue-tsc --build"
   },
   "dependencies": {
+    "@tabler/icons-vue": "^3.44.0",
     "@tailwindcss/vite": "^4.3.1",
     "aos": "^2.3.4",
     "tailwindcss": "^4.3.1",

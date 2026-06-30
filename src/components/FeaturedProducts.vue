@@ -82,7 +82,7 @@ function formatPrice(n: number) {
             <img
               :src="product.image"
               :alt="product.name"
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               loading="lazy"
             />
 

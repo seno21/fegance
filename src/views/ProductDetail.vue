@@ -5,13 +5,11 @@ import { products } from "@/data/products";
 import Navbar from "@/components/Navbar.vue";
 import AnnouncementBar from "@/components/AnnouncementBar.vue";
 import FooterSection from "@/components/FooterSection.vue";
+import ProductAccordion from "@/components/ProductAccordion.vue";
 import logoShopee from "@/assets/logo-shopee.png";
 
 const route = useRoute();
 const router = useRouter();
-
-type Tab = "description" | "notes" | "performance";
-const activeTab = ref<Tab>("description");
 
 const product = computed(() =>
   products.find((p) => p.slug === route.params.slug),
@@ -25,28 +23,59 @@ const otherProducts = computed(() =>
   products.filter((p) => p.slug !== route.params.slug).slice(0, 4),
 );
 
-const tabs: { id: Tab; label: string }[] = [
-  { id: "description", label: "Description" },
-  { id: "notes", label: "Fragrance Notes" },
-  { id: "performance", label: "Product Performance" },
-];
+// Map product properties into accordion format
+interface AccordionItem {
+  type: 'description' | 'notes' | 'specs';
+  title: string;
+  subtitle?: string;
+  icon: string;
+  content: any;
+}
+
+const accordionData = computed<AccordionItem[]>(() => {
+  if (!product.value) return [];
+  const p = product.value;
+  return [
+    {
+      type: 'description' as const,
+      title: 'Description',
+      subtitle: 'Story',
+      icon: 'IconBook',
+      content: [
+        p.description,
+        'Experience the balance of craftsmanship and luxury. Each bottle is meticulously designed to reflect the elegance of the fragrance within — a vessel worthy of the story it carries.'
+      ]
+    },
+    {
+      type: 'notes' as const,
+      title: 'Fragrance Notes',
+      subtitle: `${p.topNotes.length + p.middleNotes.length + p.baseNotes.length} Notes`,
+      icon: 'IconFlower2',
+      content: [...p.topNotes, ...p.middleNotes, ...p.baseNotes]
+    },
+    {
+      type: 'specs' as const,
+      title: 'Product Performance',
+      subtitle: 'Specs',
+      icon: 'IconGauge',
+      content: [
+        { label: 'Type', value: p.performance.type },
+        { label: 'Size', value: p.size },
+        { label: 'Sillage', value: p.performance.sillage },
+        { label: 'Projection', value: p.performance.projection },
+        { label: 'Longevity', value: p.performance.longevity }
+      ]
+    }
+  ];
+});
 
 function goToDetail(slug: string) {
-  activeTab.value = "description";
   router.push({ name: "product-detail", params: { slug } });
 }
 
 function formatPrice(n: number) {
   return "Rp " + n.toLocaleString("id-ID");
 }
-
-// Reset tab when navigating between products
-watch(
-  () => route.params.slug,
-  () => {
-    activeTab.value = "description";
-  },
-);
 
 // --- Main image hover & touch zoom ---
 const mainZoomPos = ref({ x: 50, y: 50 });
@@ -216,7 +245,7 @@ onUnmounted(() => {
           <!-- Image -->
           <div
             class="lg:sticky lg:top-32 lg:self-start"
-            data-aos="fade-right"
+            data-aos="fade-up"
             data-aos-duration="800"
           >
             <div
@@ -232,7 +261,7 @@ onUnmounted(() => {
               <img
                 :src="product.image"
                 :alt="product.name"
-                class="w-full h-full object-cover transition-transform duration-75 select-none"
+                class="w-full h-full object-cover object-center transition-transform duration-75 select-none"
                 :class="{ 'scale-[2.5]': isMainZoomed }"
                 :style="{
                   transformOrigin: `${mainZoomPos.x}% ${mainZoomPos.y}%`,
@@ -358,143 +387,8 @@ onUnmounted(() => {
               30-day returns
             </p>
 
-            <!-- Tabs -->
-            <div class="mt-12 border-b border-line">
-              <div class="flex gap-8 overflow-x-auto -mb-px">
-                <button
-                  v-for="tab in tabs"
-                  :key="tab.id"
-                  @click="activeTab = tab.id"
-                  class="pb-3.5 text-sm font-medium tracking-wide whitespace-nowrap transition-colors relative"
-                  :class="
-                    activeTab === tab.id
-                      ? 'text-ink'
-                      : 'text-faint hover:text-ink'
-                  "
-                >
-                  {{ tab.label }}
-                  <span
-                    v-if="activeTab === tab.id"
-                    class="absolute -bottom-px left-0 right-0 h-0.5 bg-gold"
-                  />
-                </button>
-              </div>
-            </div>
-
-            <div class="py-8 min-h-[180px]">
-              <!-- Description -->
-              <div
-                v-if="activeTab === 'description'"
-                class="space-y-4 text-sm sm:text-base text-ink-soft leading-relaxed max-w-prose"
-              >
-                <p>{{ product.description }}</p>
-                <p>
-                  Experience the balance of craftsmanship and luxury. Each
-                  bottle is meticulously designed to reflect the elegance of the
-                  fragrance within &mdash; a vessel worthy of the story it
-                  carries.
-                </p>
-              </div>
-
-              <!-- Notes -->
-              <div v-if="activeTab === 'notes'" class="space-y-7">
-                <div
-                  v-for="group in [
-                    {
-                      label: 'Top Notes',
-                      items: product.topNotes,
-                      hint: 'First impression &middot; 15 min',
-                    },
-                    {
-                      label: 'Heart Notes',
-                      items: product.middleNotes,
-                      hint: 'The character &middot; 2 to 4 hours',
-                    },
-                    {
-                      label: 'Base Notes',
-                      items: product.baseNotes,
-                      hint: 'The trail &middot; 6+ hours',
-                    },
-                  ]"
-                  :key="group.label"
-                >
-                  <div class="flex items-baseline justify-between mb-3">
-                    <p
-                      class="text-[10px] tracking-[0.22em] uppercase text-gold font-semibold"
-                    >
-                      {{ group.label }}
-                    </p>
-                    <p class="text-[10px] tracking-wider uppercase text-faint">
-                      {{ group.hint }}
-                    </p>
-                  </div>
-                  <div class="flex flex-wrap gap-2">
-                    <span
-                      v-for="note in group.items"
-                      :key="note"
-                      class="px-3.5 py-1.5 text-xs rounded-pill bg-cream text-ink border border-line"
-                    >
-                      {{ note }}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Product Performance -->
-              <div
-                v-if="activeTab === 'performance'"
-                class="space-y-4 max-w-prose"
-              >
-                <div
-                  class="grid grid-cols-[auto_1fr] gap-y-4 gap-x-6 border border-line rounded-2xl p-5 sm:p-6 bg-cream/40"
-                >
-                  <div
-                    class="text-[10px] tracking-[0.2em] uppercase text-faint font-semibold pt-0.5"
-                  >
-                    Type
-                  </div>
-                  <div class="text-sm text-ink font-medium">
-                    {{ product.performance.type }}
-                  </div>
-
-                  <div
-                    class="text-[10px] tracking-[0.2em] uppercase text-faint font-semibold pt-0.5"
-                  >
-                    Size
-                  </div>
-                  <div class="text-sm text-ink font-medium">
-                    {{ product.size }}
-                  </div>
-
-                  <div
-                    class="text-[10px] tracking-[0.2em] uppercase text-faint font-semibold pt-0.5"
-                  >
-                    Sillage
-                  </div>
-                  <div class="text-sm text-ink font-medium">
-                    {{ product.performance.sillage }}
-                  </div>
-
-                  <div
-                    class="text-[10px] tracking-[0.2em] uppercase text-faint font-semibold pt-0.5"
-                  >
-                    Projection
-                  </div>
-                  <div class="text-sm text-ink font-medium">
-                    {{ product.performance.projection }}
-                  </div>
-
-                  <div
-                    class="text-[10px] tracking-[0.2em] uppercase text-faint font-semibold pt-0.5"
-                  >
-                    Longevity
-                  </div>
-                  <div class="text-sm text-ink font-medium">
-                    {{ product.performance.longevity }}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <!-- Accordion -->
+            <ProductAccordion :accordion-data="accordionData" :key="product.slug" />
           </div>
         </div>
 
@@ -522,7 +416,7 @@ onUnmounted(() => {
                 <img
                   :src="item.image"
                   :alt="item.name"
-                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
               </div>
