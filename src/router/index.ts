@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/views/Home.vue'
 import ProductDetail from '@/views/ProductDetail.vue'
 import ProductListing from '@/views/ProductListing.vue'
+import Linktree from '@/views/Linktree.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,6 +21,11 @@ const router = createRouter({
       path: '/product/:slug',
       name: 'product-detail',
       component: ProductDetail
+    },
+    {
+      path: '/linktree',
+      name: 'linktree',
+      component: Linktree
     }
   ],
   scrollBehavior() {

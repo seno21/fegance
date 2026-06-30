@@ -40,8 +40,34 @@
 
             <!-- Notes content -->
             <div v-else-if="item.type === 'notes'" class="content-notes">
-              <div v-for="note in item.content" :key="note" class="note-badge">
-                {{ note }}
+              <div class="note-section">
+                <h5 class="note-section-title">Top Notes</h5>
+                <span class="note-section-subtitle">First impression</span>
+                <div class="note-tags">
+                  <span v-for="note in item.content.top" :key="note" class="note-tag note-tag--top">
+                    {{ note }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="note-section">
+                <h5 class="note-section-title">Middle Notes</h5>
+                <span class="note-section-subtitle">The character</span>
+                <div class="note-tags">
+                  <span v-for="note in item.content.middle" :key="note" class="note-tag note-tag--middle">
+                    {{ note }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="note-section">
+                <h5 class="note-section-title">Base Notes</h5>
+                <span class="note-section-subtitle">The trail</span>
+                <div class="note-tags">
+                  <span v-for="note in item.content.base" :key="note" class="note-tag note-tag--base">
+                    {{ note }}
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -270,31 +296,76 @@ const getIconComponent = (iconName: string) => {
   color: var(--color-text-soft);
 }
 
-/* Notes grid 2 kolom */
+/* Notes section columns styling */
 .content-notes {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 8px;
+  gap: 16px;
 }
 
-@media (min-width: 480px) {
+@media (min-width: 640px) {
   .content-notes {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
-.note-badge {
+.note-section {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--color-text-soft);
+  flex-direction: column;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: 8px;
-  text-align: center;
+  padding: 12px;
+}
+
+.note-section-title {
+  margin: 0 0 2px 0;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text);
+}
+
+.note-section-subtitle {
+  font-size: 9px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+  margin-bottom: 8px;
+}
+
+.note-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.note-tag {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+}
+
+.note-tag--top {
+  background: rgba(168, 213, 226, 0.1);
+  color: #2E7D8A;
+  border-color: rgba(168, 213, 226, 0.25);
+}
+
+.note-tag--middle {
+  background: rgba(232, 136, 107, 0.1);
+  color: #C85C40;
+  border-color: rgba(232, 136, 107, 0.25);
+}
+
+.note-tag--base {
+  background: rgba(212, 165, 116, 0.1);
+  color: #a66c24;
+  border-color: rgba(212, 165, 116, 0.25);
 }
 
 /* Specs table styling */

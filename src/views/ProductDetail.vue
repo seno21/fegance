@@ -51,7 +51,11 @@ const accordionData = computed<AccordionItem[]>(() => {
       title: 'Fragrance Notes',
       subtitle: `${p.topNotes.length + p.middleNotes.length + p.baseNotes.length} Notes`,
       icon: 'IconFlower2',
-      content: [...p.topNotes, ...p.middleNotes, ...p.baseNotes]
+      content: {
+        top: p.topNotes,
+        middle: p.middleNotes,
+        base: p.baseNotes
+      }
     },
     {
       type: 'specs' as const,
