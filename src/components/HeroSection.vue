@@ -71,7 +71,7 @@ const goToProducts = () => {
           <div
             class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-pill bg-canvas border border-line mb-7"
           >
-            <span class="dot-gold" />
+            <!-- <span class="dot-gold" />
             <span
               class="text-[10px] font-semibold tracking-[0.22em] uppercase text-muted"
             >
@@ -82,7 +82,7 @@ const goToProducts = () => {
               >
                 {{ year }}
               </span>
-            </span>
+            </span> -->
           </div>
 
           <h1
