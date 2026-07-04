@@ -9,7 +9,7 @@ const pillars: Pillar[] = [
   {
     title: "Masterfully Crafted",
     description:
-      "Every fragrance is developed by our perfumers—from concept to final blend—ensuring every bottle carries its own identity.",
+      "Each fragrance is thoughtfully composed from carefully selected fragrance oils and refined through our own blending process.",
     icon: "sparkles",
   },
   {

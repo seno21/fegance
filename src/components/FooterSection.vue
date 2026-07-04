@@ -62,8 +62,8 @@ const year = new Date().getFullYear();
             >
           </div>
           <p class="text-sm text-white/60 leading-relaxed max-w-xs">
-            Premium fragrances crafted for those who appreciate the finer things
-            in life. Discover your signature scent.
+            Handcrafted fragrances with distinctive character, created for those
+            who value quality and individuality. Discover your signature scent.
           </p>
           <div class="mt-6 flex gap-2.5">
             <a
@@ -128,10 +128,10 @@ const year = new Date().getFullYear();
           <p class="text-sm text-white/70 leading-relaxed">
             Jl. Nataswara Rt01,Rw01
             <br />
-            Jakarta Pusat
+            Cirebon, Jawa Barat
             <br />
             <span class="text-white/40 text-xs mt-2 block"
-              >Mon &ndash; Sat &middot; 10&ndash;20</span
+              >Mon &ndash; Sat &middot; 09&ndash;20</span
             >
           </p>
         </div>

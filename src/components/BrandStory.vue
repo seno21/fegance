@@ -129,10 +129,13 @@ import filosofiAksen2 from "@/assets/landing/filosofi.jpeg";
               identity, mood, and memory distilled into something you wear.
             </p>
             <p>
-              Every bottle is crafted using the finest ingredients sourced from
-              twelve countries — from the lavender fields of Provence to the oud
-              forests of Southeast Asia. We travel the globe so you can carry a
-              piece of it home.
+              Every fragrance begins with carefully selected premium fragrance
+              oils from trusted industry specialists. From there, each
+              composition is thoughtfully blended by hand in our home studio,
+              where proportions are refined to create a balanced scent with its
+              own distinctive character. Every bottle reflects our dedication to
+              craftsmanship, consistency, and the pursuit of fragrances that
+              feel personal and memorable.
             </p>
           </div>
 

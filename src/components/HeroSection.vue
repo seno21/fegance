@@ -95,9 +95,9 @@ const goToProducts = () => {
           <p
             class="mt-7 text-base sm:text-lg leading-relaxed text-muted max-w-xl"
           >
-            Discover premium fragrances crafted to define your identity. Each
-            bottle is a quiet ritual — a signature left in the air long after
-            you have left the room.
+            Discover signature fragrances designed to complement your identity.
+            Every bottle captures a refined character that lingers with quiet
+            elegance.
           </p>
 
           <div class="mt-9 flex flex-col sm:flex-row gap-3 sm:gap-4">
