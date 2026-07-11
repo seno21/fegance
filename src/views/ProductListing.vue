@@ -3,7 +3,6 @@ import { computed, ref } from 'vue'
 import { products, type Product } from '@/data/products'
 import { useRouter } from 'vue-router'
 import Navbar from '@/components/Navbar.vue'
-import AnnouncementBar from '@/components/AnnouncementBar.vue'
 import FooterSection from '@/components/FooterSection.vue'
 import logoShopee from '@/assets/logo-shopee.png'
 
@@ -56,7 +55,6 @@ function formatPrice(n: number) {
 
 <template>
   <div>
-    <AnnouncementBar />
     <Navbar />
 
     <main class="pt-6 lg:pt-10 pb-20 lg:pb-28">

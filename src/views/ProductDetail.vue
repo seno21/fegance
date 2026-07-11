@@ -3,7 +3,6 @@ import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { products } from "@/data/products";
 import Navbar from "@/components/Navbar.vue";
-import AnnouncementBar from "@/components/AnnouncementBar.vue";
 import FooterSection from "@/components/FooterSection.vue";
 import ProductAccordion from "@/components/ProductAccordion.vue";
 import logoShopee from "@/assets/logo-shopee.png";
@@ -216,7 +215,6 @@ onUnmounted(() => {
 
 <template>
   <div v-if="product">
-    <AnnouncementBar />
     <Navbar />
 
     <main class="pt-6 lg:pt-10 pb-20 lg:pb-28">
