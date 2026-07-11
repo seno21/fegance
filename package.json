@@ -11,6 +11,7 @@
     "type-check": "vue-tsc --build"
   },
   "dependencies": {
+    "@fontsource/playfair-display": "^5.2.8",
     "@tabler/icons-vue": "^3.44.0",
     "@tailwindcss/vite": "^4.3.1",
     "aos": "^2.3.4",

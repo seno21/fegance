@@ -68,10 +68,10 @@ const goToProducts = () => {
           data-aos="fade-up"
           data-aos-duration="800"
         >
-          <div
+          <!-- <div
             class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-pill bg-canvas border border-line mb-7"
           >
-            <!-- <span class="dot-gold" />
+           <span class="dot-gold" />
             <span
               class="text-[10px] font-semibold tracking-[0.22em] uppercase text-muted"
             >
@@ -82,8 +82,8 @@ const goToProducts = () => {
               >
                 {{ year }}
               </span>
-            </span> -->
-          </div>
+            </span> 
+          </div> -->
 
           <h1
             class="h-display text-[44px] sm:text-6xl lg:text-[72px] xl:text-[80px] text-ink"

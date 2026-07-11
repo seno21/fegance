@@ -19,32 +19,20 @@ const contacts: Contact[] = [
     link: "https://www.instagram.com/fegance.id",
     external: true,
   },
-  {
-    name: "TikTok",
-    handle: "@fegance.id",
-    link: "https://www.tiktok.com/@fegance.id",
-    external: true,
-  },
-  {
-    name: "Email",
-    handle: "feganceofficial@gmail.com",
-    link: "mailto:feganceofficial@gmail.com",
-    external: false,
-  },
 ];
 </script>
 
 <template>
-  <section id="contact" class="section bg-surface">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="contact" class="py-[120px] bg-[#F8F8F8] overflow-hidden">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
         <!-- Copy -->
         <div data-aos="fade-right" data-aos-duration="800">
-          <p class="eyebrow mb-4">Get In Touch</p>
+          <p class="text-[11px] font-bold tracking-[0.22em] text-gold uppercase block mb-4">Get In Touch</p>
           <h2 class="h-display text-3xl sm:text-4xl lg:text-5xl text-ink">
             Let&apos;s start a conversation.
           </h2>
-          <span class="gold-rule mt-5" />
+          <div class="w-12 h-[1px] bg-gold mt-5" />
           <p
             class="mt-6 text-sm sm:text-base text-muted leading-relaxed max-w-md"
           >
@@ -56,7 +44,7 @@ const contacts: Contact[] = [
           <div class="mt-10 space-y-3">
             <div class="flex items-start gap-3 text-sm">
               <div
-                class="w-9 h-9 rounded-full bg-canvas border border-line flex items-center justify-center flex-shrink-0 mt-0.5"
+                class="w-9 h-9 rounded-full bg-[#faf7f2] border border-line flex items-center justify-center flex-shrink-0 mt-0.5"
               >
                 <svg
                   class="w-4 h-4 text-gold"
@@ -92,7 +80,7 @@ const contacts: Contact[] = [
 
         <!-- Contact cards -->
         <div
-          class="grid sm:grid-cols-2 gap-3 sm:gap-4"
+          class="flex flex-col gap-4 sm:gap-6"
           data-aos="fade-left"
           data-aos-duration="800"
         >
@@ -102,35 +90,46 @@ const contacts: Contact[] = [
             :href="c.link"
             :target="c.external ? '_blank' : undefined"
             :rel="c.external ? 'noopener noreferrer' : undefined"
-            class="group bg-canvas border border-line rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:border-ink hover:-translate-y-0.5 hover:shadow-lift"
+            class="group relative bg-[#FFFFFF] border border-[#ECECEC] rounded-[24px] p-8 transition-all duration-300 hover:border-gold hover:-translate-y-1.5 hover:shadow-[0_12px_30px_rgba(201,162,39,0.08)] flex flex-col justify-between overflow-hidden min-h-[180px]"
             :data-aos="'fade-up'"
-            :data-aos-delay="i * 80"
-            data-aos-duration="700"
+            :data-aos-delay="i * 120"
+            data-aos-duration="800"
           >
-            <div class="flex items-center justify-between">
-              <p class="text-[10px] tracking-[0.2em] uppercase text-faint">
-                {{ c.name }}
-              </p>
-              <svg
-                class="w-4 h-4 text-ink transition-all duration-300 group-hover:text-gold group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                stroke-width="1.6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M7 17L17 7M17 7H7M17 7v10"
-                />
-              </svg>
+            <!-- Background Decorative Glow -->
+            <div class="absolute top-0 right-0 w-24 h-24 bg-gold/5 rounded-full blur-2xl transition-all duration-500 group-hover:bg-gold/10 group-hover:scale-150"></div>
+
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-[10px] tracking-[0.25em] font-bold uppercase text-gold">
+                  {{ c.name }}
+                </span>
+                
+                <!-- Icon Circle background -->
+                <div class="w-8 h-8 rounded-full bg-[#faf7f2] flex items-center justify-center transition-colors duration-300 group-hover:bg-gold">
+                  <svg
+                    class="w-4 h-4 text-gold transition-colors duration-300 group-hover:text-[#FFFFFF]"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M7 17L17 7M17 7H7M17 7v10"
+                    />
+                  </svg>
+                </div>
+              </div>
+              
+              <h3 class="font-display text-2xl sm:text-3xl font-semibold text-[#111111] leading-tight break-all">
+                {{ c.handle }}
+              </h3>
             </div>
-            <p class="mt-3 font-display text-lg sm:text-xl text-ink break-all">
-              {{ c.handle }}
-            </p>
-            <p class="mt-1 text-xs text-muted">
+
+            <p class="mt-6 text-xs text-[#666666] tracking-wide font-sans group-hover:text-gold transition-colors">
               {{
-                c.name === "Email" ? "Drop us a line" : "Chat with us directly"
+                c.name === "WhatsApp" ? "Chat with us directly" : "Follow our journey"
               }}
             </p>
           </a>

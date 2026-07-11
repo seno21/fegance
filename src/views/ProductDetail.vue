@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, watch } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { products } from "@/data/products";
 import Navbar from "@/components/Navbar.vue";
@@ -22,6 +22,9 @@ if (!product.value) {
 const otherProducts = computed(() =>
   products.filter((p) => p.slug !== route.params.slug).slice(0, 4),
 );
+
+// --- Gallery ---
+const selectedImage = computed(() => product.value?.image || '');
 
 // Map product properties into accordion format
 interface AccordionItem {
@@ -89,7 +92,6 @@ let mainTouchStartX = 0;
 let mainTouchStartY = 0;
 let mainHasMoved = false;
 
-// Mouse hover (desktop)
 function handleMainZoomMove(e: MouseEvent) {
   const el = e.currentTarget as HTMLElement;
   const rect = el.getBoundingClientRect();
@@ -99,7 +101,6 @@ function handleMainZoomMove(e: MouseEvent) {
   };
 }
 
-// Touch events (mobile)
 function handleMainTouchStart(e: TouchEvent) {
   if (!e.touches.length) return;
   const touch = e.touches[0];
@@ -139,14 +140,13 @@ function updateMainTouchPos(e: TouchEvent) {
   };
 }
 
-// Click handler: only open lightbox if no drag movement occurred
 function handleMainClick() {
   if (!mainHasMoved) {
     openLightbox();
   }
 }
 
-// --- Lightbox --- (with touch support)
+// --- Lightbox ---
 const showLightbox = ref(false);
 const isZoomed = ref(false);
 const zoomPos = ref({ x: 50, y: 50 });
@@ -172,7 +172,6 @@ function handleZoomMove(e: MouseEvent) {
   };
 }
 
-// Touch support for lightbox
 function handleLightboxTouchStart(e: TouchEvent) {
   if (!e.touches.length) return;
   isTouchingLightbox.value = true;
@@ -199,7 +198,6 @@ function updateLightboxTouchPos(e: TouchEvent) {
     y: Math.max(0, Math.min(100, ((touch.clientY - rect.top) / rect.height) * 100)),
   };
 }
-
 
 function onKeydown(e: KeyboardEvent) {
   if (e.key === "Escape") closeLightbox();
@@ -244,16 +242,17 @@ onUnmounted(() => {
           Back to Collection
         </button>
 
-        <!-- Top: image + info -->
-        <div class="grid lg:grid-cols-2 gap-10 lg:gap-20">
-          <!-- Image -->
+        <!-- Two-column independent layout -->
+        <div class="product-layout">
+          <!-- Left: Independent Gallery (sticky on desktop) -->
           <div
-            class="lg:sticky lg:top-32 lg:self-start"
+            class="product-gallery"
             data-aos="fade-up"
             data-aos-duration="800"
           >
+            <!-- Main Image -->
             <div
-              class="relative aspect-square sm:aspect-[4/5] rounded-3xl overflow-hidden bg-surface shadow-soft cursor-crosshair"
+              class="gallery-main"
               @click="handleMainClick"
               @mousemove="handleMainZoomMove"
               @mouseenter="isMainZoomed = true"
@@ -262,32 +261,33 @@ onUnmounted(() => {
               @touchmove="handleMainTouchMove"
               @touchend.passive="handleMainTouchEnd"
             >
-              <img
-                :src="product.image"
-                :alt="product.name"
-                class="w-full h-full object-cover object-center transition-transform duration-75 select-none"
-                :class="{ 'scale-[2.5]': isMainZoomed }"
-                :style="{
-                  transformOrigin: `${mainZoomPos.x}% ${mainZoomPos.y}%`,
-                }"
-                draggable="false"
-              />
-              <div
-                class="absolute inset-0 bg-black/0 hover:bg-black/5 transition-colors duration-300"
-              />
+              <Transition name="gallery-fade" mode="out-in">
+                <img
+                  :key="selectedImage"
+                  :src="selectedImage"
+                  :alt="product.name"
+                  class="gallery-main-img"
+                  :class="{ 'zoom-active': isMainZoomed }"
+                  :style="{
+                    transformOrigin: `${mainZoomPos.x}% ${mainZoomPos.y}%`,
+                  }"
+                  draggable="false"
+                />
+              </Transition>
+              <div class="gallery-main-overlay" />
               <div
                 v-if="product.isBestseller || product.isNew"
-                class="absolute top-5 left-5 flex flex-col gap-2"
+                class="gallery-badge-group"
               >
                 <span
                   v-if="product.isBestseller"
-                  class="px-3 py-1.5 text-[10px] font-semibold tracking-[0.2em] uppercase rounded-pill bg-gold text-ink"
+                  class="gallery-badge gallery-badge-gold"
                 >
                   Best Seller
                 </span>
                 <span
                   v-if="product.isNew"
-                  class="px-3 py-1.5 text-[10px] font-semibold tracking-[0.2em] uppercase rounded-pill bg-ink text-canvas"
+                  class="gallery-badge gallery-badge-ink"
                 >
                   New
                 </span>
@@ -295,8 +295,8 @@ onUnmounted(() => {
             </div>
           </div>
 
-          <!-- Info -->
-          <div data-aos="fade-left" data-aos-duration="800">
+          <!-- Right: Product Information (only this column grows) -->
+          <div class="product-info" data-aos="fade-left" data-aos-duration="800">
             <p class="eyebrow mb-3">{{ product.category }}</p>
             <h1 class="h-display text-4xl sm:text-5xl lg:text-6xl text-ink">
               {{ product.name }}
@@ -478,7 +478,7 @@ onUnmounted(() => {
             @click.stop
           >
             <img
-              :src="product.image"
+              :src="selectedImage"
               :alt="product.name"
               class="max-w-[90vw] max-h-[90vh] object-contain transition-transform duration-75 cursor-crosshair select-none"
               :class="{ 'scale-[2]': isZoomed }"
@@ -501,6 +501,134 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+/* ============================================================
+   PRODUCT LAYOUT — Two independent columns
+   Left gallery never stretches; only right column grows.
+   ============================================================ */
+.product-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .product-layout {
+    grid-template-columns: 560px 1fr;
+    gap: 64px;
+  }
+}
+
+/* ============================================================
+   GALLERY — Independent, sticky, fixed dimensions
+   ============================================================ */
+.product-gallery {
+  width: 100%;
+  max-width: 560px;
+  height: fit-content;
+  align-self: start;
+  position: sticky;
+  top: 120px;
+}
+
+@media (max-width: 1023px) {
+  .product-gallery {
+    position: static;
+  }
+}
+
+/* Main image container */
+.gallery-main {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+  cursor: crosshair;
+  flex-shrink: 0;
+}
+
+.gallery-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 75ms ease;
+  user-select: none;
+}
+
+.gallery-main-img.zoom-active {
+  transform: scale(2.5);
+}
+
+.gallery-main-overlay {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  transition: background 300ms ease;
+  pointer-events: none;
+}
+
+.gallery-main:hover .gallery-main-overlay {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* Badge overlays */
+.gallery-badge-group {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gallery-badge {
+  padding: 6px 12px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  line-height: 1;
+}
+
+.gallery-badge-gold {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+.gallery-badge-ink {
+  background: var(--color-ink);
+  color: var(--color-canvas);
+}
+
+/* ============================================================
+   PRODUCT INFO — Only this column grows with accordion
+   ============================================================ */
+.product-info {
+  min-width: 0;
+}
+
+/* ============================================================
+   IMAGE FADE TRANSITION
+   ============================================================ */
+.gallery-fade-enter-active,
+.gallery-fade-leave-active {
+  transition: opacity 250ms ease;
+}
+
+.gallery-fade-enter-from,
+.gallery-fade-leave-to {
+  opacity: 0;
+}
+
+/* ============================================================
+   VENDOR BUTTONS
+   ============================================================ */
 .btn-shopee {
   border: 1.5px solid #ee4d2d;
   color: #ee4d2d;
@@ -531,7 +659,9 @@ onUnmounted(() => {
   color: #fff;
 }
 
-/* Lightbox transitions */
+/* ============================================================
+   LIGHTBOX TRANSITIONS
+   ============================================================ */
 .lightbox-enter-active {
   transition: opacity 0.3s ease;
 }
