@@ -88,16 +88,17 @@ const goToProducts = () => {
           <h1
             class="h-display text-[44px] sm:text-6xl lg:text-[72px] xl:text-[80px] text-ink"
           >
-            Luxury in
-            <span class="block italic font-medium text-gold">every drop.</span>
+            Wangi Dulu
+            <span class="block italic font-medium text-gold"
+              >Lainya Belakangan!</span
+            >
           </h1>
 
           <p
             class="mt-7 text-base sm:text-lg leading-relaxed text-muted max-w-xl"
           >
-            Discover signature fragrances designed to complement your identity.
-            Every bottle captures a refined character that lingers with quiet
-            elegance.
+            Pilih aroma favorit kamu. Biar wangi aja yang bicara, gak perlu
+            repot menjelaskan siapa dirimu.
           </p>
 
           <div class="mt-9 flex flex-col sm:flex-row gap-3 sm:gap-4">

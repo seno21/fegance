@@ -23,11 +23,11 @@ const otherProducts = computed(() =>
 );
 
 // --- Gallery ---
-const selectedImage = computed(() => product.value?.image || '');
+const selectedImage = computed(() => product.value?.image || "");
 
 // Map product properties into accordion format
 interface AccordionItem {
-  type: 'description' | 'notes' | 'specs';
+  type: "description" | "notes" | "specs";
   title: string;
   subtitle?: string;
   icon: string;
@@ -39,39 +39,39 @@ const accordionData = computed<AccordionItem[]>(() => {
   const p = product.value;
   return [
     {
-      type: 'description' as const,
-      title: 'Description',
-      subtitle: 'Story',
-      icon: 'IconBook',
+      type: "description" as const,
+      title: "Description",
+      subtitle: "Story",
+      icon: "IconBook",
       content: [
         p.description,
-        'Experience the balance of craftsmanship and luxury. Each bottle is meticulously designed to reflect the elegance of the fragrance within — a vessel worthy of the story it carries.'
-      ]
+        "Experience the balance of craftsmanship and luxury. Each bottle is meticulously designed to reflect the elegance of the fragrance within — a vessel worthy of the story it carries.",
+      ],
     },
     {
-      type: 'notes' as const,
-      title: 'Fragrance Notes',
+      type: "notes" as const,
+      title: "Fragrance Notes",
       subtitle: `${p.topNotes.length + p.middleNotes.length + p.baseNotes.length} Notes`,
-      icon: 'IconFlower2',
+      icon: "IconFlower2",
       content: {
         top: p.topNotes,
         middle: p.middleNotes,
-        base: p.baseNotes
-      }
+        base: p.baseNotes,
+      },
     },
     {
-      type: 'specs' as const,
-      title: 'Product Performance',
-      subtitle: 'Specs',
-      icon: 'IconGauge',
+      type: "specs" as const,
+      title: "Product Performance",
+      subtitle: "Specs",
+      icon: "IconGauge",
       content: [
-        { label: 'Type', value: p.performance.type },
-        { label: 'Size', value: p.size },
-        { label: 'Sillage', value: p.performance.sillage },
-        { label: 'Projection', value: p.performance.projection },
-        { label: 'Longevity', value: p.performance.longevity }
-      ]
-    }
+        { label: "Type", value: p.performance.type },
+        { label: "Size", value: p.size },
+        { label: "Sillage", value: p.performance.sillage },
+        { label: "Projection", value: p.performance.projection },
+        { label: "Longevity", value: p.performance.longevity },
+      ],
+    },
   ];
 });
 
@@ -134,8 +134,14 @@ function updateMainTouchPos(e: TouchEvent) {
   const el = e.currentTarget as HTMLElement;
   const rect = el.getBoundingClientRect();
   mainZoomPos.value = {
-    x: Math.max(0, Math.min(100, ((touch.clientX - rect.left) / rect.width) * 100)),
-    y: Math.max(0, Math.min(100, ((touch.clientY - rect.top) / rect.height) * 100)),
+    x: Math.max(
+      0,
+      Math.min(100, ((touch.clientX - rect.left) / rect.width) * 100),
+    ),
+    y: Math.max(
+      0,
+      Math.min(100, ((touch.clientY - rect.top) / rect.height) * 100),
+    ),
   };
 }
 
@@ -193,8 +199,14 @@ function updateLightboxTouchPos(e: TouchEvent) {
   const el = e.currentTarget as HTMLElement;
   const rect = el.getBoundingClientRect();
   zoomPos.value = {
-    x: Math.max(0, Math.min(100, ((touch.clientX - rect.left) / rect.width) * 100)),
-    y: Math.max(0, Math.min(100, ((touch.clientY - rect.top) / rect.height) * 100)),
+    x: Math.max(
+      0,
+      Math.min(100, ((touch.clientX - rect.left) / rect.width) * 100),
+    ),
+    y: Math.max(
+      0,
+      Math.min(100, ((touch.clientY - rect.top) / rect.height) * 100),
+    ),
   };
 }
 
@@ -220,7 +232,7 @@ onUnmounted(() => {
     <main class="pt-6 lg:pt-10 pb-20 lg:pb-28">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Breadcrumb / back -->
-        <button
+        <!-- <button
           @click="router.push('/product')"
           class="inline-flex items-center gap-2 text-sm text-muted hover:text-gold transition-colors mb-10 group"
         >
@@ -238,7 +250,7 @@ onUnmounted(() => {
             />
           </svg>
           Back to Collection
-        </button>
+        </button> -->
 
         <!-- Two-column independent layout -->
         <div class="product-layout">
@@ -294,7 +306,11 @@ onUnmounted(() => {
           </div>
 
           <!-- Right: Product Information (only this column grows) -->
-          <div class="product-info" data-aos="fade-left" data-aos-duration="800">
+          <div
+            class="product-info"
+            data-aos="fade-left"
+            data-aos-duration="800"
+          >
             <p class="eyebrow mb-3">{{ product.category }}</p>
             <h1 class="h-display text-4xl sm:text-5xl lg:text-6xl text-ink">
               {{ product.name }}
@@ -326,9 +342,9 @@ onUnmounted(() => {
               {{ formatPrice(product.price) }}
             </p>
 
-            <p class="mt-6 text-base leading-relaxed text-ink-soft max-w-prose">
+            <!-- <p class="mt-6 text-base leading-relaxed text-ink-soft max-w-prose">
               {{ product.description }}
-            </p>
+            </p> -->
 
             <!-- CTAs -->
             <div class="mt-9 flex flex-col sm:flex-row gap-2.5">
@@ -390,7 +406,10 @@ onUnmounted(() => {
             </p>
 
             <!-- Accordion -->
-            <ProductAccordion :accordion-data="accordionData" :key="product.slug" />
+            <ProductAccordion
+              :accordion-data="accordionData"
+              :key="product.slug"
+            />
           </div>
         </div>
 

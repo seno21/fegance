@@ -1,32 +1,32 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { products, type Product } from '@/data/products'
-import { useRouter } from 'vue-router'
+import { computed, ref } from "vue";
+import { products, type Product } from "@/data/products";
+import { useRouter } from "vue-router";
 
-const router = useRouter()
+const router = useRouter();
 
-const activeFilter = ref<'all' | Product['family']>('all')
+const activeFilter = ref<"all" | Product["family"]>("all");
 
 const filtered = computed(() => {
-  if (activeFilter.value === 'all') return products
-  return products.filter(p => p.family === activeFilter.value)
-})
+  if (activeFilter.value === "all") return products;
+  return products.filter((p) => p.family === activeFilter.value);
+});
 
-const filters: { id: 'all' | Product['family']; label: string }[] = [
-  { id: 'all', label: 'All Scents' },
-  { id: 'floral', label: 'Floral' },
-  { id: 'woody', label: 'Woody' },
-  { id: 'oriental', label: 'Oriental' },
-  { id: 'fresh', label: 'Fresh' },
-  { id: 'citrus', label: 'Citrus' },
-]
+const filters: { id: "all" | Product["family"]; label: string }[] = [
+  { id: "all", label: "All Scents" },
+  { id: "floral", label: "Floral" },
+  { id: "woody", label: "Woody" },
+  { id: "oriental", label: "Oriental" },
+  { id: "fresh", label: "Fresh" },
+  { id: "citrus", label: "Citrus" },
+];
 
 function goToDetail(slug: string) {
-  router.push({ name: 'product-detail', params: { slug } })
+  router.push({ name: "product-detail", params: { slug } });
 }
 
 function formatPrice(n: number) {
-  return 'Rp ' + n.toLocaleString('id-ID')
+  return "Rp " + n.toLocaleString("id-ID");
 }
 </script>
 
@@ -34,19 +34,29 @@ function formatPrice(n: number) {
   <section id="products" class="section bg-cream">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Header -->
-      <div class="text-center max-w-2xl mx-auto mb-12" data-aos="fade-up" data-aos-duration="800">
+      <div
+        class="text-center max-w-2xl mx-auto mb-12"
+        data-aos="fade-up"
+        data-aos-duration="800"
+      >
         <p class="eyebrow mb-3">Curated For You</p>
         <h2 class="h-display text-3xl sm:text-4xl lg:text-5xl text-ink">
           Featured Collection
         </h2>
         <span class="gold-rule mt-5 mx-auto" />
         <p class="mt-5 text-sm sm:text-base text-muted leading-relaxed">
-          A handpicked selection of our most coveted signatures — from quiet everyday companions to evening statements.
+          Pilih wangi parfum favorite yang kamu mau — biarkan ia jadi teman
+          sehari-hari kamu.
         </p>
       </div>
 
       <!-- Filter chips -->
-      <div class="flex flex-wrap justify-center gap-2 mb-10" data-aos="fade-up" data-aos-delay="100" data-aos-duration="600">
+      <div
+        class="flex flex-wrap justify-center gap-2 mb-10"
+        data-aos="fade-up"
+        data-aos-delay="100"
+        data-aos-duration="600"
+      >
         <button
           v-for="f in filters"
           :key="f.id"
@@ -106,7 +116,9 @@ function formatPrice(n: number) {
             <div
               class="absolute inset-x-3 bottom-3 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300"
             >
-              <span class="px-4 py-2 text-[11px] font-semibold tracking-wider uppercase bg-ink/95 text-canvas backdrop-blur rounded-pill">
+              <span
+                class="px-4 py-2 text-[11px] font-semibold tracking-wider uppercase bg-ink/95 text-canvas backdrop-blur rounded-pill"
+              >
                 Quick View
               </span>
             </div>
@@ -117,13 +129,19 @@ function formatPrice(n: number) {
             <p class="text-[10px] tracking-[0.2em] uppercase text-faint mb-1.5">
               {{ product.category }}
             </p>
-            <h3 class="font-display text-lg sm:text-xl text-ink leading-snug truncate">
+            <h3
+              class="font-display text-lg sm:text-xl text-ink leading-snug truncate"
+            >
               {{ product.name }}
             </h3>
-            <p class="mt-1.5 text-xs sm:text-sm text-muted line-clamp-2 leading-relaxed">
+            <p
+              class="mt-1.5 text-xs sm:text-sm text-muted line-clamp-2 leading-relaxed"
+            >
               {{ product.shortDescription }}
             </p>
-            <div class="mt-4 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-0">
+            <div
+              class="mt-4 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-0"
+            >
               <p class="font-display text-lg sm:text-xl text-gold">
                 {{ formatPrice(product.price) }}
               </p>
