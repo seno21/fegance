@@ -113,9 +113,9 @@ import filosofiAksen2 from "@/assets/landing/filosofi.jpeg";
         >
           <p class="eyebrow mb-4">Our Philosophy</p>
           <h2 class="h-display text-3xl sm:text-4xl lg:text-5xl text-ink">
-            A fragrance is a memory,
+            Let Us Tell You a Little
             <span class="block italic font-medium text-gold"
-              >captured in liquid form.</span
+              >About Who We Are</span
             >
           </h2>
           <span class="gold-rule mt-6" />
