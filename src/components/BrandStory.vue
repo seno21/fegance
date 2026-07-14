@@ -124,18 +124,25 @@ import filosofiAksen2 from "@/assets/landing/filosofi.jpeg";
             class="mt-8 space-y-5 text-sm sm:text-base leading-relaxed text-ink-soft"
           >
             <p>
-              Founded in 2025, Fegance was born from a passion for the art of
-              perfumery. We believe a scent is more than fragrance — it is
-              identity, mood, and memory distilled into something you wear.
+              Fegance lahir dari rasa penasaran terhadap dunia parfum. Bagi
+              kami, parfum adalah sebuah karya seni. Ia merupakan bagian dari
+              keindahan—meski ia tak memiliki rupa, namun hidup lama di ingatan.
+              Ia bagian dari identitas seseorang, menentukan bagaimana orang
+              menilaimu pertama kali.
             </p>
             <p>
-              Every fragrance begins with carefully selected premium fragrance
-              oils from trusted industry specialists. From there, each
-              composition is thoughtfully blended by hand in our home studio,
-              where proportions are refined to create a balanced scent with its
-              own distinctive character. Every bottle reflects our dedication to
-              craftsmanship, consistency, and the pursuit of fragrances that
-              feel personal and memorable.
+              Layaknya sebuah brand yang terus bertumbuh, Fegance berkomitmen
+              untuk selalu berkembang. Kami terus menyempurnakan setiap
+              komposisi, memilih formulasi terbaik, serta menggunakan
+              bahan-bahan premium agar setiap aroma yang kami hadirkan memiliki
+              kualitas yang layak dikenang.
+            </p>
+            <p>
+              Di balik setiap judul parfum yang kami ciptakan, selalu ada sebuah
+              cerita. Kami percaya bahwa sebuah parfum adalah medium untuk
+              menyampaikan karakter. Kami ingin setiap parfum Fegance menjadi
+              bagian dari keseharianmu, dan menceritakan identitasmu—tanpa perlu
+              banyak kata.
             </p>
           </div>
 

@@ -90,7 +90,7 @@ const goToProducts = () => {
           >
             Wangi Dulu
             <span class="block italic font-medium text-gold"
-              >Lainya Belakangan!</span
+              >Sisanya Nanti</span
             >
           </h1>
 
