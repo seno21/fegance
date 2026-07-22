@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed } from "vue";
-import { testimonials, type Testimonial } from "@/data/products";
+import { ref, onMounted, onUnmounted, computed, watch } from "vue";
+import { useTestimonials } from "@/composables/useTestimonials";
+
+const { testimonials, loading } = useTestimonials();
 
 const current = ref(0);
 let timer: ReturnType<typeof setInterval> | null = null;
 
 function start() {
+  if (!testimonials.value.length) return;
   timer = setInterval(() => {
-    current.value = (current.value + 1) % testimonials.length;
+    current.value = (current.value + 1) % testimonials.value.length;
   }, 5000);
 }
 
@@ -26,18 +29,28 @@ function goTo(index: number) {
 
 function prev() {
   current.value =
-    (current.value - 1 + testimonials.length) % testimonials.length;
+    (current.value - 1 + testimonials.value.length) % testimonials.value.length;
   stop();
   start();
 }
 
 function next() {
-  current.value = (current.value + 1) % testimonials.length;
+  current.value = (current.value + 1) % testimonials.value.length;
   stop();
   start();
 }
 
-const currentItem = computed<Testimonial>(() => testimonials[current.value]!);
+const currentItem = computed(() => testimonials.value[current.value]);
+
+watch(
+  () => testimonials.value.length,
+  (len) => {
+    if (len > 0) {
+      stop();
+      start();
+    }
+  }
+);
 
 onMounted(() => start());
 onUnmounted(() => stop());
@@ -71,8 +84,25 @@ onUnmounted(() => stop());
         <span class="gold-rule mt-5 mx-auto" />
       </div>
 
+      <!-- Loading skeleton -->
+      <div v-if="loading" class="max-w-3xl mx-auto">
+        <div class="bg-canvas border border-line rounded-3xl px-6 sm:px-12 py-10 sm:py-14 space-y-6">
+          <div class="flex justify-center gap-1">
+            <div v-for="n in 5" :key="n" class="w-4 h-4 bg-line rounded animate-pulse" />
+          </div>
+          <div class="space-y-3 text-center">
+            <div class="h-6 w-3/4 bg-line rounded animate-pulse mx-auto" />
+            <div class="h-6 w-1/2 bg-line rounded animate-pulse mx-auto" />
+          </div>
+          <div class="flex flex-col items-center gap-3 mt-8">
+            <div class="h-5 w-32 bg-line rounded animate-pulse" />
+            <div class="h-3 w-24 bg-line rounded animate-pulse" />
+          </div>
+        </div>
+      </div>
+
       <!-- Carousel -->
-      <div class="max-w-3xl mx-auto" data-aos="fade-up" data-aos-duration="800">
+      <div v-else class="max-w-3xl mx-auto" data-aos="fade-up" data-aos-duration="800">
         <div
           class="relative bg-canvas border border-line rounded-3xl px-6 sm:px-12 py-10 sm:py-14 shadow-soft"
         >
@@ -100,7 +130,7 @@ onUnmounted(() => stop());
             leave-from-class="opacity-100"
             leave-to-class="opacity-0 -translate-y-2"
           >
-            <div :key="currentItem.id" class="text-center">
+            <div v-if="currentItem" :key="currentItem.id" class="text-center">
               <p
                 class="font-display text-lg sm:text-2xl lg:text-[26px] leading-relaxed text-ink"
               >

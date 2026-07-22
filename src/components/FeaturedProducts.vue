@@ -1,18 +1,19 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { products, type Product } from "@/data/products";
+import { useProducts } from "@/composables/useProducts";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
+const { products, loading } = useProducts();
 
-const activeFilter = ref<"all" | Product["family"]>("all");
+const activeFilter = ref<"all" | string>("all");
 
 const filtered = computed(() => {
-  if (activeFilter.value === "all") return products;
-  return products.filter((p) => p.family === activeFilter.value);
+  if (activeFilter.value === "all") return products.value;
+  return products.value.filter((p) => p.family === activeFilter.value);
 });
 
-const filters: { id: "all" | Product["family"]; label: string }[] = [
+const filters: { id: "all" | string; label: string }[] = [
   { id: "all", label: "All Scents" },
   { id: "floral", label: "Floral" },
   { id: "woody", label: "Woody" },
@@ -72,8 +73,22 @@ function formatPrice(n: number) {
         </button>
       </div>
 
+      <!-- Loading skeleton -->
+      <div v-if="loading" class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-7">
+        <div v-for="n in 8" :key="n" class="rounded-[20px] border border-line/70 overflow-hidden">
+          <div class="aspect-square bg-surface animate-pulse" />
+          <div class="p-4 sm:p-5 space-y-3">
+            <div class="h-3 w-16 bg-line rounded animate-pulse" />
+            <div class="h-5 w-3/4 bg-line rounded animate-pulse" />
+            <div class="h-4 w-full bg-line rounded animate-pulse" />
+            <div class="h-6 w-24 bg-line rounded animate-pulse" />
+          </div>
+        </div>
+      </div>
+
       <!-- Grid -->
       <TransitionGroup
+        v-else
         tag="div"
         name="grid"
         class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-7"

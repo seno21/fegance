@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import { scentFamilies, products } from "@/data/products";
+import { useScentFamilies } from "@/composables/useScentFamilies";
+import { useProducts } from "@/composables/useProducts";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
+const { families, loading: familiesLoading } = useScentFamilies();
+const { products, loading: productsLoading } = useProducts();
 
 function countByFamily(id: string) {
-  return products.filter((p) => p.family === id).length;
+  return products.value.filter((p) => p.family === id).length;
 }
 
 function explore(familyId: string) {
@@ -36,12 +39,18 @@ function explore(familyId: string) {
         </p>
       </div>
 
+      <!-- Loading skeleton -->
+      <div v-if="familiesLoading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-5">
+        <div v-for="n in 5" :key="n" class="aspect-[3/4] rounded-2xl bg-surface animate-pulse" />
+      </div>
+
       <!-- Grid -->
       <div
+        v-else
         class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-5"
       >
         <button
-          v-for="(family, i) in scentFamilies"
+          v-for="(family, i) in families"
           :key="family.id"
           @click="explore(family.id)"
           class="group relative aspect-[3/4] rounded-2xl overflow-hidden bg-surface text-left focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-canvas"

@@ -1,22 +1,51 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, watch } from "vue";
+import { useSiteContent } from "@/composables/useSiteContent";
 
+const { content, loading } = useSiteContent();
 const visible = ref(true);
-const messages = [
-  "Free shipping on orders above Rp 500.000",
-  "New collection 2026 — discover the signature scents",
-  "Complimentary sample with every order",
-];
 const index = ref(0);
 
 let timer: ReturnType<typeof setInterval> | null = null;
 
+const messages = ref<string[]>([]);
+
+watch(
+  () => content.value?.announcement,
+  (announcement) => {
+    if (announcement) {
+      messages.value = announcement.messages;
+      if (announcement.enabled && messages.value.length > 0) {
+        stop();
+        start();
+      } else {
+        visible.value = false;
+      }
+    }
+  },
+  { immediate: true }
+);
+
+function start() {
+  if (!messages.value.length) return;
+  timer = setInterval(rotate, 4000);
+}
+
+function stop() {
+  if (timer) {
+    clearInterval(timer);
+    timer = null;
+  }
+}
+
 function rotate() {
-  index.value = (index.value + 1) % messages.length;
+  index.value = (index.value + 1) % messages.value.length;
 }
 
 onMounted(() => {
-  timer = setInterval(rotate, 4000);
+  if (content.value?.announcement?.enabled && messages.value.length > 0) {
+    start();
+  }
 });
 
 onUnmounted(() => {
@@ -30,7 +59,7 @@ function close() {
 
 <template>
   <div
-    v-if="visible"
+    v-if="visible && content?.announcement?.enabled !== false && messages.length > 0"
     class="bg-ink text-canvas text-[11px] sm:text-xs tracking-[0.18em] uppercase"
   >
     <div

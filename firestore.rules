@@ -1,0 +1,30 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Public read for all content
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    match /testimonials/{testimonialId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    match /scentFamilies/{familyId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    match /siteContent/{docId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Default: deny all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

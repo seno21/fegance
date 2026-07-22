@@ -1,47 +1,55 @@
 <script setup lang="ts">
-interface Contact {
-  name: string;
-  handle: string;
-  link: string;
-  external: boolean;
-}
+import { useSiteContent } from "@/composables/useSiteContent";
 
-const contacts: Contact[] = [
-  {
-    name: "WhatsApp",
-    handle: "+62 851 7237 2101",
-    link: "https://wa.me/6285172372101",
-    external: true,
-  },
-  {
-    name: "Instagram",
-    handle: "@fegance.id",
-    link: "https://www.instagram.com/fegance.id",
-    external: true,
-  },
-];
+const { content, loading } = useSiteContent();
 </script>
 
 <template>
   <section id="contact" class="py-[120px] bg-[#F8F8F8] overflow-hidden">
     <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+      <!-- Loading skeleton -->
+      <div v-if="loading" class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div class="space-y-4">
+          <div class="h-4 w-28 bg-line rounded animate-pulse" />
+          <div class="h-10 w-64 bg-line rounded animate-pulse" />
+          <div class="w-12 h-[1px] bg-line mt-5" />
+          <div class="h-4 w-80 bg-line rounded animate-pulse mt-6" />
+          <div class="space-y-3 mt-10">
+            <div class="flex items-start gap-3">
+              <div class="w-9 h-9 rounded-full bg-line animate-pulse flex-shrink-0" />
+              <div class="space-y-2">
+                <div class="h-3 w-24 bg-line rounded animate-pulse" />
+                <div class="h-4 w-28 bg-line rounded animate-pulse" />
+                <div class="h-3 w-40 bg-line rounded animate-pulse" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <div v-for="n in 2" :key="n" class="bg-white border border-[#ECECEC] rounded-[24px] p-8 min-h-[180px]">
+            <div class="h-3 w-20 bg-line rounded animate-pulse" />
+            <div class="h-8 w-48 bg-line rounded animate-pulse mt-4" />
+            <div class="h-3 w-32 bg-line rounded animate-pulse mt-6" />
+          </div>
+        </div>
+      </div>
+
+      <div v-else class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
         <!-- Copy -->
         <div data-aos="fade-right" data-aos-duration="800">
           <p
             class="text-[11px] font-bold tracking-[0.22em] text-gold uppercase block mb-4"
           >
-            Get In Touch
+            {{ content?.contact?.eyebrow ?? "Get In Touch" }}
           </p>
           <h2 class="h-display text-3xl sm:text-4xl lg:text-5xl text-ink">
-            Let&apos;s start a conversation.
+            {{ content?.contact?.title ?? "Let&apos;s start a conversation." }}
           </h2>
           <div class="w-12 h-[1px] bg-gold mt-5" />
           <p
             class="mt-6 text-sm sm:text-base text-muted leading-relaxed max-w-md"
           >
-            Punya pertanyaan, ingin melacak pesanan, atau sekadar menyapa? Kami
-            akan dengan senang hati membantu.
+            {{ content?.contact?.description ?? "Punya pertanyaan, ingin melacak pesanan, atau sekadar menyapa? Kami akan dengan senang hati membantu." }}
           </p>
 
           <div class="mt-10 space-y-3">
@@ -70,11 +78,11 @@ const contacts: Contact[] = [
               </div>
               <div>
                 <p class="text-[10px] tracking-[0.2em] uppercase text-faint">
-                  Fegance Project
+                  {{ content?.contact?.address ?? "Fegance Project" }}
                 </p>
-                <p class="text-ink mt-0.5">Kab. Cirebon</p>
+                <p class="text-ink mt-0.5">{{ content?.contact?.address ?? "Kab. Cirebon" }}</p>
                 <p class="text-muted text-xs mt-0.5">
-                  Mon &ndash; Sat &middot; 09.00 &ndash; 20.00 WIB
+                  {{ content?.contact?.businessHours ?? "Mon &ndash; Sat &middot; 09.00 &ndash; 20.00 WIB" }}
                 </p>
               </div>
             </div>
@@ -88,7 +96,10 @@ const contacts: Contact[] = [
           data-aos-duration="800"
         >
           <a
-            v-for="(c, i) in contacts"
+            v-for="(c, i) in (content?.contact?.contacts ?? [
+              { name: 'WhatsApp', handle: '+62 851 7237 2101', link: 'https://wa.me/6285172372101', external: true },
+              { name: 'Instagram', handle: '@fegance.id', link: 'https://www.instagram.com/fegance.id', external: true },
+            ])"
             :key="c.name"
             :href="c.link"
             :target="c.external ? '_blank' : undefined"

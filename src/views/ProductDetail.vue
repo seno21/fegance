@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from "vue";
+import { ref, computed, onMounted, onUnmounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { products } from "@/data/products";
+import { useProducts } from "@/composables/useProducts";
 import Navbar from "@/components/Navbar.vue";
 import FooterSection from "@/components/FooterSection.vue";
 import ProductAccordion from "@/components/ProductAccordion.vue";
@@ -9,18 +9,27 @@ import logoShopee from "@/assets/logo-shopee.png";
 
 const route = useRoute();
 const router = useRouter();
+const { products, loading } = useProducts();
 
 const product = computed(() =>
-  products.find((p) => p.slug === route.params.slug),
+  products.value.find((p) => p.slug === route.params.slug),
 );
-
-if (!product.value) {
-  router.replace("/");
-}
 
 const otherProducts = computed(() =>
-  products.filter((p) => p.slug !== route.params.slug).slice(0, 4),
+  products.value.filter((p) => p.slug !== route.params.slug).slice(0, 4),
 );
+
+onMounted(() => {
+  if (!loading.value && !product.value) {
+    router.replace("/");
+  }
+});
+
+watch(loading, (isLoading) => {
+  if (!isLoading && !product.value) {
+    router.replace("/");
+  }
+});
 
 // --- Gallery ---
 const selectedImage = computed(() => product.value?.image || "");
@@ -226,7 +235,36 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div v-if="product">
+  <div v-if="loading && !product">
+    <Navbar />
+    <main class="pt-6 lg:pt-10 pb-20 lg:pb-28">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="product-layout">
+          <div class="product-gallery">
+            <div class="gallery-main bg-surface animate-pulse" />
+          </div>
+          <div class="product-info space-y-6">
+            <div class="h-4 w-24 bg-line rounded animate-pulse" />
+            <div class="h-12 w-3/4 bg-line rounded animate-pulse" />
+            <div class="h-8 w-40 bg-line rounded animate-pulse" />
+            <div class="flex gap-2.5 mt-7">
+              <div class="h-8 w-20 bg-line rounded-pill animate-pulse" />
+              <div class="h-8 w-24 bg-line rounded-pill animate-pulse" />
+              <div class="h-8 w-16 bg-line rounded-pill animate-pulse" />
+            </div>
+            <div class="h-10 w-48 bg-line rounded animate-pulse" />
+            <div class="flex gap-2.5 mt-9">
+              <div class="h-12 flex-1 bg-line rounded-pill animate-pulse" />
+              <div class="h-12 flex-1 bg-line rounded-pill animate-pulse" />
+              <div class="h-12 flex-1 bg-line rounded-pill animate-pulse" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div v-else-if="product">
     <Navbar />
 
     <main class="pt-6 lg:pt-10 pb-20 lg:pb-28">

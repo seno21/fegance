@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, onMounted } from "vue";
-import { products, type Product } from "@/data/products";
+import { useProducts } from "@/composables/useProducts";
 import { useRouter, useRoute } from "vue-router";
 import Navbar from "@/components/Navbar.vue";
 import FooterSection from "@/components/FooterSection.vue";
@@ -8,12 +8,13 @@ import logoShopee from "@/assets/logo-shopee.png";
 
 const router = useRouter();
 const route = useRoute();
+const { products, loading } = useProducts();
 
-const validFamilies: Product["family"][] = ["floral", "woody", "oriental", "fresh", "citrus"];
+const validFamilies = ["floral", "woody", "oriental", "fresh", "citrus"];
 const initialFamily = route.query.family;
-const activeFilter = ref<"all" | Product["family"]>(
-  validFamilies.includes(initialFamily as Product["family"])
-    ? (initialFamily as Product["family"])
+const activeFilter = ref<"all" | string>(
+  validFamilies.includes(initialFamily as string)
+    ? (initialFamily as string)
     : "all"
 );
 const sortBy = ref<
@@ -24,8 +25,8 @@ const isFilterOpen = ref(false);
 const filtered = computed(() => {
   let result =
     activeFilter.value === "all"
-      ? [...products]
-      : products.filter((p) => p.family === activeFilter.value);
+      ? [...products.value]
+      : products.value.filter((p) => p.family === activeFilter.value);
 
   switch (sortBy.value) {
     case "price-asc":
@@ -45,7 +46,7 @@ const filtered = computed(() => {
   return result;
 });
 
-const filters: { id: "all" | Product["family"]; label: string }[] = [
+const filters: { id: "all" | string; label: string }[] = [
   { id: "all", label: "All Scents" },
   { id: "floral", label: "Floral" },
   { id: "woody", label: "Woody" },
@@ -224,8 +225,22 @@ function formatPrice(n: number) {
           }}
         </p>
 
+        <!-- Loading skeleton -->
+        <div v-if="loading" class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+          <div v-for="n in 8" :key="n" class="rounded-[20px] border border-line/70 overflow-hidden">
+            <div class="aspect-square bg-surface animate-pulse" />
+            <div class="p-4 sm:p-5 space-y-3">
+              <div class="h-3 w-16 bg-line rounded animate-pulse" />
+              <div class="h-5 w-3/4 bg-line rounded animate-pulse" />
+              <div class="h-4 w-full bg-line rounded animate-pulse" />
+              <div class="h-6 w-24 bg-line rounded animate-pulse" />
+            </div>
+          </div>
+        </div>
+
         <!-- Product grid -->
         <div
+          v-else
           class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
         >
           <article

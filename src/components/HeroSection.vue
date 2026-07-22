@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import {
-  products,
-  testimonials,
-  type Product,
-  type Testimonial,
-} from "@/data/products";
+import { useSiteContent } from "@/composables/useSiteContent";
+import { useProducts } from "@/composables/useProducts";
+import brandFace from "@/assets/landing/brand-face.jpeg";
+import { useRouter } from "vue-router";
 
-const featured = (products.find((p) => p.isBestseller) ??
-  products[0]) as Product;
+const router = useRouter();
+const { content, loading: siteLoading } = useSiteContent();
+const { products, loading: productsLoading } = useProducts();
 
 function scrollToProducts() {
   document.getElementById("products")?.scrollIntoView({ behavior: "smooth" });
@@ -23,44 +22,37 @@ function formatPrice(n: number) {
 
 const year = new Date().getFullYear();
 
-import brandFace from "@/assets/landing/brand-face.jpeg";
-import { useRouter } from "vue-router";
-
-const router = useRouter();
-
 const goToProducts = () => {
   router.push("/product");
+};
+
+const featured = () => {
+  if (!products.value.length) return null;
+  return products.value.find((p) => p.isBestseller) ?? products.value[0];
 };
 </script>
 
 <template>
   <section class="relative pt-12 lg:pt-16 pb-16 lg:pb-24 overflow-hidden">
-    <!-- Decorative background -->
-    <div aria-hidden="true" class="absolute inset-0 -z-10">
-      <div class="absolute inset-0 bg-cream" />
-      <div
-        class="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full opacity-40"
-        style="
-          background: radial-gradient(
-            circle,
-            rgba(201, 162, 39, 0.1) 0%,
-            transparent 70%
-          );
-        "
-      />
-      <div
-        class="absolute -bottom-32 -left-32 w-[500px] h-[500px] rounded-full opacity-30"
-        style="
-          background: radial-gradient(
-            circle,
-            rgba(201, 162, 39, 0.08) 0%,
-            transparent 70%
-          );
-        "
-      />
+    <!-- Loading skeleton -->
+    <div v-if="siteLoading" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+        <div class="lg:col-span-7 order-2 lg:order-1 space-y-6">
+          <div class="h-12 w-3/4 bg-line rounded animate-pulse" />
+          <div class="h-5 w-full bg-line rounded animate-pulse" />
+          <div class="h-5 w-2/3 bg-line rounded animate-pulse" />
+          <div class="flex gap-4 mt-4">
+            <div class="h-12 w-40 bg-line rounded-pill animate-pulse" />
+            <div class="h-12 w-36 bg-line rounded-pill animate-pulse" />
+          </div>
+        </div>
+        <div class="lg:col-span-5 order-1 lg:order-2">
+          <div class="aspect-[4/5] rounded-[28px] bg-line animate-pulse" />
+        </div>
+      </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div v-else class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <!-- Copy -->
         <div
@@ -68,37 +60,19 @@ const goToProducts = () => {
           data-aos="fade-up"
           data-aos-duration="800"
         >
-          <!-- <div
-            class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-pill bg-canvas border border-line mb-7"
-          >
-           <span class="dot-gold" />
-            <span
-              class="text-[10px] font-semibold tracking-[0.22em] uppercase text-muted"
-            >
-              New Collection
-
-              <span
-                class="text-[10px] font-semibold tracking-[0.22em] uppercase text-muted"
-              >
-                {{ year }}
-              </span>
-            </span> 
-          </div> -->
-
           <h1
             class="h-display text-[44px] sm:text-6xl lg:text-[72px] xl:text-[80px] text-ink"
           >
-            Wangi Dulu
+            {{ content?.hero?.tagline ?? "Wangi Dulu" }}
             <span class="block italic font-medium text-gold"
-              >Sisanya Nanti</span
+              >{{ content?.hero?.taglineAccent ?? "Sisanya Nanti" }}</span
             >
           </h1>
 
           <p
             class="mt-7 text-base sm:text-lg leading-relaxed text-muted max-w-xl"
           >
-            Pilih aroma favorit kamu. Biar wangi aja yang bicara, gak perlu
-            repot menjelaskan siapa dirimu.
+            {{ content?.hero?.subtitle ?? "Pilih aroma favorit kamu. Biar wangi aja yang bicara, gak perlu repot menjelaskan siapa dirimu." }}
           </p>
 
           <div class="mt-9 flex flex-col sm:flex-row gap-3 sm:gap-4">
@@ -106,7 +80,7 @@ const goToProducts = () => {
               @click="goToProducts"
               class="group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-[12px] font-semibold tracking-[0.18em] uppercase bg-ink text-gold rounded-pill hover:bg-gold hover:text-ink transition-all duration-300"
             >
-              View Collection
+              {{ content?.hero?.ctaPrimary ?? "View Collection" }}
               <svg
                 class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"
                 fill="none"
@@ -125,7 +99,7 @@ const goToProducts = () => {
               @click="scrollToStory"
               class="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-[12px] font-semibold tracking-[0.18em] uppercase bg-transparent text-gold border border-gold rounded-pill hover:bg-gold hover:text-ink transition-all duration-300"
             >
-              Our Story
+              {{ content?.hero?.ctaSecondary ?? "Our Story" }}
             </button>
           </div>
         </div>
@@ -142,7 +116,7 @@ const goToProducts = () => {
               class="relative aspect-[4/5] rounded-[28px] overflow-hidden bg-surface shadow-lift"
             >
               <img
-                :src="brandFace"
+                :src="content?.hero?.imageUrl || brandFace"
                 alt="Fegance signature perfume"
                 class="w-full h-full object-cover"
               />
@@ -163,7 +137,7 @@ const goToProducts = () => {
                 <p class="text-[10px] tracking-[0.25em] uppercase opacity-80">
                   Signature Scent
                 </p>
-                <p class="mt-1 font-display text-2xl">{{ featured.name }}</p>
+                <p class="mt-1 font-display text-2xl">{{ featured()?.name }}</p>
               </div>
             </div>
 
@@ -192,7 +166,7 @@ const goToProducts = () => {
                     Best Seller
                   </p>
                   <p class="font-display text-sm text-ink leading-tight">
-                    {{ featured.name }}
+                    {{ featured()?.name }}
                   </p>
                 </div>
               </div>
@@ -200,6 +174,7 @@ const goToProducts = () => {
 
             <!-- Floating card: price -->
             <div
+              v-if="featured()"
               class="absolute -right-3 sm:-right-6 bottom-12 bg-ink text-canvas rounded-2xl p-4 shadow-lift hidden sm:block"
               data-aos="fade-left"
               data-aos-delay="500"
@@ -208,7 +183,7 @@ const goToProducts = () => {
                 From
               </p>
               <p class="font-display text-xl text-gold">
-                {{ formatPrice(featured.price) }}
+                {{ formatPrice(featured()!.price) }}
               </p>
             </div>
           </div>
