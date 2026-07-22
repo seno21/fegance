@@ -28,7 +28,11 @@ const contacts: Contact[] = [
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
         <!-- Copy -->
         <div data-aos="fade-right" data-aos-duration="800">
-          <p class="text-[11px] font-bold tracking-[0.22em] text-gold uppercase block mb-4">Get In Touch</p>
+          <p
+            class="text-[11px] font-bold tracking-[0.22em] text-gold uppercase block mb-4"
+          >
+            Get In Touch
+          </p>
           <h2 class="h-display text-3xl sm:text-4xl lg:text-5xl text-ink">
             Let&apos;s start a conversation.
           </h2>
@@ -36,9 +40,8 @@ const contacts: Contact[] = [
           <p
             class="mt-6 text-sm sm:text-base text-muted leading-relaxed max-w-md"
           >
-            Whether you need a fragrance consultation, want to track an order,
-            or simply wish to say hello — we are here, and we love hearing from
-            you.
+            Punya pertanyaan, ingin melacak pesanan, atau sekadar menyapa? Kami
+            akan dengan senang hati membantu.
           </p>
 
           <div class="mt-10 space-y-3">
@@ -67,9 +70,9 @@ const contacts: Contact[] = [
               </div>
               <div>
                 <p class="text-[10px] tracking-[0.2em] uppercase text-faint">
-                  Maison Fégance
+                  Fegance Project
                 </p>
-                <p class="text-ink mt-0.5">Jl. Nataswara 001, Cirebon</p>
+                <p class="text-ink mt-0.5">Kab. Cirebon</p>
                 <p class="text-muted text-xs mt-0.5">
                   Mon &ndash; Sat &middot; 09.00 &ndash; 20.00 WIB
                 </p>
@@ -96,16 +99,22 @@ const contacts: Contact[] = [
             data-aos-duration="800"
           >
             <!-- Background Decorative Glow -->
-            <div class="absolute top-0 right-0 w-24 h-24 bg-gold/5 rounded-full blur-2xl transition-all duration-500 group-hover:bg-gold/10 group-hover:scale-150"></div>
+            <div
+              class="absolute top-0 right-0 w-24 h-24 bg-gold/5 rounded-full blur-2xl transition-all duration-500 group-hover:bg-gold/10 group-hover:scale-150"
+            ></div>
 
             <div>
               <div class="flex items-center justify-between mb-4">
-                <span class="text-[10px] tracking-[0.25em] font-bold uppercase text-gold">
+                <span
+                  class="text-[10px] tracking-[0.25em] font-bold uppercase text-gold"
+                >
                   {{ c.name }}
                 </span>
-                
+
                 <!-- Icon Circle background -->
-                <div class="w-8 h-8 rounded-full bg-[#faf7f2] flex items-center justify-center transition-colors duration-300 group-hover:bg-gold">
+                <div
+                  class="w-8 h-8 rounded-full bg-[#faf7f2] flex items-center justify-center transition-colors duration-300 group-hover:bg-gold"
+                >
                   <svg
                     class="w-4 h-4 text-gold transition-colors duration-300 group-hover:text-[#FFFFFF]"
                     fill="none"
@@ -121,15 +130,21 @@ const contacts: Contact[] = [
                   </svg>
                 </div>
               </div>
-              
-              <h3 class="font-display text-2xl sm:text-3xl font-semibold text-[#111111] leading-tight break-all">
+
+              <h3
+                class="font-display text-2xl sm:text-3xl font-semibold text-[#111111] leading-tight break-all"
+              >
                 {{ c.handle }}
               </h3>
             </div>
 
-            <p class="mt-6 text-xs text-[#666666] tracking-wide font-sans group-hover:text-gold transition-colors">
+            <p
+              class="mt-6 text-xs text-[#666666] tracking-wide font-sans group-hover:text-gold transition-colors"
+            >
               {{
-                c.name === "WhatsApp" ? "Chat with us directly" : "Follow our journey"
+                c.name === "WhatsApp"
+                  ? "Chat with us directly"
+                  : "Follow our journey"
               }}
             </p>
           </a>

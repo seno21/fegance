@@ -1,14 +1,21 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, onMounted } from "vue";
 import { products, type Product } from "@/data/products";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import Navbar from "@/components/Navbar.vue";
 import FooterSection from "@/components/FooterSection.vue";
 import logoShopee from "@/assets/logo-shopee.png";
 
 const router = useRouter();
+const route = useRoute();
 
-const activeFilter = ref<"all" | Product["family"]>("all");
+const validFamilies: Product["family"][] = ["floral", "woody", "oriental", "fresh", "citrus"];
+const initialFamily = route.query.family;
+const activeFilter = ref<"all" | Product["family"]>(
+  validFamilies.includes(initialFamily as Product["family"])
+    ? (initialFamily as Product["family"])
+    : "all"
+);
 const sortBy = ref<
   "default" | "price-asc" | "price-desc" | "name-asc" | "name-desc"
 >("default");

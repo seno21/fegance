@@ -9,10 +9,7 @@ function countByFamily(id: string) {
 }
 
 function explore(familyId: string) {
-  router.push({ path: "/", hash: `#family-${familyId}` });
-  setTimeout(() => {
-    document.getElementById("products")?.scrollIntoView({ behavior: "smooth" });
-  }, 80);
+  router.push({ path: "/product", query: { family: familyId } });
 }
 </script>
 

@@ -56,14 +56,13 @@ const year = new Date().getFullYear();
         <!-- Brand -->
         <div class="lg:col-span-4">
           <div class="flex items-baseline mb-5">
-            <span class="font-display text-3xl font-semibold text-gold">F</span>
-            <span class="font-display text-3xl font-semibold text-canvas"
-              >égance</span
-            >
+            <span class="font-display text-3xl font-semibold text-gold"
+              >Fegance Project
+            </span>
           </div>
           <p class="text-sm text-white/60 leading-relaxed max-w-xs">
-            Handcrafted fragrances with distinctive character, created for those
-            who value quality and individuality. Discover your signature scent.
+            Pilih aroma favorit kamu. Biar wangi aja yang bicara, gak perlu
+            repot menjelaskan siapa dirimu.
           </p>
           <div class="mt-6 flex gap-2.5">
             <a
@@ -126,9 +125,7 @@ const year = new Date().getFullYear();
             Visit
           </h4>
           <p class="text-sm text-white/70 leading-relaxed">
-            Jl. Nataswara Rt01,Rw01
-            <br />
-            Cirebon, Jawa Barat
+            Kab. Cirebon, Jawa Barat
             <br />
             <span class="text-white/40 text-xs mt-2 block"
               >Mon &ndash; Sat &middot; 09&ndash;20</span

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from "vue";
 
 interface Pillar {
   title: string;
@@ -11,19 +11,19 @@ const pillars: Pillar[] = [
   {
     title: "Masterfully Crafted",
     description:
-      "Each fragrance is thoughtfully composed from carefully selected fragrance oils and refined through our own blending process.",
+      "Setiap botol kami racik dengan pilihan formulasi terbaik dan disempurnakan melalui komposisi kami sendiri.",
     icon: "sparkles",
   },
   {
     title: "Long-Lasting Performance",
     description:
-      "Designed to deliver impressive projection and longevity, so your signature scent stays with you throughout the day.",
+      "Dirancang untuk memberikan projection dan longevity terbaik, sehingga aromanya tetap bersama kamu sepanjang hari.",
     icon: "hourglass",
   },
   {
     title: "Satisfaction Promises",
     description:
-      "If your fragrance isn't the right match, we're here to help with exchanges or dedicated customer support.",
+      "Setiap pengalaman bersama Fegance sangat berarti bagi kami. Kami siap membantu untuk langkah perjalananmu.",
     icon: "shield",
   },
 ];
@@ -38,10 +38,14 @@ const pillars: Pillar[] = [
         data-aos="fade-up"
         data-aos-duration="800"
       >
-        <span class="text-[11px] font-bold tracking-[0.22em] text-gold uppercase block mb-3">
+        <span
+          class="text-[11px] font-bold tracking-[0.22em] text-gold uppercase block mb-3"
+        >
           Why Choose Fegance
         </span>
-        <h2 class="font-display text-4xl sm:text-5xl lg:text-[56px] leading-[1.1] text-[#111111] font-semibold mb-6">
+        <h2
+          class="font-display text-4xl sm:text-5xl lg:text-[56px] leading-[1.1] text-[#111111] font-semibold mb-6"
+        >
           The Maison Standards
         </h2>
         <!-- Elegant gold divider -->
