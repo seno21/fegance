@@ -16,7 +16,6 @@ function freshForm() {
     role: '',
     text: '',
     rating: 5,
-    avatar: '',
   }
 }
 
@@ -41,7 +40,6 @@ function openEdit(testimonial: FirestoreTestimonial) {
     role: testimonial.role,
     text: testimonial.text,
     rating: testimonial.rating,
-    avatar: testimonial.avatar,
   }
   showModal.value = true
 }
@@ -59,7 +57,6 @@ async function handleSave() {
       role: form.value.role,
       text: form.value.text,
       rating: Number(form.value.rating) || 5,
-      avatar: form.value.avatar,
     }
     if (editingTestimonial.value) {
       await updateTestimonial(editingTestimonial.value.id, data)
@@ -152,13 +149,7 @@ function renderStars(rating: number) {
           class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
         >
           <div class="flex items-start gap-4">
-            <img
-              v-if="testimonial.avatar"
-              :src="testimonial.avatar"
-              :alt="testimonial.name"
-              class="h-12 w-12 shrink-0 rounded-full object-cover"
-            />
-            <div v-else class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#c9a227]/10 text-sm font-semibold text-[#c9a227]">
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#c9a227]/10 text-sm font-semibold text-[#c9a227]">
               {{ testimonial.name?.charAt(0)?.toUpperCase() }}
             </div>
             <div class="min-w-0 flex-1">
@@ -243,33 +234,6 @@ function renderStars(rating: number) {
           <!-- Modal Body -->
           <form class="max-h-[70vh] overflow-y-auto px-6 py-5" @submit.prevent="handleSave">
             <div class="space-y-5">
-              <!-- Avatar -->
-              <fieldset>
-                <legend class="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-400">Avatar</legend>
-                <div>
-                  <label class="mb-1 block text-xs font-medium text-gray-500">Avatar URL</label>
-                  <input
-                    v-model="form.avatar"
-                    type="url"
-                    placeholder="https://…"
-                    class="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-[#111111] placeholder:text-gray-400 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]/30"
-                  />
-                  <div class="mt-2 flex items-center gap-3">
-                    <img
-                      v-if="form.avatar"
-                      :src="form.avatar"
-                      alt="Avatar preview"
-                      class="h-14 w-14 rounded-full object-cover"
-                      @error="form.avatar = ''"
-                    />
-                    <div v-else class="flex h-14 w-14 items-center justify-center rounded-full bg-[#c9a227]/10 text-lg font-semibold text-[#c9a227]">
-                      {{ form.name?.charAt(0)?.toUpperCase() || '?' }}
-                    </div>
-                    <span v-if="form.avatar" class="text-xs text-gray-400">Preview</span>
-                  </div>
-                </div>
-              </fieldset>
-
               <!-- Info -->
               <fieldset>
                 <legend class="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-400">Info</legend>

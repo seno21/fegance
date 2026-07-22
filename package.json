@@ -10,6 +10,7 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "seed": "tsx scripts/seed-firestore.ts",
+    "cleanup:testimonial-avatar": "tsx scripts/cleanup-testimonial-avatar.ts",
     "deploy:rules": "firebase deploy --only firestore:rules"
   },
   "dependencies": {

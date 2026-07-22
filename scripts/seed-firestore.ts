@@ -274,40 +274,30 @@ const testimonials = [
     role: "Beauty Editor, Jakarta",
     text: "I have been wearing Leorin for a month and I get compliments everywhere I go. The longevity is incredible — easily 8+ hours on my skin.",
     rating: 5,
-    avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=160&h=160&fit=crop",
   },
   {
     name: "Dimas Pratama",
     role: "Creative Director",
     text: "Ember Oud is the most sophisticated scent I have ever owned. Worth every rupiah. Packaged beautifully, feels like a true luxury ritual.",
     rating: 5,
-    avatar:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=160&h=160&fit=crop",
   },
   {
     name: "Rina Kusuma",
     role: "Verified Buyer",
     text: "Velvet Rose is my signature scent now. It is feminine without being overpowering. Absolutely love how it evolves through the day.",
     rating: 5,
-    avatar:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=160&h=160&fit=crop",
   },
   {
     name: "Andi Hartono",
     role: "Loyal Customer",
     text: "Ocean Noir is perfect for daily wear. Fresh yet has depth. Fast shipping and great packaging — the unboxing alone feels like a gift.",
     rating: 5,
-    avatar:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=160&h=160&fit=crop",
   },
   {
     name: "Maya Putri",
     role: "Verified Buyer",
     text: "Crystal Bloom makes me feel like I am walking through a garden in spring. Such a beautiful, delicate fragrance — I am on my third bottle.",
     rating: 5,
-    avatar:
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=160&h=160&fit=crop",
   },
 ];
 
