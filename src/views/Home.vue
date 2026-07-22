@@ -13,7 +13,7 @@ import FooterSection from "@/components/FooterSection.vue";
 
 <template>
   <div class="min-h-screen flex flex-col bg-canvas">
-    <!-- <AnnouncementBar /> -->
+    <AnnouncementBar />
     <Navbar />
 
     <main class="flex-1">
