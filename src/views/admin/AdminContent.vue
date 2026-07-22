@@ -109,7 +109,7 @@ function removeMessage(i: number) {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50 px-6 py-10">
+  <div class="min-h-screen bg-gray-50 px-4 py-6 sm:px-6 sm:py-10">
     <div class="mx-auto max-w-4xl">
       <!-- Header -->
       <div class="mb-8">

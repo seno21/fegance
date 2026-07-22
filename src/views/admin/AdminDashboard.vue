@@ -22,10 +22,10 @@ function formatPrice(price: number) {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50 px-6 py-10">
+  <div class="min-h-screen bg-gray-50 px-4 py-6 sm:px-6 sm:py-10">
     <div class="mx-auto max-w-6xl">
       <div class="mb-10">
-        <h1 class="text-3xl font-bold text-[#111111]">Dashboard</h1>
+        <h1 class="text-2xl font-bold text-[#111111] sm:text-3xl">Dashboard</h1>
         <p class="mt-1 text-gray-500">Manage your Fegance content</p>
       </div>
 
@@ -185,7 +185,25 @@ function formatPrice(price: number) {
           No products yet. Add your first product to get started.
         </div>
 
-        <table v-else class="w-full text-left text-sm">
+        <!-- Mobile cards -->
+        <div v-else class="divide-y divide-gray-100 sm:hidden">
+          <div
+            v-for="product in recentProducts"
+            :key="product.id"
+            class="px-5 py-4"
+          >
+            <div class="mb-1 flex items-start justify-between gap-2">
+              <p class="font-medium text-[#111111]">{{ product.name }}</p>
+              <span class="shrink-0 rounded-full bg-[#c9a227]/10 px-2.5 py-0.5 text-xs font-medium text-[#c9a227] capitalize">
+                {{ product.family }}
+              </span>
+            </div>
+            <p class="text-sm text-gray-500">{{ formatPrice(product.price) }}</p>
+          </div>
+        </div>
+
+        <!-- Desktop table -->
+        <table v-else class="hidden w-full text-left text-sm sm:table">
           <thead>
             <tr
               class="border-b border-gray-100 text-xs font-medium uppercase tracking-wider text-gray-400"
