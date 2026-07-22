@@ -185,54 +185,56 @@ function formatPrice(price: number) {
           No products yet. Add your first product to get started.
         </div>
 
-        <!-- Mobile cards -->
-        <div v-else class="divide-y divide-gray-100 sm:hidden">
-          <div
-            v-for="product in recentProducts"
-            :key="product.id"
-            class="px-5 py-4"
-          >
-            <div class="mb-1 flex items-start justify-between gap-2">
-              <p class="font-medium text-[#111111]">{{ product.name }}</p>
-              <span class="shrink-0 rounded-full bg-[#c9a227]/10 px-2.5 py-0.5 text-xs font-medium text-[#c9a227] capitalize">
-                {{ product.family }}
-              </span>
-            </div>
-            <p class="text-sm text-gray-500">{{ formatPrice(product.price) }}</p>
-          </div>
-        </div>
-
-        <!-- Desktop table -->
-        <table v-else class="hidden w-full text-left text-sm sm:table">
-          <thead>
-            <tr
-              class="border-b border-gray-100 text-xs font-medium uppercase tracking-wider text-gray-400"
-            >
-              <th class="px-6 py-3">Name</th>
-              <th class="px-6 py-3">Price</th>
-              <th class="px-6 py-3">Family</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-50">
-            <tr
+        <template v-else>
+          <!-- Mobile cards -->
+          <div class="divide-y divide-gray-100 sm:hidden">
+            <div
               v-for="product in recentProducts"
               :key="product.id"
-              class="transition-colors hover:bg-gray-50"
+              class="px-5 py-4"
             >
-              <td
-                class="whitespace-nowrap px-6 py-3.5 font-medium text-[#111111]"
+              <div class="mb-1 flex items-start justify-between gap-2">
+                <p class="font-medium text-[#111111]">{{ product.name }}</p>
+                <span class="shrink-0 rounded-full bg-[#c9a227]/10 px-2.5 py-0.5 text-xs font-medium text-[#c9a227] capitalize">
+                  {{ product.family }}
+                </span>
+              </div>
+              <p class="text-sm text-gray-500">{{ formatPrice(product.price) }}</p>
+            </div>
+          </div>
+
+          <!-- Desktop table -->
+          <table class="hidden w-full text-left text-sm sm:table">
+            <thead>
+              <tr
+                class="border-b border-gray-100 text-xs font-medium uppercase tracking-wider text-gray-400"
               >
-                {{ product.name }}
-              </td>
-              <td class="whitespace-nowrap px-6 py-3.5 text-gray-600">
-                {{ formatPrice(product.price) }}
-              </td>
-              <td class="whitespace-nowrap px-6 py-3.5 capitalize text-gray-500">
-                {{ product.family }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                <th class="px-6 py-3">Name</th>
+                <th class="px-6 py-3">Price</th>
+                <th class="px-6 py-3">Family</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-50">
+              <tr
+                v-for="product in recentProducts"
+                :key="product.id"
+                class="transition-colors hover:bg-gray-50"
+              >
+                <td
+                  class="whitespace-nowrap px-6 py-3.5 font-medium text-[#111111]"
+                >
+                  {{ product.name }}
+                </td>
+                <td class="whitespace-nowrap px-6 py-3.5 text-gray-600">
+                  {{ formatPrice(product.price) }}
+                </td>
+                <td class="whitespace-nowrap px-6 py-3.5 capitalize text-gray-500">
+                  {{ product.family }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </template>
       </div>
     </div>
   </div>
