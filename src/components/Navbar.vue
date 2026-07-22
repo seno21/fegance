@@ -42,6 +42,11 @@ function goToCollection() {
   router.push("/product");
 }
 
+function goToAdminLogin() {
+  closeMenu();
+  router.push("/admin/login");
+}
+
 onMounted(() => {
   window.addEventListener("scroll", handleScroll, { passive: true });
   handleScroll();
@@ -126,6 +131,27 @@ const navLinks = [
             </svg>
           </button>
 
+          <!-- Admin login icon -->
+          <button
+            @click="goToAdminLogin"
+            class="p-2 text-muted hover:text-gold transition-colors duration-200"
+            aria-label="Admin login"
+          >
+            <svg
+              class="w-4.5 h-4.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              stroke-width="1.6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+              />
+            </svg>
+          </button>
+
           <button
             @click="goToCollection()"
             class="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 text-[12px] font-semibold tracking-wider uppercase bg-ink text-canvas rounded-pill hover:bg-gold hover:text-ink transition-all duration-300"
@@ -202,6 +228,12 @@ const navLinks = [
             class="w-full mt-4 py-3.5 text-[12px] font-semibold tracking-wider uppercase bg-ink text-canvas rounded-pill hover:bg-gold hover:text-ink transition-colors"
           >
             Shop Now
+          </button>
+          <button
+            @click="goToAdminLogin"
+            class="w-full mt-2 py-3 text-[12px] font-medium tracking-wider uppercase text-muted hover:text-gold border border-line hover:border-gold/40 rounded-pill transition-colors"
+          >
+            Admin
           </button>
         </div>
       </div>
