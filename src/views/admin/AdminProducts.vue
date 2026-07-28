@@ -19,6 +19,14 @@ const families: { value: Family; label: string }[] = [
   { value: 'citrus', label: 'Citrus' },
 ]
 
+const categories = [
+  'Eau de Cologne',
+  'Eau de Toilette',
+  'Eau de Parfum',
+  'Eau de Parfum Intense',
+  'Extrait de Parfum',
+]
+
 function freshForm() {
   return {
     name: '',
@@ -425,11 +433,12 @@ function formatPrice(price: number) {
                   </div>
                   <div>
                     <label class="mb-1 block text-xs font-medium text-gray-500">Category</label>
-                    <input
+                    <select
                       v-model="form.category"
-                      type="text"
                       class="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-[#111111] focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]/30"
-                    />
+                    >
+                      <option v-for="c in categories" :key="c" :value="c">{{ c }}</option>
+                    </select>
                   </div>
                   <div>
                     <label class="mb-1 block text-xs font-medium text-gray-500">Family</label>

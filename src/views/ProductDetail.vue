@@ -92,6 +92,17 @@ function formatPrice(n: number) {
   return "Rp " + n.toLocaleString("id-ID");
 }
 
+function categoryLabel(category: string): string {
+  const map: Record<string, string> = {
+    "eau de cologne": "EDC",
+    "eau de toilette": "EDT",
+    "eau de parfum": "EDP",
+    "eau de parfum intense": "EDP Intense",
+    "extrait de parfum": "Extrait",
+  };
+  return map[category.toLowerCase()] ?? category;
+}
+
 // --- Main image hover & touch zoom ---
 const mainZoomPos = ref({ x: 50, y: 50 });
 const isMainZoomed = ref(false);
@@ -372,7 +383,7 @@ onUnmounted(() => {
               <span
                 class="px-3 py-1.5 text-xs rounded-pill bg-cream text-ink border border-line"
               >
-                EDP
+                {{ categoryLabel(product.category) }}
               </span>
             </div>
 

@@ -106,14 +106,14 @@ const featured = () => {
 
         <!-- Visual -->
         <div
-          class="lg:col-span-5 order-1 lg:order-2"
+          class="lg:col-span-4 order-1 lg:order-2"
           data-aos="fade-left"
           data-aos-duration="900"
         >
-          <div class="relative max-w-md mx-auto lg:max-w-none">
+          <div class="relative max-w-[320px] mx-auto lg:max-w-none">
             <!-- Main image frame -->
             <div
-              class="relative aspect-[4/5] rounded-[28px] overflow-hidden bg-surface shadow-lift"
+              class="relative aspect-[3/4] rounded-[20px] overflow-hidden bg-surface shadow-lift"
             >
               <img
                 :src="content?.hero?.imageUrl || brandFace"

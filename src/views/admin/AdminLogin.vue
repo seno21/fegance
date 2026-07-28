@@ -5,13 +5,9 @@
     >
       <!-- Logo -->
       <div class="flex flex-col items-center mb-8">
-        <img
-          :src="logoSvg"
-          alt="Fegance"
-          class="h-12 w-auto mb-4"
-        />
+        <img :src="logoSvg" alt="Fegance" class="h-12 w-auto mb-4" />
         <h1 class="text-xl font-display font-semibold text-ink tracking-tight">
-          Admin Panel
+          Fegance Project
         </h1>
       </div>
 
@@ -73,11 +69,7 @@
         >
           <span v-if="!loading">Sign In</span>
           <span v-else class="inline-flex items-center gap-2">
-            <svg
-              class="animate-spin h-4 w-4"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
+            <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
               <circle
                 class="opacity-25"
                 cx="12"
@@ -101,31 +93,31 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '@/firebase'
-import logoSvg from '@/assets/logo.svg'
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/firebase";
+import logoSvg from "@/assets/logo.svg";
 
-const router = useRouter()
+const router = useRouter();
 
-const email = ref('')
-const password = ref('')
-const loading = ref(false)
-const errorMsg = ref('')
+const email = ref("");
+const password = ref("");
+const loading = ref(false);
+const errorMsg = ref("");
 
 async function handleLogin() {
-  loading.value = true
-  errorMsg.value = ''
+  loading.value = true;
+  errorMsg.value = "";
 
   try {
-    await signInWithEmailAndPassword(auth, email.value, password.value)
-    router.push('/admin')
+    await signInWithEmailAndPassword(auth, email.value, password.value);
+    router.push("/admin");
   } catch (err: any) {
-    console.error('Login error:', err)
-    errorMsg.value = err.message || 'Login failed. Please try again.'
+    console.error("Login error:", err);
+    errorMsg.value = err.message || "Login failed. Please try again.";
   } finally {
-    loading.value = false
+    loading.value = false;
   }
 }
 </script>
