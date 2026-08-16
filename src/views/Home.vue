@@ -12,7 +12,7 @@ import FooterSection from "@/components/FooterSection.vue";
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col bg-canvas">
+  <div class="min-h-screen flex flex-col bg-canvas overflow-x-hidden w-full max-w-full">
     <AnnouncementBar />
     <Navbar />
 

@@ -49,6 +49,9 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+    max-width: 100%;
+    width: 100%;
   }
 
   body {
@@ -59,6 +62,16 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    max-width: 100%;
+    width: 100%;
+    position: relative;
+  }
+
+  #app {
+    overflow-x: hidden;
+    max-width: 100%;
+    width: 100%;
   }
 
   h1, h2, h3, h4, h5, h6 {
