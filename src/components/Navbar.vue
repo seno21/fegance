@@ -59,7 +59,7 @@ onUnmounted(() => {
 const navLinks = [
   { label: "Home", target: "top", action: "home" as const },
   { label: "Collection", target: "", action: "collection" as const },
-  { label: "Families", target: "families" },
+  // { label: "Families", target: "families" },
   { label: "Story", target: "story" },
   { label: "Contact", target: "contact" },
 ];

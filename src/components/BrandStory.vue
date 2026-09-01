@@ -5,19 +5,16 @@ import filosofiAksen3 from "@/assets/landing/filosofi-aksen3.jpeg";
 import filosofiAksen2 from "@/assets/landing/filosofi.jpeg";
 
 const { content, loading } = useSiteContent();
-
-const defaultStats = [
-  { value: "Every Bottle", label: "Handcrafted" },
-  { value: "Signature Scents", label: "Inspired of" },
-  { value: "INDONESIA", label: "Made In" },
-];
 </script>
 
 <template>
   <section id="story" class="section bg-canvas">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Loading skeleton -->
-      <div v-if="loading" class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+      <div
+        v-if="loading"
+        class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center"
+      >
         <div class="lg:col-span-6 space-y-4">
           <div class="aspect-[3/4] rounded-2xl bg-surface animate-pulse" />
         </div>
@@ -62,7 +59,9 @@ const defaultStats = [
             <div class="col-span-4 flex flex-col gap-3 sm:gap-4">
               <div class="aspect-square rounded-2xl overflow-hidden bg-surface">
                 <img
-                  :src="content?.brandStory?.images?.secondary || filosofiAksen3"
+                  :src="
+                    content?.brandStory?.images?.secondary || filosofiAksen3
+                  "
                   alt="Crafting process"
                   class="w-full h-full object-cover"
                   loading="lazy"
@@ -138,23 +137,28 @@ const defaultStats = [
           data-aos="fade-left"
           data-aos-duration="800"
         >
-          <p class="eyebrow mb-4">{{ content?.brandStory?.eyebrow ?? "Our Philosophy" }}</p>
+          <p class="eyebrow mb-4">
+            {{ content?.brandStory?.eyebrow ?? "Our Philosophy" }}
+          </p>
           <h2 class="h-display text-3xl sm:text-4xl lg:text-5xl text-ink">
             {{ content?.brandStory?.title ?? "Let Us Tell You a Little" }}
-            <span class="block italic font-medium text-gold"
-              >{{ content?.brandStory?.titleAccent ?? "About Who We Are" }}</span
-            >
+            <span class="block italic font-medium text-gold">{{
+              content?.brandStory?.titleAccent ?? "About Who We Are"
+            }}</span>
           </h2>
           <span class="gold-rule mt-6" />
 
           <div
             class="mt-8 space-y-5 text-sm sm:text-base leading-relaxed text-ink-soft"
           >
-            <p v-for="(paragraph, i) in (content?.brandStory?.paragraphs ?? [
-              'Fegance lahir dari rasa penasaran terhadap dunia parfum. Bagi kami, parfum adalah sebuah karya seni. Ia merupakan bagian dari keindahan—meski ia tak memiliki rupa, namun hidup lama di ingatan. Ia bagian dari identitas seseorang, menentukan bagaimana orang menilaimu pertama kali.',
-              'Layaknya sebuah brand yang terus bertumbuh, Fegance berkomitmen untuk selalu berkembang. Kami terus menyempurnakan setiap komposisi, memilih formulasi terbaik, serta menggunakan bahan-bahan premium agar setiap aroma yang kami hadirkan memiliki kualitas yang layak dikenang.',
-              'Di balik setiap judul parfum yang kami ciptakan, selalu ada sebuah cerita. Kami percaya bahwa sebuah parfum adalah medium untuk menyampaikan karakter. Kami ingin setiap parfum Fegance menjadi bagian dari keseharianmu, dan menceritakan identitasmu—tanpa perlu banyak kata.',
-            ])" :key="i">
+            <p
+              v-for="(paragraph, i) in content?.brandStory?.paragraphs ?? [
+                'Fegance lahir dari rasa penasaran terhadap dunia parfum. Bagi kami, parfum adalah sebuah karya seni. Ia merupakan bagian dari keindahan—meski ia tak memiliki rupa, namun hidup lama di ingatan. Ia bagian dari identitas seseorang, menentukan bagaimana orang menilaimu pertama kali.',
+                'Layaknya sebuah brand yang terus bertumbuh, Fegance berkomitmen untuk selalu berkembang. Kami terus menyempurnakan setiap komposisi, memilih formulasi terbaik, serta menggunakan bahan-bahan premium agar setiap aroma yang kami hadirkan memiliki kualitas yang layak dikenang.',
+                'Di balik setiap judul parfum yang kami ciptakan, selalu ada sebuah cerita. Kami percaya bahwa sebuah parfum adalah medium untuk menyampaikan karakter. Kami ingin setiap parfum Fegance menjadi bagian dari keseharianmu, dan menceritakan identitasmu—tanpa perlu banyak kata.',
+              ]"
+              :key="i"
+            >
               {{ paragraph }}
             </p>
           </div>
@@ -162,16 +166,7 @@ const defaultStats = [
           <!-- Stats -->
           <dl
             class="mt-10 grid grid-cols-3 gap-4 sm:gap-8 pt-8 border-t border-line"
-          >
-            <div v-for="stat in (content?.brandStory?.stats ?? defaultStats)" :key="stat.label">
-              <dt class="text-[10px] tracking-[0.2em] uppercase text-faint">
-                {{ stat.label }}
-              </dt>
-              <dd class="mt-1.5 font-display text-xl sm:text-xl text-ink">
-                {{ stat.value }}
-              </dd>
-            </div>
-          </dl>
+          ></dl>
         </div>
       </div>
     </div>
