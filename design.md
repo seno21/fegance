@@ -148,7 +148,7 @@ Menu:
 
 Button:
 
-Shop Now
+Shop
 
 Style:
 

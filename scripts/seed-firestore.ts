@@ -268,38 +268,86 @@ const products = [
   },
 ];
 
-const testimonials = [
-  {
-    name: "Sarah Wijaya",
-    role: "Beauty Editor, Jakarta",
-    text: "I have been wearing Leorin for a month and I get compliments everywhere I go. The longevity is incredible — easily 8+ hours on my skin.",
-    rating: 5,
+const ourStory = {
+  eyebrow: "Our Heritage & Vision",
+  title: "Cerita Fegance",
+  titleAccent: "Biar Wangi Aja Yang Bicara",
+  subtitle:
+    "Lahir dari semangat menghadirkan aroma mewah berkualitas tinggi yang terjangkau, Fegance mendedikasikan setiap kreasi parfum untuk mewakili karakter dan cerita diri kamu.",
+  paragraphs: [
+    "Fegance lahir di Cirebon dari rasa penasaran mendalam terhadap dunia seni wewangian. Bagi kami, parfum bukanlah sekadar minyak wangi penyegar tubuh. Ia adalah karya seni tanpa rupa yang mampu mengunci memori, membangkitkan rasa percaya diri, dan meninggalkan kesan mendalam dalam setiap perjumpaan.",
+    "Perjalanan kami dimulai dari keinginan sederhana: menciptakan parfum dengan kualitas ekstrak minyak wangi premium yang tahan lama, dipadu dengan kemasan mewah yang estetik, tanpa membebankan harga yang berlebihan. Setiap botol racikan Fegance dibuat melalui pengujian aroma mendalam (olfactory testing) untuk memastikan daya tahan (longevity) dan jejak aroma (sillage) yang memikat.",
+    "Bagi Fegance, aroma kamu adalah identitas tanpa suara. Ketika kata-kata tak perlu terucap, biar wangi Fegance yang berbicara mewakili pesona dan karakter unik dirimu.",
+  ],
+  vision:
+    "Menjadi rumah parfum artisanal lokal terdepan di Indonesia yang menginspirasi setiap individu untuk mengekspresikan jati diri melalui aroma berkualitas internasional.",
+  mission: [
+    "Menggunakan bahan baku dan konsentrat parfum grade A+ berkualitas tinggi.",
+    "Mengembangkan kombinasi aroma unik yang memiliki daya tahan ekstra dan karakter yang kuat.",
+    "Memberikan pengalaman kemasan dan layanan kelas atas dengan harga yang jujur dan terjangkau.",
+  ],
+  values: [
+    {
+      title: "Artisanal Blending",
+      description:
+        "Diracik secara teliti oleh master perfumer dengan keseimbangan note atas, tengah, dan bawah.",
+      icon: "sparkles",
+    },
+    {
+      title: "High Concentration Oil",
+      description:
+        "Formula Eau de Parfum dengan konsentrasi bibit tinggi untuk ketahanan 8-12 jam lebih.",
+      icon: "hourglass",
+    },
+    {
+      title: "Identity & Memory",
+      description:
+        "Aroma yang diciptakan khusus untuk membangkitkan ingatan emosional dan daya pikat persona.",
+      icon: "bookmark",
+    },
+    {
+      title: "Fair Luxury",
+      description:
+        "Kualitas mewah setara parfum desainer dengan harga yang bersahabat untuk semua kalangan.",
+      icon: "shield",
+    },
+  ],
+  timeline: [
+    {
+      year: "2024",
+      title: "Awal Gagasan",
+      description:
+        "Riset dan pengujian puluhan formulasi wewangian untuk menemukan karakter khas Fegance.",
+    },
+    {
+      year: "2025",
+      title: "Peluncuran Resmi",
+      description:
+        "Fegance resmi diluncurkan di Cirebon dengan koleksi perdana yang langsung dicintai pengemar parfum.",
+    },
+    {
+      year: "2026",
+      title: "Ekspansi & Inovasi",
+      description:
+        "Menghadirkan varian varian baru serta pengalaman ritel digital yang semakin luas di seluruh Indonesia.",
+    },
+  ],
+  images: {
+    main: "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=1000&fit=crop",
+    secondary:
+      "https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&fit=crop",
+    accent:
+      "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&fit=crop",
+    atelier:
+      "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=1000&fit=crop",
   },
-  {
-    name: "Dimas Pratama",
-    role: "Creative Director",
-    text: "Ember Oud is the most sophisticated scent I have ever owned. Worth every rupiah. Packaged beautifully, feels like a true luxury ritual.",
-    rating: 5,
-  },
-  {
-    name: "Rina Kusuma",
-    role: "Verified Buyer",
-    text: "Velvet Rose is my signature scent now. It is feminine without being overpowering. Absolutely love how it evolves through the day.",
-    rating: 5,
-  },
-  {
-    name: "Andi Hartono",
-    role: "Loyal Customer",
-    text: "Ocean Noir is perfect for daily wear. Fresh yet has depth. Fast shipping and great packaging — the unboxing alone feels like a gift.",
-    rating: 5,
-  },
-  {
-    name: "Maya Putri",
-    role: "Verified Buyer",
-    text: "Crystal Bloom makes me feel like I am walking through a garden in spring. Such a beautiful, delicate fragrance — I am on my third bottle.",
-    rating: 5,
-  },
-];
+  stats: [
+    { value: "100%", label: "Artisanal Crafting" },
+    { value: "12+ Jam", label: "Ketahanan Aroma" },
+    { value: "10,000+", label: "Pelanggan Setia" },
+    { value: "15+", label: "Varian Signature" },
+  ],
+};
 
 const scentFamilies = [
   {
@@ -355,7 +403,7 @@ const siteContent = {
     taglineAccent: "Sisanya Nanti",
     subtitle:
       "Pilih aroma favorit kamu. Biar wangi aja yang bicara, gak perlu repot menjelaskan siapa dirimu.",
-    ctaPrimary: "View Collection",
+    ctaPrimary: "Collection",
     ctaSecondary: "Our Story",
     imageUrl: "",
   },
@@ -445,12 +493,10 @@ async function seed() {
     console.log(`  + ${product.name}`);
   }
 
-  // Seed testimonials
-  console.log("Seeding testimonials...");
-  for (const testimonial of testimonials) {
-    await addDoc(collection(db, "testimonials"), testimonial);
-    console.log(`  + ${testimonial.name}`);
-  }
+  // Seed Our Story
+  console.log("Seeding Our Story content...");
+  await setDoc(doc(db, "ourStory", "main"), ourStory);
+  console.log("  + ourStory/main");
 
   // Seed scent families
   console.log("Seeding scent families...");

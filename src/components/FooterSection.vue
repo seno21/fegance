@@ -13,9 +13,8 @@ function handleSubscribe() {
 
 const quickLinks = [
   { label: "Home", href: "/" },
-  { label: "Collection", href: "/#products" },
-  { label: "Scent Families", href: "/#families" },
-  { label: "Our Story", href: "/#story" },
+  { label: "Collection", href: "/product" },
+  { label: "Our Story", href: "/our-story" },
   { label: "Contact", href: "/#contact" },
 ];
 

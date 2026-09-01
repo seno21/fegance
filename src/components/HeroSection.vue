@@ -64,15 +64,18 @@ const featured = () => {
             class="h-display text-[44px] sm:text-6xl lg:text-[72px] xl:text-[80px] text-ink"
           >
             {{ content?.hero?.tagline ?? "Wangi Dulu" }}
-            <span class="block italic font-medium text-gold"
-              >{{ content?.hero?.taglineAccent ?? "Sisanya Nanti" }}</span
-            >
+            <span class="block italic font-medium text-gold">{{
+              content?.hero?.taglineAccent ?? "Sisanya Nanti"
+            }}</span>
           </h1>
 
           <p
             class="mt-7 text-base sm:text-lg leading-relaxed text-muted max-w-xl"
           >
-            {{ content?.hero?.subtitle ?? "Pilih aroma favorit kamu. Biar wangi aja yang bicara, gak perlu repot menjelaskan siapa dirimu." }}
+            {{
+              content?.hero?.subtitle ??
+              "Pilih aroma favorit kamu. Biar wangi aja yang bicara, gak perlu repot menjelaskan siapa dirimu."
+            }}
           </p>
 
           <div class="mt-9 flex flex-col sm:flex-row gap-3 sm:gap-4">
@@ -80,7 +83,7 @@ const featured = () => {
               @click="goToProducts"
               class="group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-[12px] font-semibold tracking-[0.18em] uppercase bg-ink text-gold rounded-pill hover:bg-gold hover:text-ink transition-all duration-300"
             >
-              {{ content?.hero?.ctaPrimary ?? "View Collection" }}
+              {{ (content?.hero?.ctaPrimary && content.hero.ctaPrimary !== 'View Collection') ? content.hero.ctaPrimary : 'Collection' }}
               <svg
                 class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"
                 fill="none"

@@ -163,10 +163,28 @@ const { content, loading } = useSiteContent();
             </p>
           </div>
 
-          <!-- Stats -->
-          <dl
-            class="mt-10 grid grid-cols-3 gap-4 sm:gap-8 pt-8 border-t border-line"
-          ></dl>
+          <!-- Read More Button -->
+          <div class="mt-8">
+            <router-link
+              to="/our-story"
+              class="inline-flex items-center gap-2 px-6 py-3 rounded-pill bg-ink text-canvas hover:bg-gold hover:text-ink text-xs font-semibold uppercase tracking-wider transition-all duration-300 shadow-soft"
+            >
+              Read More
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </router-link>
+          </div>
         </div>
       </div>
     </div>

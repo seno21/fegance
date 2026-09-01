@@ -7,7 +7,7 @@ service cloud.firestore {
       allow write: if true;
     }
 
-    match /testimonials/{testimonialId} {
+    match /ourStory/{storyId} {
       allow read: if true;
       allow write: if true;
     }

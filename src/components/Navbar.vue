@@ -42,6 +42,11 @@ function goToCollection() {
   router.push("/product");
 }
 
+function goToStory() {
+  closeMenu();
+  router.push("/our-story");
+}
+
 function goToAdminLogin() {
   closeMenu();
   router.push("/admin/login");
@@ -59,9 +64,8 @@ onUnmounted(() => {
 const navLinks = [
   { label: "Home", target: "top", action: "home" as const },
   { label: "Collection", target: "", action: "collection" as const },
-  // { label: "Families", target: "families" },
-  { label: "Story", target: "story" },
-  { label: "Contact", target: "contact" },
+  { label: "Our Story", target: "", action: "story" as const },
+  { label: "Contact", target: "contact", action: "contact" as const },
 ];
 </script>
 
@@ -98,7 +102,9 @@ const navLinks = [
                 ? goHome()
                 : link.action === 'collection'
                   ? goToCollection()
-                  : scrollToSection(link.target!)
+                  : link.action === 'story'
+                    ? goToStory()
+                    : scrollToSection(link.target!)
             "
             class="group relative text-[13px] font-medium tracking-wide text-ink hover:text-gold transition-colors duration-200"
           >
@@ -156,7 +162,7 @@ const navLinks = [
             @click="goToCollection()"
             class="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 text-[12px] font-semibold tracking-wider uppercase bg-ink text-canvas rounded-pill hover:bg-gold hover:text-ink transition-all duration-300"
           >
-            Shop Now
+            Shop
             <svg
               class="w-3.5 h-3.5"
               fill="none"
@@ -217,7 +223,9 @@ const navLinks = [
                 ? goHome()
                 : link.action === 'collection'
                   ? goToCollection()
-                  : scrollToSection(link.target!)
+                  : link.action === 'story'
+                    ? goToStory()
+                    : scrollToSection(link.target!)
             "
             class="block w-full text-left py-3 text-base font-medium text-ink hover:text-gold transition-colors border-b border-line/60 last:border-0"
           >
@@ -227,7 +235,7 @@ const navLinks = [
             @click="goToCollection()"
             class="w-full mt-4 py-3.5 text-[12px] font-semibold tracking-wider uppercase bg-ink text-canvas rounded-pill hover:bg-gold hover:text-ink transition-colors"
           >
-            Shop Now
+            Shop
           </button>
           <button
             @click="goToAdminLogin"

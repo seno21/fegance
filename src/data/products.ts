@@ -28,14 +28,6 @@ export interface Product {
   isBestseller?: boolean;
 }
 
-export interface Testimonial {
-  id: number;
-  name: string;
-  role: string;
-  text: string;
-  rating: number;
-}
-
 export interface ScentFamily {
   id: Product["family"];
   name: string;
@@ -65,12 +57,12 @@ export const products: Product[] = [
       "https://shopee.co.id/Maison-Fegance-Midnight-Gold-i.dummy.midnight-gold",
     tiktokLink: "https://shop.tiktok.com/view/product/dummy-midnight-gold",
     whatsappLink:
-      "https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Midnight%20Gold",
+      "https://wa.me/6285172372101?text=Halo%20saya%20tertarik%20dengan%20Leorin%20Midnight%20Gold",
     performance: {
-      type: "Gen XY (Masculine)",
+      type: "Gen XY (Masculine / Unisex)",
       sillage: "Medium to strong",
       projection: "2-3 meters",
-      longevity: "3-4 hours outdoors, up to 6 hours indoors",
+      longevity: "8-12 hours",
     },
     isBestseller: true,
   },
@@ -94,12 +86,12 @@ export const products: Product[] = [
       "https://shopee.co.id/Maison-Fegance-Velvet-Rose-i.dummy.velvet-rose",
     tiktokLink: "https://shop.tiktok.com/view/product/dummy-velvet-rose",
     whatsappLink:
-      "https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Velvet%20Rose",
+      "https://wa.me/6285172372101?text=Halo%20saya%20tertarik%20dengan%20Velvet%20Rose",
     performance: {
       type: "Floral Rose (Feminine)",
       sillage: "Moderate",
-      projection: "1.5 meters",
-      longevity: "5-6 hours",
+      projection: "1.5 - 2 meters",
+      longevity: "8-10 hours",
     },
   },
   {
@@ -122,12 +114,12 @@ export const products: Product[] = [
       "https://shopee.co.id/Maison-Fegance-Ocean-Noir-i.dummy.ocean-noir",
     tiktokLink: "https://shop.tiktok.com/view/product/dummy-ocean-noir",
     whatsappLink:
-      "https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Ocean%20Noir",
+      "https://wa.me/6285172372101?text=Halo%20saya%20tertarik%20dengan%20Ocean%20Noir",
     performance: {
       type: "Fresh Aquatic (Masculine)",
       sillage: "Medium",
       projection: "1-2 meters",
-      longevity: "4-5 hours",
+      longevity: "6-8 hours",
     },
     isNew: true,
   },
@@ -151,12 +143,12 @@ export const products: Product[] = [
       "https://shopee.co.id/Maison-Fegance-Crystal-Bloom-i.dummy.crystal-bloom",
     tiktokLink: "https://shop.tiktok.com/view/product/dummy-crystal-bloom",
     whatsappLink:
-      "https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Crystal%20Bloom",
+      "https://wa.me/6285172372101?text=Halo%20saya%20tertarik%20dengan%20Crystal%20Bloom",
     performance: {
       type: "Floral Fresh (Feminine)",
       sillage: "Intimate to moderate",
-      projection: "1 meter",
-      longevity: "4-5 hours",
+      projection: "1.5 meters",
+      longevity: "8-10 hours",
     },
   },
   {
@@ -179,12 +171,12 @@ export const products: Product[] = [
       "https://shopee.co.id/Maison-Fegance-Ember-Oud-i.dummy.ember-oud",
     tiktokLink: "https://shop.tiktok.com/view/product/dummy-ember-oud",
     whatsappLink:
-      "https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Ember%20Oud",
+      "https://wa.me/6285172372101?text=Halo%20saya%20tertarik%20dengan%20Ember%20Oud",
     performance: {
       type: "Oriental Woody (Unisex)",
       sillage: "Strong",
       projection: "2-3 meters",
-      longevity: "8-12 hours",
+      longevity: "10-14 hours",
     },
     isBestseller: true,
   },
@@ -208,12 +200,12 @@ export const products: Product[] = [
       "https://shopee.co.id/Maison-Fegance-Iris-Garden-i.dummy.iris-garden",
     tiktokLink: "https://shop.tiktok.com/view/product/dummy-iris-garden",
     whatsappLink:
-      "https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Iris%20Garden",
+      "https://wa.me/6285172372101?text=Halo%20saya%20tertarik%20dengan%20Iris%20Garden",
     performance: {
       type: "Floral Green (Feminine)",
       sillage: "Moderate",
       projection: "1.5 meters",
-      longevity: "5-6 hours",
+      longevity: "6-8 hours",
     },
   },
   {
@@ -236,12 +228,12 @@ export const products: Product[] = [
       "https://shopee.co.id/Maison-Fegance-Amber-Nights-i.dummy.amber-nights",
     tiktokLink: "https://shop.tiktok.com/view/product/dummy-amber-nights",
     whatsappLink:
-      "https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Amber%20Nights",
+      "https://wa.me/6285172372101?text=Halo%20saya%20tertarik%20dengan%20Amber%20Nights",
     performance: {
       type: "Oriental Warm (Unisex)",
       sillage: "Strong",
       projection: "2 meters",
-      longevity: "7-9 hours",
+      longevity: "8-10 hours",
     },
     isNew: true,
   },
@@ -265,51 +257,13 @@ export const products: Product[] = [
       "https://shopee.co.id/Maison-Fegance-Citrus-Sky-i.dummy.citrus-sky",
     tiktokLink: "https://shop.tiktok.com/view/product/dummy-citrus-sky",
     whatsappLink:
-      "https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Citrus%20Sky",
+      "https://wa.me/6285172372101?text=Halo%20saya%20tertarik%20dengan%20Citrus%20Sky",
     performance: {
       type: "Citrus Aromatic (Unisex/Masculine)",
       sillage: "Medium",
-      projection: "1 meter",
-      longevity: "4-6 hours",
+      projection: "1.5 meters",
+      longevity: "6-8 hours",
     },
-  },
-];
-
-export const testimonials: Testimonial[] = [
-  {
-    id: 1,
-    name: "Sarah Wijaya",
-    role: "Beauty Editor, Jakarta",
-    text: "I have been wearing Leorin for a month and I get compliments everywhere I go. The longevity is incredible — easily 8+ hours on my skin.",
-    rating: 5,
-  },
-  {
-    id: 2,
-    name: "Dimas Pratama",
-    role: "Creative Director",
-    text: "Ember Oud is the most sophisticated scent I have ever owned. Worth every rupiah. Packaged beautifully, feels like a true luxury ritual.",
-    rating: 5,
-  },
-  {
-    id: 3,
-    name: "Rina Kusuma",
-    role: "Verified Buyer",
-    text: "Velvet Rose is my signature scent now. It is feminine without being overpowering. Absolutely love how it evolves through the day.",
-    rating: 5,
-  },
-  {
-    id: 4,
-    name: "Andi Hartono",
-    role: "Loyal Customer",
-    text: "Ocean Noir is perfect for daily wear. Fresh yet has depth. Fast shipping and great packaging — the unboxing alone feels like a gift.",
-    rating: 5,
-  },
-  {
-    id: 5,
-    name: "Maya Putri",
-    role: "Verified Buyer",
-    text: "Crystal Bloom makes me feel like I am walking through a garden in spring. Such a beautiful, delicate fragrance — I am on my third bottle.",
-    rating: 5,
   },
 ];
 

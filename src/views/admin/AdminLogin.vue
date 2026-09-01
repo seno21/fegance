@@ -4,11 +4,19 @@
       class="w-full max-w-[380px] bg-canvas rounded-[20px] shadow-lift p-8 sm:p-10"
     >
       <!-- Logo -->
-      <div class="flex flex-col items-center mb-8">
+      <div class="flex flex-col items-center mb-6">
         <img :src="logoSvg" alt="Fegance" class="h-12 w-auto mb-4" />
         <h1 class="text-xl font-display font-semibold text-ink tracking-tight">
-          Fegance Project
+          Fegance Admin
         </h1>
+      </div>
+
+      <!-- Timeout Notice -->
+      <div
+        v-if="isTimeout"
+        class="mb-5 px-4 py-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs leading-relaxed text-center"
+      >
+        Sesi Anda telah berakhir karena tidak ada aktivitas selama 10 menit. Silakan login kembali.
       </div>
 
       <!-- Error -->
@@ -93,12 +101,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { ref, computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase";
+import { updateSessionActivity } from "@/composables/useAdminSession";
 import logoSvg from "@/assets/logo.svg";
 
+const route = useRoute();
 const router = useRouter();
 
 const email = ref("");
@@ -106,12 +116,15 @@ const password = ref("");
 const loading = ref(false);
 const errorMsg = ref("");
 
+const isTimeout = computed(() => route.query.reason === "timeout");
+
 async function handleLogin() {
   loading.value = true;
   errorMsg.value = "";
 
   try {
     await signInWithEmailAndPassword(auth, email.value, password.value);
+    updateSessionActivity();
     router.push("/admin");
   } catch (err: any) {
     console.error("Login error:", err);

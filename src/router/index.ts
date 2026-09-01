@@ -1,17 +1,18 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "@/firebase";
+import { isSessionExpired, clearSessionActivity } from "@/composables/useAdminSession";
 import Home from "@/views/Home.vue";
 import ProductDetail from "@/views/ProductDetail.vue";
 import ProductListing from "@/views/ProductListing.vue";
 import Linktree from "@/views/Linktree.vue";
+import OurStory from "@/views/OurStory.vue";
 
 const AdminLogin = () => import("@/views/admin/AdminLogin.vue");
 const AdminLayout = () => import("@/components/admin/AdminSidebar.vue");
 const AdminDashboard = () => import("@/views/admin/AdminDashboard.vue");
 const AdminProducts = () => import("@/views/admin/AdminProducts.vue");
-const AdminTestimonials = () => import("@/views/admin/AdminTestimonials.vue");
-const AdminScentFamilies = () => import("@/views/admin/AdminScentFamilies.vue");
+const AdminOurStory = () => import("@/views/admin/AdminOurStory.vue");
 const AdminContent = () => import("@/views/admin/AdminContent.vue");
 
 let authResolved = false;
@@ -41,6 +42,11 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: Home,
+    },
+    {
+      path: "/our-story",
+      name: "our-story",
+      component: OurStory,
     },
     {
       path: "/product",
@@ -79,14 +85,9 @@ const router = createRouter({
           component: AdminProducts,
         },
         {
-          path: "testimonials",
-          name: "admin-testimonials",
-          component: AdminTestimonials,
-        },
-        {
-          path: "scent-families",
-          name: "admin-scent-families",
-          component: AdminScentFamilies,
+          path: "our-story",
+          name: "admin-our-story",
+          component: AdminOurStory,
         },
         {
           path: "content",
@@ -109,12 +110,34 @@ router.beforeEach(async (to) => {
 
   const isAuthed = await waitForAuth();
 
-  if (needsAuth && !isAuthed) {
-    return { name: "admin-login" };
+  if (needsAuth) {
+    if (!isAuthed || isSessionExpired()) {
+      if (isSessionExpired()) {
+        clearSessionActivity();
+        try {
+          await signOut(auth);
+        } catch (e) {
+          // ignore
+        }
+        return { name: "admin-login", query: { reason: "timeout" } };
+      }
+      return { name: "admin-login" };
+    }
   }
+
   if (needsGuest && isAuthed) {
+    if (isSessionExpired()) {
+      clearSessionActivity();
+      try {
+        await signOut(auth);
+      } catch (e) {
+        // ignore
+      }
+      return true;
+    }
     return { name: "admin-dashboard" };
   }
+
   return true;
 });
 
