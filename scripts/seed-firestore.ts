@@ -495,8 +495,9 @@ async function seed() {
 
   // Seed Our Story
   console.log("Seeding Our Story content...");
+  await setDoc(doc(db, "siteContent", "ourStory"), ourStory);
   await setDoc(doc(db, "ourStory", "main"), ourStory);
-  console.log("  + ourStory/main");
+  console.log("  + siteContent/ourStory");
 
   // Seed scent families
   console.log("Seeding scent families...");

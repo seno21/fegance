@@ -73,12 +73,12 @@ export function useOurStory() {
   let unsubscribe: (() => void) | null = null;
 
   onMounted(() => {
+    // Listen to siteContent/ourStory (allowed by existing Firebase rules)
     unsubscribe = onSnapshot(
-      doc(db, "ourStory", "main"),
+      doc(db, "siteContent", "ourStory"),
       (snap) => {
         if (snap.exists()) {
           const data = snap.data() as any;
-          // Upgrade / migrate older data structure if needed
           if (!data.blocks && (data.paragraphs || data.coverImage)) {
             const blocks: StoryBlock[] = [];
             if (data.coverImage) {
@@ -138,7 +138,8 @@ export function useOurStory() {
   });
 
   async function updateStory(data: OurStoryArticle): Promise<void> {
-    await setDoc(doc(db, "ourStory", "main"), data, { merge: true });
+    // Save to siteContent/ourStory which matches siteContent/{docId} rules
+    await setDoc(doc(db, "siteContent", "ourStory"), data, { merge: true });
   }
 
   return {
