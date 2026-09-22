@@ -43,7 +43,7 @@ const firstParagraphIndex = computed(() => {
         <!-- HEADER SECTION -->
         <header class="text-center space-y-4 mb-10">
           <span
-            class="inline-block text-xs font-bold uppercase tracking-[0.25em] text-gold"
+            class="inline-block text-xs font-bold uppercase tracking-[0.25em] text-ink"
           >
             {{ story.eyebrow || "Cerita Fegance" }}
           </span>
@@ -90,7 +90,7 @@ const firstParagraphIndex = computed(() => {
               v-if="block.type === 'paragraph'"
               :class="
                 index === firstParagraphIndex
-                  ? 'relative pl-5 border-l-2 border-gold text-ink font-medium leading-relaxed'
+                  ? 'relative pl-5 border-l-2 border-ink text-ink font-medium leading-relaxed'
                   : ''
               "
             >
@@ -135,7 +135,7 @@ const firstParagraphIndex = computed(() => {
 
           <router-link
             to="/product"
-            class="inline-flex items-center gap-2 px-6 py-3 rounded-pill bg-ink text-canvas hover:bg-gold hover:text-ink text-xs font-semibold uppercase tracking-wider transition-all duration-300 shadow-soft"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-pill bg-ink text-canvas hover:bg-neutral-800 hover:text-white text-xs font-semibold uppercase tracking-wider transition-all duration-300 shadow-soft"
           >
             Collection
             <svg

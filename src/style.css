@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "851ChikaraZuyoku";
+  src: url("/fonts/851CHIKARA-DZUYOKU_kanaA_004.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "851チカラヅヨク";
+  src: url("/fonts/851CHIKARA-DZUYOKU_kanaA_004.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* =========================================================================
    DESIGN TOKENS — Single source of truth
    Color palette, typography, radii, shadows. Mirror dari design.md.
@@ -7,23 +23,23 @@
    ========================================================================= */
 
 @theme {
-  /* Brand Colors */
-  --color-gold: #c9a227;
-  --color-gold-hover: #d4af37;
-  --color-gold-soft: #e8d89a;
+  /* Brand Colors — Monochrome Black & White */
+  --color-gold: #111111;
+  --color-gold-hover: #333333;
+  --color-gold-soft: #e5e5e5;
   --color-ink: #111111;
   --color-ink-soft: #444444;
   --color-muted: #666666;
   --color-faint: #999999;
   --color-line: #e5e5e5;
   --color-canvas: #ffffff;
-  --color-cream: #faf7f2;
+  --color-cream: #fafafa;
   --color-surface: #f7f7f7;
-  --color-surface-2: #f3f0ea;
+  --color-surface-2: #eeeeee;
 
   /* Typography */
-  --font-display: "DM Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "851ChikaraZuyoku", "851チカラヅヨク", "DM Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sans: "851ChikaraZuyoku", "851チカラヅヨク", "DM Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
 
   /* Radii */
   --radius-card: 20px;
@@ -32,7 +48,7 @@
   /* Shadows — restrained, not gaudy */
   --shadow-soft: 0 1px 2px rgba(17, 17, 17, 0.04), 0 4px 16px rgba(17, 17, 17, 0.04);
   --shadow-lift: 0 8px 30px rgba(17, 17, 17, 0.08), 0 2px 8px rgba(17, 17, 17, 0.04);
-  --shadow-glow: 0 0 0 1px rgba(201, 162, 39, 0.18), 0 18px 40px -10px rgba(201, 162, 39, 0.25);
+  --shadow-glow: 0 0 0 1px rgba(17, 17, 17, 0.2), 0 18px 40px -10px rgba(17, 17, 17, 0.25);
 }
 
 /* =========================================================================
@@ -47,6 +63,7 @@
   }
 
   html {
+    font-size: 93.75%;
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     overflow-x: hidden;
@@ -103,8 +120,8 @@
 
 /* Selection */
 ::selection {
-  background: var(--color-gold);
-  color: var(--color-ink);
+  background: #111111;
+  color: #ffffff;
 }
 
 /* =========================================================================
@@ -126,18 +143,18 @@
 .gold-rule {
   width: 48px;
   height: 1px;
-  background: var(--color-gold);
+  background: var(--color-ink);
   display: inline-block;
 }
 
-/* Eyebrow label (small uppercase gold text) */
+/* Eyebrow label (small uppercase text) */
 .eyebrow {
   font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-gold);
+  color: var(--color-ink);
 }
 
 /* Display heading sizes — fluid */
@@ -161,25 +178,25 @@
   }
 }
 
-/* Subtle gold glow for product card hover */
+/* Subtle glow for product card hover */
 .glow-gold {
-  box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.35), 0 18px 40px -10px rgba(201, 162, 39, 0.28);
+  box-shadow: 0 0 0 1px rgba(17, 17, 17, 0.35), 0 18px 40px -10px rgba(17, 17, 17, 0.28);
 }
 
-/* Animated gold dot for badges */
+/* Animated dot for badges */
 .dot-gold {
   display: inline-block;
   width: 6px;
   height: 6px;
   border-radius: 9999px;
-  background: var(--color-gold);
-  box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.18);
+  background: var(--color-ink);
+  box-shadow: 0 0 0 4px rgba(17, 17, 17, 0.18);
   animation: pulse-soft 2.4s ease-in-out infinite;
 }
 
 @keyframes pulse-soft {
-  0%, 100% { box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.18); }
-  50% { box-shadow: 0 0 0 8px rgba(201, 162, 39, 0.05); }
+  0%, 100% { box-shadow: 0 0 0 4px rgba(17, 17, 17, 0.18); }
+  50% { box-shadow: 0 0 0 8px rgba(17, 17, 17, 0.05); }
 }
 
 /* Smooth fade for testimonial transitions */
@@ -195,13 +212,13 @@
 
 /* Logo in navbar */
 .logo-mark {
-  height: 2.25rem;
+  height: 2.6rem;
   width: auto;
   display: block;
 }
 @media (min-width: 1024px) {
   .logo-mark {
-    height: 2.5rem;
+    height: 3rem;
   }
 }
 

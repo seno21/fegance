@@ -5,7 +5,6 @@ import HeroSection from "@/components/HeroSection.vue";
 import FeaturedProducts from "@/components/FeaturedProducts.vue";
 import BrandStory from "@/components/BrandStory.vue";
 import WhyChooseUs from "@/components/WhyChooseUs.vue";
-import ContactSection from "@/components/ContactSection.vue";
 import FooterSection from "@/components/FooterSection.vue";
 </script>
 
@@ -21,7 +20,6 @@ import FooterSection from "@/components/FooterSection.vue";
       <FeaturedProducts />
       <BrandStory />
       <WhyChooseUs />
-      <ContactSection />
     </main>
 
     <FooterSection />

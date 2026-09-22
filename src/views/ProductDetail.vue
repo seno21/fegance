@@ -32,7 +32,34 @@ watch(loading, (isLoading) => {
 });
 
 // --- Gallery ---
-const selectedImage = computed(() => product.value?.image || "");
+const selectedImageIndex = ref(0);
+
+const allImages = computed(() => {
+  if (!product.value) return [];
+  const list = [product.value.image];
+  if (product.value.gallery && Array.isArray(product.value.gallery)) {
+    product.value.gallery.forEach((url) => {
+      if (url && url.trim()) list.push(url.trim());
+    });
+  }
+  // Guarantee 3 photo choices are present
+  while (list.length < 3 && product.value.image) {
+    list.push(product.value.image);
+  }
+  return list;
+});
+
+const selectedImage = computed(() => {
+  if (!allImages.value.length) return product.value?.image || "";
+  return allImages.value[selectedImageIndex.value] || allImages.value[0];
+});
+
+watch(
+  () => route.params.slug,
+  () => {
+    selectedImageIndex.value = 0;
+  }
+);
 
 // Map product properties into accordion format
 interface AccordionItem {
@@ -103,75 +130,7 @@ function categoryLabel(category: string): string {
   return map[category.toLowerCase()] ?? category;
 }
 
-// --- Main image hover & touch zoom ---
-const mainZoomPos = ref({ x: 50, y: 50 });
-const isMainZoomed = ref(false);
-const isTouchingMain = ref(false);
-let mainTouchStartX = 0;
-let mainTouchStartY = 0;
-let mainHasMoved = false;
-
-function handleMainZoomMove(e: MouseEvent) {
-  const el = e.currentTarget as HTMLElement;
-  const rect = el.getBoundingClientRect();
-  mainZoomPos.value = {
-    x: ((e.clientX - rect.left) / rect.width) * 100,
-    y: ((e.clientY - rect.top) / rect.height) * 100,
-  };
-}
-
-function handleMainTouchStart(e: TouchEvent) {
-  if (!e.touches.length) return;
-  const touch = e.touches[0];
-  if (!touch) return;
-  isTouchingMain.value = true;
-  isMainZoomed.value = true;
-  mainTouchStartX = touch.clientX;
-  mainTouchStartY = touch.clientY;
-  mainHasMoved = false;
-  updateMainTouchPos(e);
-}
-function handleMainTouchMove(e: TouchEvent) {
-  if (!isTouchingMain.value) return;
-  const touch = e.touches[0];
-  if (!touch) return;
-  const dx = touch.clientX - mainTouchStartX;
-  const dy = touch.clientY - mainTouchStartY;
-  if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
-    mainHasMoved = true;
-  }
-  updateMainTouchPos(e);
-}
-function handleMainTouchEnd() {
-  isTouchingMain.value = false;
-  isMainZoomed.value = false;
-}
-
-function updateMainTouchPos(e: TouchEvent) {
-  if (!e.touches.length) return;
-  const touch = e.touches[0];
-  if (!touch) return;
-  const el = e.currentTarget as HTMLElement;
-  const rect = el.getBoundingClientRect();
-  mainZoomPos.value = {
-    x: Math.max(
-      0,
-      Math.min(100, ((touch.clientX - rect.left) / rect.width) * 100),
-    ),
-    y: Math.max(
-      0,
-      Math.min(100, ((touch.clientY - rect.top) / rect.height) * 100),
-    ),
-  };
-}
-
-function handleMainClick() {
-  if (!mainHasMoved) {
-    openLightbox();
-  }
-}
-
-// --- Lightbox ---
+// --- Lightbox / Modal ---
 const showLightbox = ref(false);
 const isZoomed = ref(false);
 const zoomPos = ref({ x: 50, y: 50 });
@@ -192,8 +151,8 @@ function handleZoomMove(e: MouseEvent) {
   const el = e.currentTarget as HTMLElement;
   const rect = el.getBoundingClientRect();
   zoomPos.value = {
-    x: ((e.clientX - rect.left) / rect.width) * 100,
-    y: ((e.clientY - rect.top) / rect.height) * 100,
+    x: Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100)),
+    y: Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100)),
   };
 }
 
@@ -280,27 +239,6 @@ onUnmounted(() => {
 
     <main class="pt-6 lg:pt-10 pb-20 lg:pb-28">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Breadcrumb / back -->
-        <!-- <button
-          @click="router.push('/product')"
-          class="inline-flex items-center gap-2 text-sm text-muted hover:text-gold transition-colors mb-10 group"
-        >
-          <svg
-            class="w-4 h-4 transition-transform group-hover:-translate-x-0.5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            stroke-width="1.6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-          Back to Collection
-        </button> -->
-
         <!-- Two-column independent layout -->
         <div class="product-layout">
           <!-- Left: Independent Gallery (sticky on desktop) -->
@@ -309,52 +247,90 @@ onUnmounted(() => {
             data-aos="fade-up"
             data-aos-duration="800"
           >
-            <!-- Main Image -->
+            <!-- Main Image with Thin Dark Fade & Zoom Icon on Hover -->
             <div
-              class="gallery-main"
-              @click="handleMainClick"
-              @mousemove="handleMainZoomMove"
-              @mouseenter="isMainZoomed = true"
-              @mouseleave="isMainZoomed = false"
-              @touchstart.passive="handleMainTouchStart"
-              @touchmove="handleMainTouchMove"
-              @touchend.passive="handleMainTouchEnd"
+              class="group relative aspect-square w-full rounded-[24px] overflow-hidden bg-surface shadow-soft border border-line/70 cursor-pointer"
+              @click="openLightbox"
             >
               <Transition name="gallery-fade" mode="out-in">
                 <img
                   :key="selectedImage"
                   :src="selectedImage"
                   :alt="product.name"
-                  class="gallery-main-img"
-                  :class="{ 'zoom-active': isMainZoomed }"
-                  :style="{
-                    transformOrigin: `${mainZoomPos.x}% ${mainZoomPos.y}%`,
-                  }"
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   draggable="false"
                 />
               </Transition>
-              <div class="gallery-main-overlay" />
+
+              <!-- Fade Warna Hitam Tipis & Icon Zoom -->
+              <div
+                class="absolute inset-0 bg-black/40 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center gap-2 text-white z-10"
+              >
+                <div
+                  class="w-12 h-12 rounded-full bg-white/20 border border-white/40 backdrop-blur-md flex items-center justify-center transform scale-90 group-hover:scale-100 transition-transform duration-300"
+                >
+                  <svg
+                    class="w-6 h-6 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"
+                    />
+                  </svg>
+                </div>
+                <span class="text-xs font-semibold uppercase tracking-wider text-white drop-shadow">
+                  Klik untuk Zoom
+                </span>
+              </div>
+
+              <!-- Badges -->
               <div
                 v-if="product.isBestseller || product.isNew"
-                class="gallery-badge-group"
+                class="absolute top-4 left-4 flex flex-col gap-1.5 z-20 pointer-events-none"
               >
                 <span
                   v-if="product.isBestseller"
-                  class="gallery-badge gallery-badge-gold"
+                  class="px-3 py-1 text-[10px] font-semibold uppercase tracking-wider rounded-pill bg-neutral-900 text-white border border-neutral-700"
                 >
                   Best Seller
                 </span>
                 <span
                   v-if="product.isNew"
-                  class="gallery-badge gallery-badge-ink"
+                  class="px-3 py-1 text-[10px] font-semibold uppercase tracking-wider rounded-pill bg-ink text-canvas"
                 >
                   New
                 </span>
               </div>
             </div>
+
+            <!-- 3 Pilihan Foto Thumbnails di bawah foto utama halaman detail -->
+            <div class="mt-4 flex items-center gap-3 overflow-x-auto pb-1">
+              <button
+                v-for="(imgUrl, idx) in allImages"
+                :key="idx"
+                @click="selectedImageIndex = idx"
+                class="group relative w-20 h-20 rounded-xl overflow-hidden border-2 transition-all duration-200 shrink-0 focus:outline-none"
+                :class="
+                  selectedImageIndex === idx
+                    ? 'border-ink shadow-md scale-105'
+                    : 'border-line/80 hover:border-ink/60 opacity-75 hover:opacity-100'
+                "
+              >
+                <img
+                  :src="imgUrl"
+                  :alt="`${product.name} foto ${idx + 1}`"
+                  class="w-full h-full object-cover"
+                />
+              </button>
+            </div>
           </div>
 
-          <!-- Right: Product Information (only this column grows) -->
+          <!-- Right: Product Information -->
           <div
             class="product-info"
             data-aos="fade-left"
@@ -387,13 +363,9 @@ onUnmounted(() => {
               </span>
             </div>
 
-            <p class="mt-7 font-display text-3xl sm:text-4xl text-gold">
+            <p class="mt-7 font-display text-3xl sm:text-4xl text-ink font-bold">
               {{ formatPrice(product.price) }}
             </p>
-
-            <!-- <p class="mt-6 text-base leading-relaxed text-ink-soft max-w-prose">
-              {{ product.description }}
-            </p> -->
 
             <!-- CTAs -->
             <div class="mt-9 flex flex-col sm:flex-row gap-2.5">
@@ -409,23 +381,6 @@ onUnmounted(() => {
                   class="w-4.5 h-4.5 shrink-0 object-contain filter group-hover:brightness-0 group-hover:invert transition-all duration-200"
                 />
                 Shopee
-              </a>
-              <a
-                :href="product.tiktokLink"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn-brand btn-tiktok flex-1 inline-flex items-center justify-center gap-2.5 px-5 py-3.5 text-[11px] font-semibold tracking-[0.16em] uppercase rounded-pill transition-all duration-200 hover:text-white"
-              >
-                <svg
-                  class="w-4 h-4 shrink-0"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"
-                  />
-                </svg>
-                TikTok Shop
               </a>
               <a
                 :href="product.whatsappLink"
@@ -477,7 +432,7 @@ onUnmounted(() => {
               v-for="(item, i) in otherProducts"
               :key="item.id"
               @click="goToDetail(item.slug)"
-              class="group cursor-pointer bg-canvas border border-line rounded-2xl overflow-hidden transition-all duration-300 hover:border-gold hover:-translate-y-1 hover:shadow-lift"
+              class="group cursor-pointer bg-canvas border border-line rounded-2xl overflow-hidden transition-all duration-300 hover:border-black hover:-translate-y-1 hover:shadow-lift"
               data-aos="fade-up"
               :data-aos-delay="i * 80"
               data-aos-duration="700"
@@ -499,7 +454,7 @@ onUnmounted(() => {
                 >
                   {{ item.name }}
                 </h3>
-                <p class="mt-1.5 font-display text-sm sm:text-base text-gold">
+                <p class="mt-1.5 font-display text-sm sm:text-base text-ink font-bold">
                   {{ formatPrice(item.price) }}
                 </p>
               </div>
@@ -511,25 +466,26 @@ onUnmounted(() => {
 
     <FooterSection />
 
-    <!-- Lightbox overlay -->
+    <!-- Lightbox / Modal for Auto-Zoom & 3 Photo Choices -->
     <Teleport to="body">
       <Transition name="lightbox">
         <div
           v-if="showLightbox"
-          class="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center"
+          class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-6"
           @click="closeLightbox"
         >
+          <!-- Close button -->
           <button
             @click="closeLightbox"
-            class="absolute top-6 right-6 z-10 text-white/60 hover:text-white transition-colors"
-            aria-label="Close zoom"
+            class="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 border border-white/20 text-white flex items-center justify-center hover:bg-white/20 transition-colors"
+            aria-label="Close modal"
           >
             <svg
-              class="w-8 h-8"
+              class="w-6 h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              stroke-width="2"
             >
               <path
                 stroke-linecap="round"
@@ -540,25 +496,79 @@ onUnmounted(() => {
           </button>
 
           <div
-            class="relative max-w-[90vw] max-h-[90vh] overflow-hidden rounded-2xl"
+            class="relative flex flex-col items-center max-w-3xl w-full max-h-[92vh] bg-[#111111]/95 border border-white/10 rounded-3xl p-4 sm:p-6 overflow-hidden shadow-2xl"
             @click.stop
           >
-            <img
-              :src="selectedImage"
-              :alt="product.name"
-              class="max-w-[90vw] max-h-[90vh] object-contain transition-transform duration-75 cursor-crosshair select-none"
-              :class="{ 'scale-[2]': isZoomed }"
-              :style="{
-                transformOrigin: `${zoomPos.x}% ${zoomPos.y}%`,
-              }"
-              draggable="false"
+            <!-- Header inside modal -->
+            <div class="w-full flex items-center justify-between mb-3 px-1">
+              <div>
+                <h3 class="font-display text-xl font-bold text-white leading-tight">
+                  {{ product.name }}
+                </h3>
+              </div>
+            </div>
+
+            <!-- Auto-Zoom Large Photo View -->
+            <div
+              class="relative w-full aspect-square max-h-[50vh] sm:max-h-[58vh] rounded-2xl overflow-hidden bg-black/60 border border-white/10 cursor-crosshair group flex items-center justify-center"
               @mousemove="handleZoomMove"
               @mouseenter="isZoomed = true"
               @mouseleave="isZoomed = false"
               @touchstart="handleLightboxTouchStart"
               @touchmove="handleLightboxTouchMove"
               @touchend.passive="handleLightboxTouchEnd"
-            />
+            >
+              <img
+                :src="selectedImage"
+                :alt="product.name"
+                class="w-full h-full object-contain transition-transform duration-100 ease-out select-none pointer-events-none"
+                :class="{ 'scale-[2.2]': isZoomed }"
+                :style="{ transformOrigin: `${zoomPos.x}% ${zoomPos.y}%` }"
+                draggable="false"
+              />
+
+              <!-- Unzoomed Overlay Hint -->
+              <div
+                v-if="!isZoomed"
+                class="absolute bottom-3 bg-black/70 text-white/90 px-3.5 py-1.5 rounded-full text-xs font-medium backdrop-blur-md border border-white/10 pointer-events-none flex items-center gap-1.5"
+              >
+                <svg
+                  class="w-4 h-4 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"
+                  />
+                </svg>
+                Sorot foto untuk Auto-Zoom
+              </div>
+            </div>
+
+            <!-- 3 Pilihan Foto Thumbnails di bawah foto utama Modal -->
+            <div class="w-full mt-4 flex items-center justify-center gap-3 overflow-x-auto py-1">
+              <button
+                v-for="(imgUrl, idx) in allImages"
+                :key="idx"
+                @click="selectedImageIndex = idx"
+                class="group relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border-2 transition-all duration-200 shrink-0 focus:outline-none"
+                :class="
+                  selectedImageIndex === idx
+                    ? 'border-white ring-2 ring-white/40 scale-105 shadow-glow'
+                    : 'border-white/20 hover:border-white/60 opacity-60 hover:opacity-100'
+                "
+              >
+                <img
+                  :src="imgUrl"
+                  :alt="`Pilihan ${idx + 1}`"
+                  class="w-full h-full object-cover"
+                />
+              </button>
+            </div>
           </div>
         </div>
       </Transition>
@@ -663,8 +673,8 @@ onUnmounted(() => {
 }
 
 .gallery-badge-gold {
-  background: var(--color-gold);
-  color: var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-canvas);
 }
 
 .gallery-badge-ink {
@@ -703,16 +713,6 @@ onUnmounted(() => {
 .btn-shopee:hover {
   background: #ee4d2d;
   color: #fff;
-}
-
-.btn-tiktok {
-  background: transparent;
-  color: #010101;
-  border: 1.5px solid #010101;
-}
-.btn-tiktok:hover {
-  background: #010101;
-  color: #fff !important;
 }
 
 .btn-whatsapp {

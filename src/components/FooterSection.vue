@@ -15,7 +15,6 @@ const quickLinks = [
   { label: "Home", href: "/" },
   { label: "Collection", href: "/product" },
   { label: "Our Story", href: "/our-story" },
-  { label: "Contact", href: "/#contact" },
 ];
 
 const categories = [
@@ -55,7 +54,7 @@ const year = new Date().getFullYear();
         <!-- Brand -->
         <div class="lg:col-span-4">
           <div class="flex items-baseline mb-5">
-            <span class="font-display text-3xl font-semibold text-gold"
+            <span class="font-display text-3xl font-semibold text-white"
               >Fegance Project
             </span>
           </div>
@@ -71,7 +70,7 @@ const year = new Date().getFullYear();
               target="_blank"
               rel="noopener noreferrer"
               :aria-label="s.name"
-              class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/70 hover:border-gold hover:text-gold transition-colors"
+              class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/70 hover:border-white hover:text-white transition-colors"
             >
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                 <path :d="s.path" />
@@ -82,14 +81,16 @@ const year = new Date().getFullYear();
 
         <!-- Links -->
         <div class="lg:col-span-3">
-          <h4 class="text-[10px] tracking-[0.25em] uppercase text-gold mb-5">
+          <h4
+            class="text-[10px] tracking-[0.25em] uppercase text-white/90 mb-5"
+          >
             Navigate
           </h4>
           <ul class="space-y-3">
             <li v-for="link in quickLinks" :key="link.label">
               <a
                 :href="link.href"
-                class="text-sm text-white/70 hover:text-gold transition-colors inline-flex items-center gap-1.5 group"
+                class="text-sm text-white/70 hover:text-white transition-colors inline-flex items-center gap-1.5 group"
               >
                 {{ link.label }}
                 <span
@@ -103,14 +104,16 @@ const year = new Date().getFullYear();
 
         <!-- Categories -->
         <div class="lg:col-span-3">
-          <h4 class="text-[10px] tracking-[0.25em] uppercase text-gold mb-5">
+          <h4
+            class="text-[10px] tracking-[0.25em] uppercase text-white/90 mb-5"
+          >
             Categories
           </h4>
           <ul class="space-y-3">
             <li v-for="c in categories" :key="c">
               <a
                 href="/#products"
-                class="text-sm text-white/70 hover:text-gold transition-colors"
+                class="text-sm text-white/70 hover:text-white transition-colors"
               >
                 {{ c }}
               </a>
@@ -120,7 +123,9 @@ const year = new Date().getFullYear();
 
         <!-- Contact -->
         <div class="lg:col-span-2">
-          <h4 class="text-[10px] tracking-[0.25em] uppercase text-gold mb-5">
+          <h4
+            class="text-[10px] tracking-[0.25em] uppercase text-white/90 mb-5"
+          >
             Visit
           </h4>
           <p class="text-sm text-white/70 leading-relaxed">
@@ -137,7 +142,7 @@ const year = new Date().getFullYear();
     <!-- Bottom bar -->
     <div class="border-t border-white/10">
       <div class="py-6 text-center text-xs text-white/40">
-        <p>&copy; {{ year }} Fegance. All rights reserved.</p>
+        <p>&copy; {{ year }} Fegance Project. All rights reserved.</p>
       </div>
     </div>
   </footer>

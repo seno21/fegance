@@ -3,8 +3,8 @@
     <div
       v-for="(item, index) in accordionData"
       :key="index"
-      class="bg-white border border-[#ECECEC] rounded-[16px] overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:border-[#c9a227] transition-all duration-[250ms] group"
-      :class="{ 'border-[#c9a227]': activeIndex === index }"
+      class="bg-white border border-[#ECECEC] rounded-[16px] overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:border-[#111111] transition-all duration-[250ms] group"
+      :class="{ 'border-[#111111]': activeIndex === index }"
     >
       <button
         class="flex items-center justify-between w-full min-h-[56px] sm:min-h-[64px] py-[16px] px-[24px] bg-transparent border-none cursor-pointer text-left focus:outline-none"
@@ -15,12 +15,12 @@
         <div class="flex items-center gap-[16px]">
           <!-- Icon Circle Background -->
           <div
-            class="w-[40px] h-[40px] rounded-full bg-[#faf7f2] flex items-center justify-center transition-colors duration-[250ms] group-hover:bg-[#c9a227] shrink-0"
-            :class="{ 'bg-[#c9a227]': activeIndex === index }"
+            class="w-[40px] h-[40px] rounded-full bg-[#f0f0f0] flex items-center justify-center transition-colors duration-[250ms] group-hover:bg-[#111111] shrink-0"
+            :class="{ 'bg-[#111111]': activeIndex === index }"
           >
             <component
               :is="getIconComponent(item.icon)"
-              class="w-[18px] h-[18px] text-[#c9a227] transition-colors duration-[250ms] group-hover:text-white"
+              class="w-[18px] h-[18px] text-[#111111] transition-colors duration-[250ms] group-hover:text-white"
               :class="{ 'text-white': activeIndex === index }"
             />
           </div>
@@ -32,7 +32,7 @@
             </h4>
             <span
               v-if="item.subtitle"
-              class="font-sans text-[12px] tracking-widest text-[#c9a227] uppercase mt-[4px] leading-none"
+              class="font-sans text-[12px] tracking-widest text-[#666666] uppercase mt-[4px] leading-none"
             >
               {{ item.subtitle }}
             </span>
@@ -41,8 +41,8 @@
 
         <!-- Toggle Chevron -->
         <div
-          class="flex items-center justify-center text-[#666666] transition-transform duration-[250ms] group-hover:text-[#c9a227]"
-          :class="{ 'rotate-180 text-[#c9a227]': activeIndex === index }"
+          class="flex items-center justify-center text-[#666666] transition-transform duration-[250ms] group-hover:text-[#111111]"
+          :class="{ 'rotate-180 text-[#111111]': activeIndex === index }"
         >
           <IconChevronDown
             class="w-[20px] h-[20px] transition-transform duration-[250ms]"
@@ -85,7 +85,7 @@
                   <span
                     v-for="note in item.content.top"
                     :key="note"
-                    class="text-[13px] bg-[#faf7f2] text-[#c9a227] px-[12px] py-[4px] rounded-full border border-[#f0ebe1] leading-none"
+                    class="text-[13px] bg-[#f0f0f0] text-[#111111] px-[12px] py-[4px] rounded-full border border-[#e0e0e0] leading-none"
                   >
                     {{ note }}
                   </span>
@@ -104,7 +104,7 @@
                   <span
                     v-for="note in item.content.middle"
                     :key="note"
-                    class="text-[13px] bg-[#faf7f2] text-[#c9a227] px-[12px] py-[4px] rounded-full border border-[#f0ebe1] leading-none"
+                    class="text-[13px] bg-[#f0f0f0] text-[#111111] px-[12px] py-[4px] rounded-full border border-[#e0e0e0] leading-none"
                   >
                     {{ note }}
                   </span>
@@ -123,7 +123,7 @@
                   <span
                     v-for="note in item.content.base"
                     :key="note"
-                    class="text-[13px] bg-[#faf7f2] text-[#c9a227] px-[12px] py-[4px] rounded-full border border-[#f0ebe1] leading-none"
+                    class="text-[13px] bg-[#f0f0f0] text-[#111111] px-[12px] py-[4px] rounded-full border border-[#e0e0e0] leading-none"
                   >
                     {{ note }}
                   </span>

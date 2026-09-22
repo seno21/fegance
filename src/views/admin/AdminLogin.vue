@@ -43,7 +43,7 @@
             required
             autocomplete="email"
             placeholder="admin@fegance.com"
-            class="w-full px-4 py-3 rounded-xl border border-line bg-surface text-ink text-sm placeholder:text-faint focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/30 transition-colors"
+            class="w-full px-4 py-3 rounded-xl border border-line bg-surface text-ink text-sm placeholder:text-faint focus:outline-none focus:border-ink focus:ring-1 focus:ring-ink/30 transition-colors"
           />
         </div>
 
@@ -61,19 +61,14 @@
             required
             autocomplete="current-password"
             placeholder="••••••••"
-            class="w-full px-4 py-3 rounded-xl border border-line bg-surface text-ink text-sm placeholder:text-faint focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/30 transition-colors"
+            class="w-full px-4 py-3 rounded-xl border border-line bg-surface text-ink text-sm placeholder:text-faint focus:outline-none focus:border-ink focus:ring-1 focus:ring-ink/30 transition-colors"
           />
         </div>
 
         <button
           type="submit"
           :disabled="loading"
-          class="mt-2 w-full py-3 rounded-xl font-display font-semibold text-sm tracking-wide transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
-          :class="
-            loading
-              ? 'bg-gold/70 text-canvas'
-              : 'bg-gold text-ink hover:bg-gold-hover shadow-soft hover:shadow-lift'
-          "
+          class="mt-2 w-full py-3 rounded-xl font-display font-semibold text-sm tracking-wide transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed bg-ink text-canvas hover:bg-neutral-800 shadow-soft hover:shadow-lift"
         >
           <span v-if="!loading">Sign In</span>
           <span v-else class="inline-flex items-center gap-2">

@@ -106,7 +106,7 @@ const { content, loading } = useSiteContent();
                 class="w-10 h-10 rounded-full bg-cream flex items-center justify-center"
               >
                 <svg
-                  class="w-5 h-5 text-gold"
+                  class="w-5 h-5 text-ink"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -142,7 +142,7 @@ const { content, loading } = useSiteContent();
           </p>
           <h2 class="h-display text-3xl sm:text-4xl lg:text-5xl text-ink">
             {{ content?.brandStory?.title ?? "Let Us Tell You a Little" }}
-            <span class="block italic font-medium text-gold">{{
+            <span class="block italic font-medium text-ink/70">{{
               content?.brandStory?.titleAccent ?? "About Who We Are"
             }}</span>
           </h2>
@@ -167,7 +167,7 @@ const { content, loading } = useSiteContent();
           <div class="mt-8">
             <router-link
               to="/our-story"
-              class="inline-flex items-center gap-2 px-6 py-3 rounded-pill bg-ink text-canvas hover:bg-gold hover:text-ink text-xs font-semibold uppercase tracking-wider transition-all duration-300 shadow-soft"
+              class="inline-flex items-center gap-2 px-6 py-3 rounded-pill bg-ink text-canvas hover:bg-black/80 hover:text-white text-xs font-semibold uppercase tracking-wider transition-all duration-300 shadow-soft"
             >
               Read More
               <svg

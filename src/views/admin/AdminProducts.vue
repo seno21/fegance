@@ -33,6 +33,9 @@ function freshForm() {
     slug: '',
     price: 0,
     image: '',
+    gallery1: '',
+    gallery2: '',
+    gallery3: '',
     shortDescription: '',
     description: '',
     category: 'Eau de Parfum',
@@ -99,11 +102,15 @@ function openAdd() {
 
 function openEdit(product: FirestoreProduct) {
   editingProduct.value = product
+  const g = product.gallery || []
   form.value = {
     name: product.name,
     slug: product.slug,
     price: product.price,
     image: product.image,
+    gallery1: g[0] || '',
+    gallery2: g[1] || '',
+    gallery3: g[2] || '',
     shortDescription: product.shortDescription,
     description: product.description,
     category: product.category,
@@ -133,11 +140,16 @@ function closeModal() {
 async function handleSave() {
   saving.value = true
   try {
+    const galleryArray = [form.value.gallery1, form.value.gallery2, form.value.gallery3]
+      .map((url) => url.trim())
+      .filter(Boolean)
+
     const data = {
       name: form.value.name,
       slug: form.value.slug || generateSlug(form.value.name),
       price: Number(form.value.price) || 0,
       image: form.value.image,
+      gallery: galleryArray,
       shortDescription: form.value.shortDescription,
       description: form.value.description,
       category: form.value.category,
@@ -461,23 +473,76 @@ function formatPrice(price: number) {
                 </div>
               </fieldset>
 
-              <!-- Image -->
+              <!-- Images / Gallery -->
               <fieldset>
-                <legend class="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-400">Image</legend>
-                <div>
-                  <label class="mb-1 block text-xs font-medium text-gray-500">Image URL</label>
-                  <input
-                    v-model="form.image"
-                    type="url"
-                    placeholder="https://…"
-                    class="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-[#111111] placeholder:text-gray-400 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]/30"
-                  />
-                  <img
-                    v-if="form.image"
-                    :src="form.image"
-                    alt="Preview"
-                    class="mt-2 h-16 w-16 rounded-lg object-cover"
-                  />
+                <legend class="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-400">Foto Utama & Foto Gallery (3 Pilihan Foto)</legend>
+                <div class="space-y-4">
+                  <div>
+                    <label class="mb-1 block text-xs font-medium text-gray-500">Foto Utama (Main Image URL) *</label>
+                    <input
+                      v-model="form.image"
+                      type="url"
+                      placeholder="https://…"
+                      required
+                      class="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-[#111111] placeholder:text-gray-400 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]/30"
+                    />
+                    <img
+                      v-if="form.image"
+                      :src="form.image"
+                      alt="Preview Main"
+                      class="mt-2 h-16 w-16 rounded-lg object-cover border border-gray-200"
+                    />
+                  </div>
+
+                  <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 pt-2 border-t border-gray-100">
+                    <div>
+                      <label class="mb-1 block text-xs font-medium text-gray-500">Foto Tambahan 1 (Tampak Samping)</label>
+                      <input
+                        v-model="form.gallery1"
+                        type="url"
+                        placeholder="https://…"
+                        class="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-[#111111] placeholder:text-gray-400 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]/30"
+                      />
+                      <img
+                        v-if="form.gallery1"
+                        :src="form.gallery1"
+                        alt="Preview 1"
+                        class="mt-2 h-14 w-14 rounded-lg object-cover border border-gray-200"
+                      />
+                    </div>
+
+                    <div>
+                      <label class="mb-1 block text-xs font-medium text-gray-500">Foto Tambahan 2 (Tampak Belakang/Detail)</label>
+                      <input
+                        v-model="form.gallery2"
+                        type="url"
+                        placeholder="https://…"
+                        class="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-[#111111] placeholder:text-gray-400 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]/30"
+                      />
+                      <img
+                        v-if="form.gallery2"
+                        :src="form.gallery2"
+                        alt="Preview 2"
+                        class="mt-2 h-14 w-14 rounded-lg object-cover border border-gray-200"
+                      />
+                    </div>
+
+                    <div>
+                      <label class="mb-1 block text-xs font-medium text-gray-500">Foto Tambahan 3 (Perspektif / Packaging)</label>
+                      <input
+                        v-model="form.gallery3"
+                        type="url"
+                        placeholder="https://…"
+                        class="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-[#111111] placeholder:text-gray-400 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]/30"
+                      />
+                      <img
+                        v-if="form.gallery3"
+                        :src="form.gallery3"
+                        alt="Preview 3"
+                        class="mt-2 h-14 w-14 rounded-lg object-cover border border-gray-200"
+                      />
+                    </div>
+                  </div>
                 </div>
               </fieldset>
 
@@ -549,15 +614,6 @@ function formatPrice(price: number) {
                       v-model="form.shopeeLink"
                       type="url"
                       placeholder="https://shopee.co.id/…"
-                      class="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-[#111111] placeholder:text-gray-400 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]/30"
-                    />
-                  </div>
-                  <div>
-                    <label class="mb-1 block text-xs font-medium text-gray-500">TikTok Shop Link</label>
-                    <input
-                      v-model="form.tiktokLink"
-                      type="url"
-                      placeholder="https://shop.tiktok.com/…"
                       class="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-[#111111] placeholder:text-gray-400 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]/30"
                     />
                   </div>

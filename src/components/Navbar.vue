@@ -52,6 +52,12 @@ function goToAdminLogin() {
   router.push("/admin/login");
 }
 
+function handleNavClick(action: "home" | "collection" | "story") {
+  if (action === "home") goHome();
+  else if (action === "collection") goToCollection();
+  else if (action === "story") goToStory();
+}
+
 onMounted(() => {
   window.addEventListener("scroll", handleScroll, { passive: true });
   handleScroll();
@@ -62,10 +68,9 @@ onUnmounted(() => {
 });
 
 const navLinks = [
-  { label: "Home", target: "top", action: "home" as const },
-  { label: "Collection", target: "", action: "collection" as const },
-  { label: "Our Story", target: "", action: "story" as const },
-  { label: "Contact", target: "contact", action: "contact" as const },
+  { label: "Home", action: "home" as const },
+  { label: "Collection", action: "collection" as const },
+  { label: "Our Story", action: "story" as const },
 ];
 </script>
 
@@ -93,54 +98,27 @@ const navLinks = [
         </button>
 
         <!-- Desktop nav -->
-        <nav class="hidden lg:flex items-center gap-9">
+        <nav class="hidden lg:flex items-center gap-10">
           <button
             v-for="link in navLinks"
             :key="link.label"
-            @click="
-              link.action === 'home'
-                ? goHome()
-                : link.action === 'collection'
-                  ? goToCollection()
-                  : link.action === 'story'
-                    ? goToStory()
-                    : scrollToSection(link.target!)
-            "
-            class="group relative text-[13px] font-medium tracking-wide text-ink hover:text-gold transition-colors duration-200"
+            @click="handleNavClick(link.action)"
+            class="group relative font-display text-[14px] font-bold tracking-widest uppercase text-ink hover:text-black transition-colors duration-200 py-1"
           >
             {{ link.label }}
             <span
-              class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 h-px bg-gold transition-all duration-300 w-0 group-hover:w-full"
+              class="absolute -bottom-1 left-0 h-[2px] bg-ink transition-all duration-300 w-0 group-hover:w-full"
             />
           </button>
         </nav>
 
         <!-- Right side -->
         <div class="flex items-center gap-2 lg:gap-3">
-          <button
-            @click="scrollToSection('contact')"
-            class="hidden md:inline-flex items-center gap-2 text-[13px] font-medium text-ink hover:text-gold transition-colors"
-            aria-label="Search"
-          >
-            <svg
-              class="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              stroke-width="1.6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
-              />
-            </svg>
-          </button>
 
           <!-- Admin login icon -->
           <button
             @click="goToAdminLogin"
-            class="p-2 text-muted hover:text-gold transition-colors duration-200"
+            class="p-2 text-muted hover:text-ink transition-colors duration-200"
             aria-label="Admin login"
           >
             <svg
@@ -160,7 +138,7 @@ const navLinks = [
 
           <button
             @click="goToCollection()"
-            class="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 text-[12px] font-semibold tracking-wider uppercase bg-ink text-canvas rounded-pill hover:bg-gold hover:text-ink transition-all duration-300"
+            class="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 text-[12px] font-semibold tracking-wider uppercase bg-ink text-canvas rounded-pill hover:bg-black/80 hover:text-white transition-all duration-300"
           >
             Shop
             <svg
@@ -218,28 +196,20 @@ const navLinks = [
           <button
             v-for="link in navLinks"
             :key="link.label"
-            @click="
-              link.action === 'home'
-                ? goHome()
-                : link.action === 'collection'
-                  ? goToCollection()
-                  : link.action === 'story'
-                    ? goToStory()
-                    : scrollToSection(link.target!)
-            "
-            class="block w-full text-left py-3 text-base font-medium text-ink hover:text-gold transition-colors border-b border-line/60 last:border-0"
+            @click="handleNavClick(link.action)"
+            class="block w-full text-left py-3 text-base font-medium text-ink hover:text-black transition-colors border-b border-line/60 last:border-0"
           >
             {{ link.label }}
           </button>
           <button
             @click="goToCollection()"
-            class="w-full mt-4 py-3.5 text-[12px] font-semibold tracking-wider uppercase bg-ink text-canvas rounded-pill hover:bg-gold hover:text-ink transition-colors"
+            class="w-full mt-4 py-3.5 text-[12px] font-semibold tracking-wider uppercase bg-ink text-canvas rounded-pill hover:bg-black/80 transition-colors"
           >
             Shop
           </button>
           <button
             @click="goToAdminLogin"
-            class="w-full mt-2 py-3 text-[12px] font-medium tracking-wider uppercase text-muted hover:text-gold border border-line hover:border-gold/40 rounded-pill transition-colors"
+            class="w-full mt-2 py-3 text-[12px] font-medium tracking-wider uppercase text-muted hover:text-ink border border-line hover:border-black/40 rounded-pill transition-colors"
           >
             Admin
           </button>

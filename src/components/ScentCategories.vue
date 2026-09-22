@@ -53,7 +53,7 @@ function explore(familyId: string) {
           v-for="(family, i) in families"
           :key="family.id"
           @click="explore(family.id)"
-          class="group relative aspect-[3/4] rounded-2xl overflow-hidden bg-surface text-left focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-canvas"
+          class="group relative aspect-[3/4] rounded-2xl overflow-hidden bg-surface text-left focus:outline-none focus:ring-2 focus:ring-ink focus:ring-offset-2 focus:ring-offset-canvas"
           data-aos="fade-up"
           :data-aos-delay="i * 80"
           data-aos-duration="800"

@@ -33,7 +33,15 @@ const featured = () => {
 </script>
 
 <template>
-  <section class="relative pt-12 lg:pt-16 pb-16 lg:pb-24 overflow-hidden">
+  <section
+    class="relative pt-12 lg:pt-20 pb-16 lg:pb-28 overflow-hidden bg-gradient-to-b from-canvas via-surface to-canvas"
+  >
+    <!-- Subtle ambient background blur orb -->
+    <div
+      aria-hidden="true"
+      class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-black/5 rounded-full blur-3xl pointer-events-none"
+    />
+
     <!-- Loading skeleton -->
     <div v-if="siteLoading" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
@@ -52,7 +60,7 @@ const featured = () => {
       </div>
     </div>
 
-    <div v-else class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div v-else class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <!-- Copy -->
         <div
@@ -61,16 +69,17 @@ const featured = () => {
           data-aos-duration="800"
         >
           <h1
-            class="h-display text-[44px] sm:text-6xl lg:text-[72px] xl:text-[80px] text-ink"
+            class="font-display font-bold text-[48px] sm:text-6xl lg:text-[76px] xl:text-[84px] text-ink leading-[1.05] tracking-tight"
           >
             {{ content?.hero?.tagline ?? "Wangi Dulu" }}
-            <span class="block italic font-medium text-gold">{{
-              content?.hero?.taglineAccent ?? "Sisanya Nanti"
-            }}</span>
+            <span
+              class="block text-ink/70 mt-2 font-display italic font-normal"
+              >{{ content?.hero?.taglineAccent ?? "Sisanya Nanti" }}</span
+            >
           </h1>
 
           <p
-            class="mt-7 text-base sm:text-lg leading-relaxed text-muted max-w-xl"
+            class="mt-7 text-base sm:text-xl leading-relaxed text-muted max-w-xl font-sans"
           >
             {{
               content?.hero?.subtitle ??
@@ -81,15 +90,20 @@ const featured = () => {
           <div class="mt-9 flex flex-col sm:flex-row gap-3 sm:gap-4">
             <button
               @click="goToProducts"
-              class="group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-[12px] font-semibold tracking-[0.18em] uppercase bg-ink text-gold rounded-pill hover:bg-gold hover:text-ink transition-all duration-300"
+              class="group inline-flex items-center justify-center gap-3 px-8 py-4 text-[13px] font-bold tracking-[0.18em] uppercase bg-ink text-white rounded-pill hover:bg-black/80 transition-all duration-300 transform hover:-translate-y-0.5 shadow-lift"
             >
-              {{ (content?.hero?.ctaPrimary && content.hero.ctaPrimary !== 'View Collection') ? content.hero.ctaPrimary : 'Collection' }}
+              {{
+                content?.hero?.ctaPrimary &&
+                content.hero.ctaPrimary !== "View Collection"
+                  ? content.hero.ctaPrimary
+                  : "Collection"
+              }}
               <svg
-                class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"
+                class="w-4 h-4 transition-transform group-hover:translate-x-1"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
-                stroke-width="2"
+                stroke-width="2.5"
               >
                 <path
                   stroke-linecap="round"
@@ -100,7 +114,7 @@ const featured = () => {
             </button>
             <button
               @click="scrollToStory"
-              class="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-[12px] font-semibold tracking-[0.18em] uppercase bg-transparent text-gold border border-gold rounded-pill hover:bg-gold hover:text-ink transition-all duration-300"
+              class="inline-flex items-center justify-center gap-2.5 px-8 py-4 text-[13px] font-bold tracking-[0.18em] uppercase bg-canvas text-ink border-2 border-ink rounded-pill hover:bg-ink hover:text-white transition-all duration-300 transform hover:-translate-y-0.5"
             >
               {{ content?.hero?.ctaSecondary ?? "Our Story" }}
             </button>
@@ -109,19 +123,24 @@ const featured = () => {
 
         <!-- Visual -->
         <div
-          class="lg:col-span-4 order-1 lg:order-2"
+          class="lg:col-span-5 order-1 lg:order-2"
           data-aos="fade-left"
           data-aos-duration="900"
         >
-          <div class="relative max-w-[320px] mx-auto lg:max-w-none">
+          <div class="relative max-w-[340px] mx-auto lg:max-w-none">
+            <!-- Decorative border accent -->
+            <div
+              class="absolute -inset-3 rounded-[32px] bg-gradient-to-tr from-black/10 via-black/5 to-transparent blur-xl opacity-70"
+            ></div>
+
             <!-- Main image frame -->
             <div
-              class="relative aspect-[3/4] rounded-[20px] overflow-hidden bg-surface shadow-lift"
+              class="relative aspect-[3/4] rounded-[28px] overflow-hidden bg-surface shadow-lift border border-line/80 group"
             >
               <img
                 :src="content?.hero?.imageUrl || brandFace"
                 alt="Fegance signature perfume"
-                class="w-full h-full object-cover"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <!-- Subtle vignette -->
               <div
@@ -130,32 +149,38 @@ const featured = () => {
                 style="
                   background: linear-gradient(
                     180deg,
-                    transparent 60%,
-                    rgba(17, 17, 17, 0.35) 100%
+                    transparent 50%,
+                    rgba(17, 17, 17, 0.65) 100%
                   );
                 "
               />
               <!-- Bottom caption -->
               <div class="absolute bottom-0 left-0 right-0 p-6 text-canvas">
-                <p class="text-[10px] tracking-[0.25em] uppercase opacity-80">
+                <span
+                  class="inline-block px-3 py-1 rounded-full bg-white text-ink text-[10px] font-bold tracking-[0.25em] uppercase mb-2"
+                >
                   Signature Scent
+                </span>
+                <p
+                  class="font-display text-2xl sm:text-3xl font-bold tracking-tight text-white"
+                >
+                  {{ featured()?.name }}
                 </p>
-                <p class="mt-1 font-display text-2xl">{{ featured()?.name }}</p>
               </div>
             </div>
 
             <!-- Floating card: best seller -->
             <div
-              class="absolute -left-4 sm:-left-8 top-8 bg-canvas rounded-2xl p-4 shadow-lift max-w-[200px] hidden sm:block"
+              class="absolute -left-6 sm:-left-10 top-10 bg-canvas/90 backdrop-blur-md border border-line/80 rounded-2xl p-4 shadow-lift max-w-[210px] hidden sm:block transform -rotate-1 hover:rotate-0 transition-transform duration-300"
               data-aos="fade-right"
               data-aos-delay="300"
             >
-              <div class="flex items-center gap-2.5">
+              <div class="flex items-center gap-3">
                 <div
-                  class="w-10 h-10 rounded-full bg-cream flex items-center justify-center"
+                  class="w-10 h-10 rounded-xl bg-ink/10 flex items-center justify-center shrink-0"
                 >
                   <svg
-                    class="w-5 h-5 text-gold"
+                    class="w-5 h-5 text-ink"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -165,10 +190,14 @@ const featured = () => {
                   </svg>
                 </div>
                 <div>
-                  <p class="text-[10px] tracking-wider uppercase text-faint">
+                  <p
+                    class="text-[10px] font-bold tracking-widest uppercase text-muted"
+                  >
                     Best Seller
                   </p>
-                  <p class="font-display text-sm text-ink leading-tight">
+                  <p
+                    class="font-display text-base font-bold text-ink leading-tight mt-0.5"
+                  >
                     {{ featured()?.name }}
                   </p>
                 </div>
@@ -178,14 +207,16 @@ const featured = () => {
             <!-- Floating card: price -->
             <div
               v-if="featured()"
-              class="absolute -right-3 sm:-right-6 bottom-12 bg-ink text-canvas rounded-2xl p-4 shadow-lift hidden sm:block"
+              class="absolute -right-4 sm:-right-8 bottom-12 bg-ink text-canvas border border-white/10 rounded-2xl p-4 shadow-lift hidden sm:block transform rotate-1 hover:rotate-0 transition-transform duration-300"
               data-aos="fade-left"
               data-aos-delay="500"
             >
-              <p class="text-[10px] tracking-wider uppercase text-canvas/60">
-                From
+              <p
+                class="text-[10px] font-bold tracking-widest uppercase text-canvas/60"
+              >
+                Starting From
               </p>
-              <p class="font-display text-xl text-gold">
+              <p class="font-display text-xl font-bold text-white mt-0.5">
                 {{ formatPrice(featured()!.price) }}
               </p>
             </div>
@@ -200,10 +231,11 @@ const featured = () => {
         data-aos-delay="600"
       >
         <div class="flex flex-col items-center gap-2 text-faint">
-          <span class="text-[10px] tracking-[0.3em] uppercase">Scroll</span>
-          <div
-            class="w-px h-12 bg-gradient-to-b from-faint/60 to-transparent"
-          />
+          <span
+            class="text-[10px] font-bold tracking-[0.3em] uppercase text-ink"
+            >Scroll</span
+          >
+          <div class="w-px h-12 bg-gradient-to-b from-ink/80 to-transparent" />
         </div>
       </div>
     </div>

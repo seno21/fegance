@@ -191,7 +191,7 @@ function formatPrice(n: number) {
               <select
                 id="sort"
                 v-model="sortBy"
-                class="text-[13px] font-medium text-ink bg-canvas border border-line rounded-pill px-4 py-2 pr-8 appearance-none cursor-pointer focus:outline-none focus:border-gold transition-colors"
+                class="text-[13px] font-medium text-ink bg-canvas border border-line rounded-pill px-4 py-2 pr-8 appearance-none cursor-pointer focus:outline-none focus:border-ink transition-colors"
               >
                 <option
                   v-for="opt in sortOptions"
@@ -249,7 +249,7 @@ function formatPrice(n: number) {
             data-aos="fade-up"
             :data-aos-delay="(i % 4) * 80"
             data-aos-duration="800"
-            class="group bg-canvas rounded-[20px] overflow-hidden border border-line/70 transition-all duration-500 hover:-translate-y-1.5 hover:border-gold hover:shadow-lift cursor-pointer flex flex-col"
+            class="group bg-canvas rounded-[20px] overflow-hidden border border-line/70 transition-all duration-500 hover:-translate-y-1.5 hover:border-ink hover:shadow-lift cursor-pointer flex flex-col"
             @click="goToDetail(product.slug)"
           >
             <!-- Image -->
@@ -270,7 +270,7 @@ function formatPrice(n: number) {
                 </span>
                 <span
                   v-if="product.isBestseller"
-                  class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase rounded-pill bg-gold text-ink"
+                  class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase rounded-pill bg-neutral-900 text-white border border-neutral-700"
                 >
                   Best Seller
                 </span>
@@ -298,7 +298,7 @@ function formatPrice(n: number) {
               <div
                 class="mt-4 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-0"
               >
-                <p class="font-display text-lg sm:text-xl text-gold">
+                <p class="font-display text-lg sm:text-xl text-ink font-semibold">
                   {{ formatPrice(product.price) }}
                 </p>
                 <span class="text-[10px] tracking-wider uppercase text-faint">
@@ -314,7 +314,7 @@ function formatPrice(n: number) {
           <p class="text-muted text-sm">No products match this filter.</p>
           <button
             @click="activeFilter = 'all'"
-            class="mt-4 px-5 py-2.5 text-[12px] font-semibold tracking-wider uppercase bg-ink text-canvas rounded-pill hover:bg-gold hover:text-ink transition-all duration-300"
+            class="mt-4 px-5 py-2.5 text-[12px] font-semibold tracking-wider uppercase bg-ink text-canvas rounded-pill hover:bg-neutral-800 hover:text-white transition-all duration-300"
           >
             View All Products
           </button>

@@ -38,14 +38,14 @@ const { content, loading } = useSiteContent();
         <!-- Copy -->
         <div data-aos="fade-right" data-aos-duration="800">
           <p
-            class="text-[11px] font-bold tracking-[0.22em] text-gold uppercase block mb-4"
+            class="text-[11px] font-bold tracking-[0.22em] text-ink uppercase block mb-4"
           >
             {{ content?.contact?.eyebrow ?? "Get In Touch" }}
           </p>
           <h2 class="h-display text-3xl sm:text-4xl lg:text-5xl text-ink">
             {{ content?.contact?.title ?? "Let&apos;s start a conversation." }}
           </h2>
-          <div class="w-12 h-[1px] bg-gold mt-5" />
+          <div class="w-12 h-[1px] bg-ink mt-5" />
           <p
             class="mt-6 text-sm sm:text-base text-muted leading-relaxed max-w-md"
           >
@@ -55,10 +55,10 @@ const { content, loading } = useSiteContent();
           <div class="mt-10 space-y-3">
             <div class="flex items-start gap-3 text-sm">
               <div
-                class="w-9 h-9 rounded-full bg-[#faf7f2] border border-line flex items-center justify-center flex-shrink-0 mt-0.5"
+                class="w-9 h-9 rounded-full bg-surface border border-line flex items-center justify-center flex-shrink-0 mt-0.5"
               >
                 <svg
-                  class="w-4 h-4 text-gold"
+                  class="w-4 h-4 text-ink"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -104,30 +104,30 @@ const { content, loading } = useSiteContent();
             :href="c.link"
             :target="c.external ? '_blank' : undefined"
             :rel="c.external ? 'noopener noreferrer' : undefined"
-            class="group relative bg-[#FFFFFF] border border-[#ECECEC] rounded-[24px] p-8 transition-all duration-300 hover:border-gold hover:-translate-y-1.5 hover:shadow-[0_12px_30px_rgba(201,162,39,0.08)] flex flex-col justify-between overflow-hidden min-h-[180px]"
+            class="group relative bg-[#FFFFFF] border border-[#ECECEC] rounded-[24px] p-8 transition-all duration-300 hover:border-ink hover:-translate-y-1.5 hover:shadow-[0_12px_30px_rgba(17,17,17,0.08)] flex flex-col justify-between overflow-hidden min-h-[180px]"
             :data-aos="'fade-up'"
             :data-aos-delay="i * 120"
             data-aos-duration="800"
           >
             <!-- Background Decorative Glow -->
             <div
-              class="absolute top-0 right-0 w-24 h-24 bg-gold/5 rounded-full blur-2xl transition-all duration-500 group-hover:bg-gold/10 group-hover:scale-150"
+              class="absolute top-0 right-0 w-24 h-24 bg-black/5 rounded-full blur-2xl transition-all duration-500 group-hover:bg-black/10 group-hover:scale-150"
             ></div>
 
             <div>
               <div class="flex items-center justify-between mb-4">
                 <span
-                  class="text-[10px] tracking-[0.25em] font-bold uppercase text-gold"
+                  class="text-[10px] tracking-[0.25em] font-bold uppercase text-ink"
                 >
                   {{ c.name }}
                 </span>
 
                 <!-- Icon Circle background -->
                 <div
-                  class="w-8 h-8 rounded-full bg-[#faf7f2] flex items-center justify-center transition-colors duration-300 group-hover:bg-gold"
+                  class="w-8 h-8 rounded-full bg-surface flex items-center justify-center transition-colors duration-300 group-hover:bg-ink"
                 >
                   <svg
-                    class="w-4 h-4 text-gold transition-colors duration-300 group-hover:text-[#FFFFFF]"
+                    class="w-4 h-4 text-ink transition-colors duration-300 group-hover:text-[#FFFFFF]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -150,7 +150,7 @@ const { content, loading } = useSiteContent();
             </div>
 
             <p
-              class="mt-6 text-xs text-[#666666] tracking-wide font-sans group-hover:text-gold transition-colors"
+              class="mt-6 text-xs text-[#666666] tracking-wide font-sans group-hover:text-ink transition-colors"
             >
               {{
                 c.name === "WhatsApp"

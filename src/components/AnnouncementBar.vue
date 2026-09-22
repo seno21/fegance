@@ -80,7 +80,7 @@ function close() {
       </Transition>
       <button
         @click="close"
-        class="absolute right-3 sm:right-6 text-canvas/50 hover:text-gold transition-colors"
+        class="absolute right-3 sm:right-6 text-canvas/50 hover:text-white transition-colors"
         aria-label="Dismiss announcement"
       >
         <svg

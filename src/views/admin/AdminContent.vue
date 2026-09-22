@@ -4,7 +4,7 @@ import { useSiteContent, type SiteContent } from '@/composables/useSiteContent'
 
 const { content, loading, updateSection } = useSiteContent()
 
-type Tab = 'hero' | 'brandStory' | 'whyChooseUs' | 'contact' | 'announcement'
+type Tab = 'hero' | 'brandStory' | 'whyChooseUs' | 'announcement'
 const activeTab = ref<Tab>('hero')
 const saving = ref(false)
 const saveSuccess = ref(false)
@@ -14,7 +14,6 @@ const tabs: { key: Tab; label: string }[] = [
   { key: 'hero', label: 'Hero' },
   { key: 'brandStory', label: 'Brand Story' },
   { key: 'whyChooseUs', label: 'Why Choose Us' },
-  { key: 'contact', label: 'Contact' },
   { key: 'announcement', label: 'Announcement' },
 ]
 
@@ -60,8 +59,6 @@ async function handleSave() {
       data = { ...brandStory.value }
     } else if (section === 'whyChooseUs') {
       data = { ...whyChooseUs.value }
-    } else if (section === 'contact') {
-      data = { ...contact.value }
     } else {
       data = { ...announcement.value }
     }
@@ -338,78 +335,6 @@ function removeMessage(i: number) {
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                       </svg>
                       Add Pillar
-                    </button>
-                  </fieldset>
-                </div>
-              </template>
-
-              <!-- CONTACT TAB -->
-              <template v-if="activeTab === 'contact'">
-                <h2 class="mb-5 text-lg font-semibold text-[#111111]">Contact</h2>
-                <div class="space-y-4">
-                  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <div>
-                      <label class="mb-1 block text-xs font-medium text-gray-500">Eyebrow</label>
-                      <input v-model="contact.eyebrow" type="text" class="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-[#111111] focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]/30" />
-                    </div>
-                    <div>
-                      <label class="mb-1 block text-xs font-medium text-gray-500">Title</label>
-                      <input v-model="contact.title" type="text" class="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-[#111111] focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]/30" />
-                    </div>
-                  </div>
-                  <div>
-                    <label class="mb-1 block text-xs font-medium text-gray-500">Description</label>
-                    <textarea v-model="contact.description" rows="2" class="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-[#111111] focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]/30" />
-                  </div>
-                  <div>
-                    <label class="mb-1 block text-xs font-medium text-gray-500">Address</label>
-                    <textarea v-model="contact.address" rows="2" class="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-[#111111] focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]/30" />
-                  </div>
-                  <div>
-                    <label class="mb-1 block text-xs font-medium text-gray-500">Business Hours</label>
-                    <input v-model="contact.businessHours" type="text" class="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-[#111111] focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]/30" />
-                  </div>
-
-                  <!-- Contacts -->
-                  <fieldset>
-                    <legend class="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-400">Contact Links</legend>
-                    <div class="space-y-4">
-                      <div v-for="(_, i) in contact.contacts" :key="i" class="rounded-xl border border-gray-100 bg-gray-50/50 p-4">
-                        <div class="mb-3 flex items-center justify-between">
-                          <span class="text-xs font-medium text-gray-400">Contact {{ i + 1 }}</span>
-                          <button type="button" class="text-red-500 transition-colors hover:text-red-700" @click="removeContact(i)">
-                            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                          </button>
-                        </div>
-                        <div class="space-y-3">
-                          <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                            <div>
-                              <label class="mb-1 block text-xs font-medium text-gray-500">Name</label>
-                              <input v-model="contact.contacts[i]!.name" type="text" class="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-[#111111] focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]/30" />
-                            </div>
-                            <div>
-                              <label class="mb-1 block text-xs font-medium text-gray-500">Handle</label>
-                              <input v-model="contact.contacts[i]!.handle" type="text" class="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-[#111111] focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]/30" />
-                            </div>
-                          </div>
-                          <div>
-                            <label class="mb-1 block text-xs font-medium text-gray-500">Link</label>
-                              <input v-model="contact.contacts[i]!.link" type="url" placeholder="https://…" class="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-[#111111] placeholder:text-gray-400 focus:border-[#c9a227] focus:outline-none focus:ring-1 focus:ring-[#c9a227]/30" />
-                          </div>
-                          <label class="inline-flex items-center gap-2 text-sm text-gray-600">
-                            <input v-model="contact.contacts[i]!.external" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-[#c9a227] focus:ring-[#c9a227]/30" />
-                            Opens externally
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    <button type="button" class="mt-3 inline-flex items-center gap-1 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-50" @click="addContact">
-                      <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                      </svg>
-                      Add Contact
                     </button>
                   </fieldset>
                 </div>

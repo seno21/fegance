@@ -34,7 +34,7 @@ onUnmounted(() => {
       v-if="visible"
       @click="scrollToTop"
       aria-label="Scroll to top"
-      class="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-ink text-canvas shadow-lift flex items-center justify-center hover:bg-gold hover:text-ink transition-colors"
+      class="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-ink text-canvas shadow-lift flex items-center justify-center hover:bg-neutral-800 hover:text-white transition-colors"
     >
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />

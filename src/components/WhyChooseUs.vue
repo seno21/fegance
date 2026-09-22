@@ -37,7 +37,7 @@ const defaultPillars = [
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div v-for="n in 3" :key="n" class="bg-white border border-[#ECECEC] rounded-[24px] p-12 space-y-6">
-            <div class="w-14 h-14 rounded-full bg-[#faf7f2] mx-auto animate-pulse" />
+            <div class="w-14 h-14 rounded-full bg-neutral-100 mx-auto animate-pulse" />
             <div class="h-8 w-48 bg-line rounded animate-pulse mx-auto" />
             <div class="space-y-2">
               <div class="h-4 w-full bg-line rounded animate-pulse" />
@@ -55,7 +55,7 @@ const defaultPillars = [
           data-aos-duration="800"
         >
           <span
-            class="text-[11px] font-bold tracking-[0.22em] text-gold uppercase block mb-3"
+            class="text-[11px] font-bold tracking-[0.22em] text-[#111111] uppercase block mb-3"
           >
             Why Choose Fegance
           </span>
@@ -64,8 +64,8 @@ const defaultPillars = [
           >
             {{ content?.whyChooseUs?.sectionTitle ?? "The Maison Standards" }}
           </h2>
-          <!-- Elegant gold divider -->
-          <div class="w-12 h-[1px] bg-gold"></div>
+          <!-- Elegant divider -->
+          <div class="w-12 h-[1px] bg-[#111111]"></div>
         </div>
 
         <!-- Cards Layout -->
@@ -75,19 +75,19 @@ const defaultPillars = [
           <div
             v-for="(pillar, i) in (content?.whyChooseUs?.pillars ?? defaultPillars)"
             :key="pillar.title"
-            class="bg-[#FFFFFF] border border-[#ECECEC] rounded-[24px] p-12 shadow-[0_1px_2px_rgba(17,17,17,0.04),0_4px_16px_rgba(17,17,17,0.04)] hover:shadow-[0_8px_30px_rgba(17,17,17,0.08),0_2px_8px_rgba(17,17,17,0.04)] hover:border-gold transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.02] group flex flex-col items-center text-center"
+            class="bg-[#FFFFFF] border border-[#ECECEC] rounded-[24px] p-12 shadow-[0_1px_2px_rgba(17,17,17,0.04),0_4px_16px_rgba(17,17,17,0.04)] hover:shadow-[0_8px_30px_rgba(17,17,17,0.08),0_2px_8px_rgba(17,17,17,0.04)] hover:border-[#111111] transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.02] group flex flex-col items-center text-center"
             data-aos="fade-up"
             :data-aos-delay="(i + 1) * 100"
             data-aos-duration="800"
           >
             <!-- Icon Circle Background -->
             <div
-              class="w-14 h-14 rounded-full bg-[#faf7f2] flex items-center justify-center mb-8 transition-colors duration-300 group-hover:bg-gold"
+              class="w-14 h-14 rounded-full bg-[#f0f0f0] flex items-center justify-center mb-8 transition-colors duration-300 group-hover:bg-[#111111]"
             >
               <!-- Sparkles (Crown/Sparkle) -->
               <svg
                 v-if="pillar.icon === 'sparkles'"
-                class="w-6 h-6 text-gold transition-colors duration-300 group-hover:text-white"
+                class="w-6 h-6 text-[#111111] transition-colors duration-300 group-hover:text-white"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -102,7 +102,7 @@ const defaultPillars = [
               <!-- Hourglass -->
               <svg
                 v-else-if="pillar.icon === 'hourglass'"
-                class="w-6 h-6 text-gold transition-colors duration-300 group-hover:text-white"
+                class="w-6 h-6 text-[#111111] transition-colors duration-300 group-hover:text-white"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -117,7 +117,7 @@ const defaultPillars = [
               <!-- Shield -->
               <svg
                 v-else
-                class="w-6 h-6 text-gold transition-colors duration-300 group-hover:text-white"
+                class="w-6 h-6 text-[#111111] transition-colors duration-300 group-hover:text-white"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
