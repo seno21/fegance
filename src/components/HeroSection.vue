@@ -99,7 +99,7 @@ const featured = () => {
           >
             {{
               content?.hero?.subtitle ??
-              "Pilih aroma favorit kamu. Biar wangi aja yang bicara, gak perlu repot menjelaskan siapa dirimu."
+              "Pilih aroma favorit sesuai karaktermu, jadilah mc di ceritamu"
             }}
           </p>
 

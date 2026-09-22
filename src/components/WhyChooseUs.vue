@@ -30,7 +30,7 @@ const defaultPillars = [
     <!-- Anime Background Layer -->
     <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
       <img
-        src="/images/anime/down.png"
+        src="/images/anime/down.jpg"
         alt="Anime Japanese Countryside Scenery"
         class="w-full h-full object-cover object-bottom filter saturate-[1.1] brightness-[0.96] opacity-40 sm:opacity-50"
       />

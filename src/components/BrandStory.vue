@@ -12,7 +12,7 @@ const { content, loading } = useSiteContent();
     <!-- Anime Countryside Center Background -->
     <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
       <img
-        src="/images/anime/center.jpg"
+        src="/images/anime/center.png"
         alt="Anime Japanese Countryside Scenery"
         class="w-full h-full object-cover object-center filter saturate-[1.1] brightness-[0.95] opacity-55 sm:opacity-70"
       />
