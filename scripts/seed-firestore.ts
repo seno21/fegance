@@ -1,10 +1,8 @@
 /**
  * Firestore Seed Script
  *
- * Run this once to populate your Firestore database with initial data.
- * Usage: npx tsx scripts/seed-firestore.ts
- *
- * Make sure your .env file has the correct Firebase config.
+ * Run this to populate your Firestore database with initial hardcoded data.
+ * Usage: npm run seed
  */
 
 import { initializeApp } from "firebase/app";
@@ -14,8 +12,14 @@ import {
   setDoc,
   collection,
   addDoc,
+  getDocs,
+  deleteDoc,
 } from "firebase/firestore";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import * as dotenv from "dotenv";
 
 dotenv.config();
@@ -53,12 +57,12 @@ const products = [
       "https://shopee.co.id/Maison-Fegance-Midnight-Gold-i.dummy.midnight-gold",
     tiktokLink: "https://shop.tiktok.com/view/product/dummy-midnight-gold",
     whatsappLink:
-      "https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Midnight%20Gold",
+      "https://wa.me/6285172372101?text=Halo%20saya%20tertarik%20dengan%20Leorin%20Midnight%20Gold",
     performance: {
-      type: "Gen XY (Masculine)",
+      type: "Gen XY (Masculine / Unisex)",
       sillage: "Medium to strong",
       projection: "2-3 meters",
-      longevity: "3-4 hours outdoors, up to 6 hours indoors",
+      longevity: "8-12 hours",
     },
     isNew: false,
     isBestseller: true,
@@ -82,12 +86,12 @@ const products = [
       "https://shopee.co.id/Maison-Fegance-Velvet-Rose-i.dummy.velvet-rose",
     tiktokLink: "https://shop.tiktok.com/view/product/dummy-velvet-rose",
     whatsappLink:
-      "https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Velvet%20Rose",
+      "https://wa.me/6285172372101?text=Halo%20saya%20tertarik%20dengan%20Velvet%20Rose",
     performance: {
       type: "Floral Rose (Feminine)",
       sillage: "Moderate",
-      projection: "1.5 meters",
-      longevity: "5-6 hours",
+      projection: "1.5 - 2 meters",
+      longevity: "8-10 hours",
     },
     isNew: false,
     isBestseller: false,
@@ -111,12 +115,12 @@ const products = [
       "https://shopee.co.id/Maison-Fegance-Ocean-Noir-i.dummy.ocean-noir",
     tiktokLink: "https://shop.tiktok.com/view/product/dummy-ocean-noir",
     whatsappLink:
-      "https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Ocean%20Noir",
+      "https://wa.me/6285172372101?text=Halo%20saya%20tertarik%20dengan%20Ocean%20Noir",
     performance: {
       type: "Fresh Aquatic (Masculine)",
       sillage: "Medium",
       projection: "1-2 meters",
-      longevity: "4-5 hours",
+      longevity: "6-8 hours",
     },
     isNew: true,
     isBestseller: false,
@@ -140,12 +144,12 @@ const products = [
       "https://shopee.co.id/Maison-Fegance-Crystal-Bloom-i.dummy.crystal-bloom",
     tiktokLink: "https://shop.tiktok.com/view/product/dummy-crystal-bloom",
     whatsappLink:
-      "https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Crystal%20Bloom",
+      "https://wa.me/6285172372101?text=Halo%20saya%20tertarik%20dengan%20Crystal%20Bloom",
     performance: {
       type: "Floral Fresh (Feminine)",
       sillage: "Intimate to moderate",
-      projection: "1 meter",
-      longevity: "4-5 hours",
+      projection: "1.5 meters",
+      longevity: "8-10 hours",
     },
     isNew: false,
     isBestseller: false,
@@ -169,12 +173,12 @@ const products = [
       "https://shopee.co.id/Maison-Fegance-Ember-Oud-i.dummy.ember-oud",
     tiktokLink: "https://shop.tiktok.com/view/product/dummy-ember-oud",
     whatsappLink:
-      "https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Ember%20Oud",
+      "https://wa.me/6285172372101?text=Halo%20saya%20tertarik%20dengan%20Ember%20Oud",
     performance: {
       type: "Oriental Woody (Unisex)",
       sillage: "Strong",
       projection: "2-3 meters",
-      longevity: "8-12 hours",
+      longevity: "10-14 hours",
     },
     isNew: false,
     isBestseller: true,
@@ -198,12 +202,12 @@ const products = [
       "https://shopee.co.id/Maison-Fegance-Iris-Garden-i.dummy.iris-garden",
     tiktokLink: "https://shop.tiktok.com/view/product/dummy-iris-garden",
     whatsappLink:
-      "https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Iris%20Garden",
+      "https://wa.me/6285172372101?text=Halo%20saya%20tertarik%20dengan%20Iris%20Garden",
     performance: {
       type: "Floral Green (Feminine)",
       sillage: "Moderate",
       projection: "1.5 meters",
-      longevity: "5-6 hours",
+      longevity: "6-8 hours",
     },
     isNew: false,
     isBestseller: false,
@@ -227,12 +231,12 @@ const products = [
       "https://shopee.co.id/Maison-Fegance-Amber-Nights-i.dummy.amber-nights",
     tiktokLink: "https://shop.tiktok.com/view/product/dummy-amber-nights",
     whatsappLink:
-      "https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Amber%20Nights",
+      "https://wa.me/6285172372101?text=Halo%20saya%20tertarik%20dengan%20Amber%20Nights",
     performance: {
       type: "Oriental Warm (Unisex)",
       sillage: "Strong",
       projection: "2 meters",
-      longevity: "7-9 hours",
+      longevity: "8-10 hours",
     },
     isNew: true,
     isBestseller: false,
@@ -256,12 +260,12 @@ const products = [
       "https://shopee.co.id/Maison-Fegance-Citrus-Sky-i.dummy.citrus-sky",
     tiktokLink: "https://shop.tiktok.com/view/product/dummy-citrus-sky",
     whatsappLink:
-      "https://wa.me/6281234567890?text=Halo%20saya%20tertarik%20dengan%20Citrus%20Sky",
+      "https://wa.me/6285172372101?text=Halo%20saya%20tertarik%20dengan%20Citrus%20Sky",
     performance: {
       type: "Citrus Aromatic (Unisex/Masculine)",
       sillage: "Medium",
-      projection: "1 meter",
-      longevity: "4-6 hours",
+      projection: "1.5 meters",
+      longevity: "6-8 hours",
     },
     isNew: false,
     isBestseller: false,
@@ -269,83 +273,51 @@ const products = [
 ];
 
 const ourStory = {
-  eyebrow: "Our Heritage & Vision",
-  title: "Cerita Fegance",
-  titleAccent: "Biar Wangi Aja Yang Bicara",
+  eyebrow: "Cerita Fegance",
+  title: "Biar Wangi Aja Yang Bicara",
   subtitle:
-    "Lahir dari semangat menghadirkan aroma mewah berkualitas tinggi yang terjangkau, Fegance mendedikasikan setiap kreasi parfum untuk mewakili karakter dan cerita diri kamu.",
-  paragraphs: [
-    "Fegance lahir di Cirebon dari rasa penasaran mendalam terhadap dunia seni wewangian. Bagi kami, parfum bukanlah sekadar minyak wangi penyegar tubuh. Ia adalah karya seni tanpa rupa yang mampu mengunci memori, membangkitkan rasa percaya diri, dan meninggalkan kesan mendalam dalam setiap perjumpaan.",
-    "Perjalanan kami dimulai dari keinginan sederhana: menciptakan parfum dengan kualitas ekstrak minyak wangi premium yang tahan lama, dipadu dengan kemasan mewah yang estetik, tanpa membebankan harga yang berlebihan. Setiap botol racikan Fegance dibuat melalui pengujian aroma mendalam (olfactory testing) untuk memastikan daya tahan (longevity) dan jejak aroma (sillage) yang memikat.",
-    "Bagi Fegance, aroma kamu adalah identitas tanpa suara. Ketika kata-kata tak perlu terucap, biar wangi Fegance yang berbicara mewakili pesona dan karakter unik dirimu.",
-  ],
-  vision:
-    "Menjadi rumah parfum artisanal lokal terdepan di Indonesia yang menginspirasi setiap individu untuk mengekspresikan jati diri melalui aroma berkualitas internasional.",
-  mission: [
-    "Menggunakan bahan baku dan konsentrat parfum grade A+ berkualitas tinggi.",
-    "Mengembangkan kombinasi aroma unik yang memiliki daya tahan ekstra dan karakter yang kuat.",
-    "Memberikan pengalaman kemasan dan layanan kelas atas dengan harga yang jujur dan terjangkau.",
-  ],
-  values: [
+    "Sebuah karya seni aroma buatan Cirebon yang diracik khusus untuk menceritakan identitas diri tanpa perlu banyak kata.",
+  blocks: [
     {
-      title: "Artisanal Blending",
-      description:
-        "Diracik secara teliti oleh master perfumer dengan keseimbangan note atas, tengah, dan bawah.",
-      icon: "sparkles",
+      id: "b1",
+      type: "image",
+      content:
+        "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=1200&fit=crop",
+      caption: "Maison Fegance Atelier & Signature Fragrance",
+      position: "top",
     },
     {
-      title: "High Concentration Oil",
-      description:
-        "Formula Eau de Parfum dengan konsentrasi bibit tinggi untuk ketahanan 8-12 jam lebih.",
-      icon: "hourglass",
+      id: "b2",
+      type: "paragraph",
+      content:
+        "Fegance lahir di Cirebon dari rasa penasaran yang mendalam terhadap dunia seni wewangian. Bagi kami, parfum bukanlah sekadar minyak wangi penyegar tubuh biasa. Ia adalah sebuah karya seni tanpa rupa—meski tak kasat mata, aromanya hidup lama dalam ingatan dan menjadi bagian erat dari identitas seseorang.",
     },
     {
-      title: "Identity & Memory",
-      description:
-        "Aroma yang diciptakan khusus untuk membangkitkan ingatan emosional dan daya pikat persona.",
-      icon: "bookmark",
+      id: "b3",
+      type: "paragraph",
+      content:
+        "Perjalanan kami dimulai dari keinginan sederhana: menciptakan parfum lokal berkualitas tinggi dengan ekstrak minyak wangi premium yang tahan lama, dipadu dengan kemasan mewah dan estetik, tanpa membebankan harga yang berlebihan.",
     },
     {
-      title: "Fair Luxury",
-      description:
-        "Kualitas mewah setara parfum desainer dengan harga yang bersahabat untuk semua kalangan.",
-      icon: "shield",
-    },
-  ],
-  timeline: [
-    {
-      year: "2024",
-      title: "Awal Gagasan",
-      description:
-        "Riset dan pengujian puluhan formulasi wewangian untuk menemukan karakter khas Fegance.",
+      id: "b4",
+      type: "image",
+      content:
+        "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=1200&fit=crop",
+      caption: "Proses racikan formulasi wewangian dengan standar tinggi",
+      position: "middle",
     },
     {
-      year: "2025",
-      title: "Peluncuran Resmi",
-      description:
-        "Fegance resmi diluncurkan di Cirebon dengan koleksi perdana yang langsung dicintai pengemar parfum.",
+      id: "b5",
+      type: "paragraph",
+      content:
+        "Setiap racikan Fegance dibuat melalui proses formulasi teliti (olfactory testing) untuk memastikan daya tahan (longevity) dan jejak aroma (sillage) yang memikat sepanjang hari. Kami percaya bahwa wewangian adalah cara paling elegan untuk menyampaikan karakter diri.",
     },
     {
-      year: "2026",
-      title: "Ekspansi & Inovasi",
-      description:
-        "Menghadirkan varian varian baru serta pengalaman ritel digital yang semakin luas di seluruh Indonesia.",
+      id: "b6",
+      type: "paragraph",
+      content:
+        "Ketika kata-kata tak perlu terucap, biarkan wangi Fegance yang berbicara mewakili pesona dan keunikan dirimu.",
     },
-  ],
-  images: {
-    main: "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=1000&fit=crop",
-    secondary:
-      "https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&fit=crop",
-    accent:
-      "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&fit=crop",
-    atelier:
-      "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=1000&fit=crop",
-  },
-  stats: [
-    { value: "100%", label: "Artisanal Crafting" },
-    { value: "12+ Jam", label: "Ketahanan Aroma" },
-    { value: "10,000+", label: "Pelanggan Setia" },
-    { value: "15+", label: "Varian Signature" },
   ],
 };
 
@@ -435,19 +407,19 @@ const siteContent = {
         title: "Masterfully Crafted",
         description:
           "Setiap botol kami racik dengan pilihan formulasi terbaik dan disempurnakan melalui komposisi kami sendiri.",
-        icon: "sparkles" as const,
+        icon: "sparkles",
       },
       {
         title: "Long-Lasting Performance",
         description:
           "Dirancang untuk memberikan projection dan longevity terbaik, sehingga aromanya tetap bersama kamu sepanjang hari.",
-        icon: "hourglass" as const,
+        icon: "hourglass",
       },
       {
         title: "Satisfaction Promises",
         description:
           "Setiap pengalaman bersama Fegance sangat berarti bagi kami. Kami siap membantu untuk langkah perjalananmu.",
-        icon: "shield" as const,
+        icon: "shield",
       },
     ],
   },
@@ -486,20 +458,48 @@ const siteContent = {
 async function seed() {
   console.log("Seeding Firestore...\n");
 
-  // Seed products
+  // 1. Authenticate admin first
+  const adminEmail = process.env.VITE_ADMIN_EMAIL || "admin@fegance.id";
+  const adminPassword = process.env.ADMIN_PASSWORD || "admin123456";
+  console.log(`Authenticating admin user: ${adminEmail}`);
+  try {
+    await signInWithEmailAndPassword(auth, adminEmail, adminPassword);
+    console.log("  + Signed in as admin successfully!");
+  } catch (e: any) {
+    try {
+      await createUserWithEmailAndPassword(auth, adminEmail, adminPassword);
+      console.log("  + Admin user created & authenticated successfully!");
+    } catch (createErr: any) {
+      console.log("  ! Admin authentication note:", createErr.message);
+    }
+  }
+
+  // 2. Clean existing products to prevent duplicates
+  console.log("Clearing existing products in database...");
+  try {
+    const existingDocs = await getDocs(collection(db, "products"));
+    for (const d of existingDocs.docs) {
+      await deleteDoc(doc(db, "products", d.id));
+    }
+    console.log(`  + Removed ${existingDocs.docs.length} old products`);
+  } catch (err: any) {
+    console.log("  ! Note on clearing products:", err.message);
+  }
+
+  // 3. Seed products
   console.log("Seeding products...");
   for (const product of products) {
     await addDoc(collection(db, "products"), product);
     console.log(`  + ${product.name}`);
   }
 
-  // Seed Our Story
+  // 4. Seed Our Story
   console.log("Seeding Our Story content...");
   await setDoc(doc(db, "siteContent", "ourStory"), ourStory);
   await setDoc(doc(db, "ourStory", "main"), ourStory);
-  console.log("  + siteContent/ourStory");
+  console.log("  + siteContent/ourStory & ourStory/main");
 
-  // Seed scent families
+  // 5. Seed scent families
   console.log("Seeding scent families...");
   for (const family of scentFamilies) {
     await setDoc(doc(db, "scentFamilies", family.id), {
@@ -511,27 +511,12 @@ async function seed() {
     console.log(`  + ${family.name}`);
   }
 
-  // Seed site content
+  // 6. Seed site content
   console.log("Seeding site content...");
   await setDoc(doc(db, "siteContent", "main"), siteContent);
   console.log("  + siteContent/main");
 
-  // Create admin user
-  const adminEmail = process.env.VITE_ADMIN_EMAIL || "admin@fegance.id";
-  const adminPassword = process.env.ADMIN_PASSWORD || "admin123456";
-  console.log(`\nCreating admin user: ${adminEmail}`);
-  try {
-    await createUserWithEmailAndPassword(auth, adminEmail, adminPassword);
-    console.log("  + Admin user created successfully!");
-  } catch (e: any) {
-    if (e.code === "auth/email-already-in-use") {
-      console.log("  ! Admin user already exists, skipping.");
-    } else {
-      console.error("  X Error creating admin user:", e.message);
-    }
-  }
-
-  console.log("\nDone! Firestore seeded successfully.");
+  console.log("\nDone! Firestore database seeded successfully.");
   process.exit(0);
 }
 
