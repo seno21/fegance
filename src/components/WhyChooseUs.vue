@@ -26,8 +26,20 @@ const defaultPillars = [
 </script>
 
 <template>
-  <section class="py-[120px] bg-[#F8F8F8] overflow-hidden">
-    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="py-[120px] relative overflow-hidden bg-canvas">
+    <!-- Anime Background Layer -->
+    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+      <img
+        src="/images/anime/down.png"
+        alt="Anime Japanese Countryside Scenery"
+        class="w-full h-full object-cover object-bottom filter saturate-[1.1] brightness-[0.96] opacity-40 sm:opacity-50"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-canvas via-canvas/80 to-canvas z-10"
+      />
+    </div>
+
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <!-- Loading skeleton -->
       <div v-if="loading" class="space-y-10">
         <div class="flex flex-col items-center space-y-4">
@@ -36,8 +48,14 @@ const defaultPillars = [
           <div class="w-12 h-[1px] bg-line" />
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div v-for="n in 3" :key="n" class="bg-white border border-[#ECECEC] rounded-[24px] p-12 space-y-6">
-            <div class="w-14 h-14 rounded-full bg-neutral-100 mx-auto animate-pulse" />
+          <div
+            v-for="n in 3"
+            :key="n"
+            class="bg-white border border-[#ECECEC] rounded-[24px] p-12 space-y-6"
+          >
+            <div
+              class="w-14 h-14 rounded-full bg-neutral-100 mx-auto animate-pulse"
+            />
             <div class="h-8 w-48 bg-line rounded animate-pulse mx-auto" />
             <div class="space-y-2">
               <div class="h-4 w-full bg-line rounded animate-pulse" />
@@ -73,9 +91,10 @@ const defaultPillars = [
           class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center items-stretch"
         >
           <div
-            v-for="(pillar, i) in (content?.whyChooseUs?.pillars ?? defaultPillars)"
+            v-for="(pillar, i) in content?.whyChooseUs?.pillars ??
+            defaultPillars"
             :key="pillar.title"
-            class="bg-[#FFFFFF] border border-[#ECECEC] rounded-[24px] p-12 shadow-[0_1px_2px_rgba(17,17,17,0.04),0_4px_16px_rgba(17,17,17,0.04)] hover:shadow-[0_8px_30px_rgba(17,17,17,0.08),0_2px_8px_rgba(17,17,17,0.04)] hover:border-[#111111] transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.02] group flex flex-col items-center text-center"
+            class="bg-white/85 backdrop-blur-md border border-[#ECECEC]/80 rounded-[24px] p-12 shadow-[0_1px_2px_rgba(17,17,17,0.04),0_4px_16px_rgba(17,17,17,0.04)] hover:shadow-[0_8px_30px_rgba(17,17,17,0.12)] hover:border-[#111111] transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.02] group flex flex-col items-center text-center"
             data-aos="fade-up"
             :data-aos-delay="(i + 1) * 100"
             data-aos-duration="800"

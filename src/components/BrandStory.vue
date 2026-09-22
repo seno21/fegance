@@ -8,8 +8,24 @@ const { content, loading } = useSiteContent();
 </script>
 
 <template>
-  <section id="story" class="section bg-canvas">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="story" class="section relative overflow-hidden bg-canvas">
+    <!-- Anime Countryside Center Background -->
+    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+      <img
+        src="/images/anime/center.jpg"
+        alt="Anime Japanese Countryside Scenery"
+        class="w-full h-full object-cover object-center filter saturate-[1.1] brightness-[0.95] opacity-55 sm:opacity-70"
+      />
+      <!-- Gradient mask overlay for typography legibility -->
+      <div
+        class="absolute inset-0 bg-gradient-to-l from-canvas via-canvas/90 to-canvas/40 sm:to-transparent z-10"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-canvas via-transparent to-canvas z-10"
+      />
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <!-- Loading skeleton -->
       <div
         v-if="loading"

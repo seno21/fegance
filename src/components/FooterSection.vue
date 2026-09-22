@@ -59,8 +59,7 @@ const year = new Date().getFullYear();
             </span>
           </div>
           <p class="text-sm text-white/60 leading-relaxed max-w-xs">
-            Pilih aroma favorit kamu. Biar wangi aja yang bicara, gak perlu
-            repot menjelaskan siapa dirimu.
+            Aroma yang terinspirasi dari karakter dan cerita yang kami suka
           </p>
           <div class="mt-6 flex gap-2.5">
             <a

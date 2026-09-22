@@ -34,12 +34,28 @@ const featured = () => {
 
 <template>
   <section
-    class="relative pt-12 lg:pt-20 pb-16 lg:pb-28 overflow-hidden bg-gradient-to-b from-canvas via-surface to-canvas"
+    class="relative pt-12 lg:pt-20 pb-16 lg:pb-28 overflow-hidden bg-canvas"
   >
+    <!-- Background Anime Countryside Scenery -->
+    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+      <img
+        src="/images/anime/up.jpg"
+        alt="Anime Japanese Countryside Scenery"
+        class="w-full h-full object-cover object-center filter saturate-[1.15] brightness-[0.98] transition-transform duration-1000 transform hover:scale-105 opacity-60 sm:opacity-75"
+      />
+      <!-- Gradient Overlays for optimal readability -->
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-canvas via-canvas/85 to-canvas/40 sm:to-transparent z-10"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-canvas via-transparent to-canvas z-10"
+      />
+    </div>
+
     <!-- Subtle ambient background blur orb -->
     <div
       aria-hidden="true"
-      class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-black/5 rounded-full blur-3xl pointer-events-none"
+      class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-black/5 rounded-full blur-3xl pointer-events-none z-10"
     />
 
     <!-- Loading skeleton -->
