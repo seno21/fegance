@@ -1,25 +1,12 @@
-/**
- * Firestore Seed Script
- *
- * Run this to populate your Firestore database with initial hardcoded data.
- * Usage: npm run seed
- */
-
 import { initializeApp } from "firebase/app";
 import {
   getFirestore,
+  collection,
+  getDocs,
   doc,
   setDoc,
-  collection,
-  addDoc,
-  getDocs,
   deleteDoc,
 } from "firebase/firestore";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
 import * as dotenv from "dotenv";
 
 dotenv.config();
@@ -35,10 +22,10 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const auth = getAuth(app);
 
 const products = [
   {
+    id: 1,
     name: "Leorin",
     slug: "midnight-gold",
     price: 75000,
@@ -64,10 +51,10 @@ const products = [
       projection: "2-3 meters",
       longevity: "8-12 hours",
     },
-    isNew: false,
     isBestseller: true,
   },
   {
+    id: 2,
     name: "Velvet Rose",
     slug: "velvet-rose",
     price: 65000,
@@ -93,10 +80,9 @@ const products = [
       projection: "1.5 - 2 meters",
       longevity: "8-10 hours",
     },
-    isNew: false,
-    isBestseller: false,
   },
   {
+    id: 3,
     name: "Ocean Noir",
     slug: "ocean-noir",
     price: 55000,
@@ -123,9 +109,9 @@ const products = [
       longevity: "6-8 hours",
     },
     isNew: true,
-    isBestseller: false,
   },
   {
+    id: 4,
     name: "Crystal Bloom",
     slug: "crystal-bloom",
     price: 85000,
@@ -151,10 +137,9 @@ const products = [
       projection: "1.5 meters",
       longevity: "8-10 hours",
     },
-    isNew: false,
-    isBestseller: false,
   },
   {
+    id: 5,
     name: "Ember Oud",
     slug: "ember-oud",
     price: 100000,
@@ -180,10 +165,10 @@ const products = [
       projection: "2-3 meters",
       longevity: "10-14 hours",
     },
-    isNew: false,
     isBestseller: true,
   },
   {
+    id: 6,
     name: "Iris Garden",
     slug: "iris-garden",
     price: 45000,
@@ -209,10 +194,9 @@ const products = [
       projection: "1.5 meters",
       longevity: "6-8 hours",
     },
-    isNew: false,
-    isBestseller: false,
   },
   {
+    id: 7,
     name: "Amber Nights",
     slug: "amber-nights",
     price: 80000,
@@ -239,9 +223,9 @@ const products = [
       longevity: "8-10 hours",
     },
     isNew: true,
-    isBestseller: false,
   },
   {
+    id: 8,
     name: "Citrus Sky",
     slug: "citrus-sky",
     price: 50000,
@@ -267,59 +251,8 @@ const products = [
       projection: "1.5 meters",
       longevity: "6-8 hours",
     },
-    isNew: false,
-    isBestseller: false,
   },
 ];
-
-const ourStory = {
-  eyebrow: "Cerita Fegance",
-  title: "Biar Wangi Aja Yang Bicara",
-  subtitle:
-    "Sebuah karya seni aroma buatan Cirebon yang diracik khusus untuk menceritakan identitas diri tanpa perlu banyak kata.",
-  blocks: [
-    {
-      id: "b1",
-      type: "image",
-      content:
-        "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=1200&fit=crop",
-      caption: "Maison Fegance Atelier & Signature Fragrance",
-      position: "top",
-    },
-    {
-      id: "b2",
-      type: "paragraph",
-      content:
-        "Fegance lahir di Cirebon dari rasa penasaran yang mendalam terhadap dunia seni wewangian. Bagi kami, parfum bukanlah sekadar minyak wangi penyegar tubuh biasa. Ia adalah sebuah karya seni tanpa rupa—meski tak kasat mata, aromanya hidup lama dalam ingatan dan menjadi bagian erat dari identitas seseorang.",
-    },
-    {
-      id: "b3",
-      type: "paragraph",
-      content:
-        "Perjalanan kami dimulai dari keinginan sederhana: menciptakan parfum lokal berkualitas tinggi dengan ekstrak minyak wangi premium yang tahan lama, dipadu dengan kemasan mewah dan estetik, tanpa membebankan harga yang berlebihan.",
-    },
-    {
-      id: "b4",
-      type: "image",
-      content:
-        "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=1200&fit=crop",
-      caption: "Proses racikan formulasi wewangian dengan standar tinggi",
-      position: "middle",
-    },
-    {
-      id: "b5",
-      type: "paragraph",
-      content:
-        "Setiap racikan Fegance dibuat melalui proses formulasi teliti (olfactory testing) untuk memastikan daya tahan (longevity) dan jejak aroma (sillage) yang memikat sepanjang hari. Kami percaya bahwa wewangian adalah cara paling elegan untuk menyampaikan karakter diri.",
-    },
-    {
-      id: "b6",
-      type: "paragraph",
-      content:
-        "Ketika kata-kata tak perlu terucap, biarkan wangi Fegance yang berbicara mewakili pesona dan keunikan dirimu.",
-    },
-  ],
-};
 
 const scentFamilies = [
   {
@@ -369,158 +302,191 @@ const scentFamilies = [
   },
 ];
 
-const siteContent = {
-  hero: {
-    tagline: "Wangi Dulu",
-    taglineAccent: "Sisanya Nanti",
-    subtitle:
-      "Pilih aroma favorit kamu. Biar wangi aja yang bicara, gak perlu repot menjelaskan siapa dirimu.",
-    ctaPrimary: "Collection",
-    ctaSecondary: "Our Story",
-    imageUrl: "",
-  },
-  brandStory: {
-    eyebrow: "Our Philosophy",
-    title: "Let Us Tell You a Little",
-    titleAccent: "About Who We Are",
-    paragraphs: [
-      "Fegance lahir dari rasa penasaran terhadap dunia parfum. Bagi kami, parfum adalah sebuah karya seni. Ia merupakan bagian dari keindahan—meski ia tak memiliki rupa, namun hidup lama di ingatan. Ia bagian dari identitas seseorang, menentukan bagaimana orang menilaimu pertama kali.",
-      "Layaknya sebuah brand yang terus bertumbuh, Fegance berkomitmen untuk selalu berkembang. Kami terus menyempurnakan setiap komposisi, memilih formulasi terbaik, serta menggunakan bahan-bahan premium agar setiap aroma yang kami hadirkan memiliki kualitas yang layak dikenang.",
-      "Di balik setiap judul parfum yang kami ciptakan, selalu ada sebuah cerita. Kami percaya bahwa sebuah parfum adalah medium untuk menyampaikan karakter. Kami ingin setiap parfum Fegance menjadi bagian dari keseharianmu, dan menceritakan identitasmu—tanpa perlu banyak kata.",
-    ],
-    stats: [
-      { value: "Every Bottle", label: "Handcrafted" },
-      { value: "Signature Scents", label: "Inspired of" },
-      { value: "INDONESIA", label: "Made In" },
-    ],
-    images: {
-      main: "",
-      secondary: "",
-      accent: "",
+const defaultOurStoryArticle = {
+  eyebrow: "Cerita Fegance",
+  title: "Biar Wangi Aja Yang Bicara",
+  subtitle:
+    "Sebuah karya seni aroma buatan Cirebon yang diracik khusus untuk menceritakan identitas diri tanpa perlu banyak kata.",
+  blocks: [
+    {
+      id: "b1",
+      type: "image",
+      content:
+        "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=1200&fit=crop",
+      caption: "Maison Fegance Atelier & Signature Fragrance",
+      position: "top",
     },
-  },
-  whyChooseUs: {
-    sectionTitle: "The Maison Standards",
-    sectionSubtitle: "Why Choose Fegance",
-    pillars: [
-      {
-        title: "Masterfully Crafted",
-        description:
-          "Setiap botol kami racik dengan pilihan formulasi terbaik dan disempurnakan melalui komposisi kami sendiri.",
-        icon: "sparkles",
-      },
-      {
-        title: "Long-Lasting Performance",
-        description:
-          "Dirancang untuk memberikan projection dan longevity terbaik, sehingga aromanya tetap bersama kamu sepanjang hari.",
-        icon: "hourglass",
-      },
-      {
-        title: "Satisfaction Promises",
-        description:
-          "Setiap pengalaman bersama Fegance sangat berarti bagi kami. Kami siap membantu untuk langkah perjalananmu.",
-        icon: "shield",
-      },
-    ],
-  },
-  contact: {
-    eyebrow: "Get In Touch",
-    title: "Let's start a conversation.",
-    description:
-      "Punya pertanyaan, ingin melacak pesanan, atau sekadar menyapa? Kami akan dengan senang hati membantu.",
-    address: "Kab. Cirebon, Jawa Barat",
-    businessHours: "Mon – Sat · 09.00 – 20.00 WIB",
-    contacts: [
-      {
-        name: "WhatsApp",
-        handle: "+62 851 7237 2101",
-        link: "https://wa.me/6285172372101",
-        external: true,
-      },
-      {
-        name: "Instagram",
-        handle: "@fegance.id",
-        link: "https://www.instagram.com/fegance.id",
-        external: true,
-      },
-    ],
-  },
-  announcement: {
-    messages: [
-      "Free shipping on orders above Rp 500.000",
-      "New collection 2026 — discover the signature scents",
-      "Complimentary sample with every order",
-    ],
-    enabled: false,
-  },
+    {
+      id: "b2",
+      type: "paragraph",
+      content:
+        "Fegance lahir di Cirebon dari rasa penasaran yang mendalam terhadap dunia seni wewangian. Bagi kami, parfum bukanlah sekadar minyak wangi penyegar tubuh biasa. Ia adalah sebuah karya seni tanpa rupa—meski tak kasat mata, aromanya hidup lama dalam ingatan dan menjadi bagian erat dari identitas seseorang.",
+    },
+    {
+      id: "b3",
+      type: "paragraph",
+      content:
+        "Perjalanan kami dimulai dari keinginan sederhana: menciptakan parfum lokal berkualitas tinggi dengan ekstrak minyak wangi premium yang tahan lama, dipadu dengan kemasan mewah dan estetik, tanpa membebankan harga yang berlebihan.",
+    },
+    {
+      id: "b4",
+      type: "image",
+      content:
+        "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=1200&fit=crop",
+      caption: "Proses racikan formulasi wewangian dengan standar tinggi",
+      position: "middle",
+    },
+    {
+      id: "b5",
+      type: "paragraph",
+      content:
+        "Setiap racikan Fegance dibuat melalui proses formulasi teliti (olfactory testing) untuk memastikan daya tahan (longevity) dan jejak aroma (sillage) yang memikat sepanjang hari. Kami percaya bahwa wewangian adalah cara paling elegan untuk menyampaikan karakter diri.",
+    },
+    {
+      id: "b6",
+      type: "paragraph",
+      content:
+        "Ketika kata-kata tak perlu terucap, biarkan wangi Fegance yang berbicara mewakili pesona dan keunikan dirimu.",
+    },
+  ],
 };
 
-async function seed() {
-  console.log("Seeding Firestore...\n");
-
-  // 1. Authenticate admin first
-  const adminEmail = process.env.VITE_ADMIN_EMAIL || "admin@fegance.id";
-  const adminPassword = process.env.ADMIN_PASSWORD || "admin123456";
-  console.log(`Authenticating admin user: ${adminEmail}`);
-  try {
-    await signInWithEmailAndPassword(auth, adminEmail, adminPassword);
-    console.log("  + Signed in as admin successfully!");
-  } catch (e: any) {
-    try {
-      await createUserWithEmailAndPassword(auth, adminEmail, adminPassword);
-      console.log("  + Admin user created & authenticated successfully!");
-    } catch (createErr: any) {
-      console.log("  ! Admin authentication note:", createErr.message);
-    }
+async function clearCollection(collectionName: string) {
+  console.log(`Clearing collection: ${collectionName}...`);
+  const snap = await getDocs(collection(db, collectionName));
+  for (const d of snap.docs) {
+    await deleteDoc(doc(db, collectionName, d.id));
   }
-
-  // 2. Clean existing products to prevent duplicates
-  console.log("Clearing existing products in database...");
-  try {
-    const existingDocs = await getDocs(collection(db, "products"));
-    for (const d of existingDocs.docs) {
-      await deleteDoc(doc(db, "products", d.id));
-    }
-    console.log(`  + Removed ${existingDocs.docs.length} old products`);
-  } catch (err: any) {
-    console.log("  ! Note on clearing products:", err.message);
-  }
-
-  // 3. Seed products
-  console.log("Seeding products...");
-  for (const product of products) {
-    await addDoc(collection(db, "products"), product);
-    console.log(`  + ${product.name}`);
-  }
-
-  // 4. Seed Our Story
-  console.log("Seeding Our Story content...");
-  await setDoc(doc(db, "siteContent", "ourStory"), ourStory);
-  await setDoc(doc(db, "ourStory", "main"), ourStory);
-  console.log("  + siteContent/ourStory & ourStory/main");
-
-  // 5. Seed scent families
-  console.log("Seeding scent families...");
-  for (const family of scentFamilies) {
-    await setDoc(doc(db, "scentFamilies", family.id), {
-      name: family.name,
-      tagline: family.tagline,
-      description: family.description,
-      image: family.image,
-    });
-    console.log(`  + ${family.name}`);
-  }
-
-  // 6. Seed site content
-  console.log("Seeding site content...");
-  await setDoc(doc(db, "siteContent", "main"), siteContent);
-  console.log("  + siteContent/main");
-
-  console.log("\nDone! Firestore database seeded successfully.");
-  process.exit(0);
+  console.log(`Cleared ${snap.docs.length} documents from ${collectionName}.`);
 }
 
-seed().catch((e) => {
-  console.error("Seed failed:", e);
-  process.exit(1);
-});
+async function seedProducts() {
+  await clearCollection("products");
+  console.log(`Seeding ${products.length} products...`);
+  for (const item of products) {
+    const { id, ...data } = item;
+    const docId = String(id);
+    await setDoc(doc(db, "products", docId), data);
+    console.log(`  - Added product: ${data.name} (ID: ${docId})`);
+  }
+}
+
+async function seedScentFamilies() {
+  await clearCollection("scentFamilies");
+  console.log(`Seeding ${scentFamilies.length} scent families...`);
+  for (const item of scentFamilies) {
+    const { id, ...data } = item;
+    await setDoc(doc(db, "scentFamilies", id), data);
+    console.log(`  - Added scent family: ${data.name} (ID: ${id})`);
+  }
+}
+
+async function seedSiteContent() {
+  console.log("Seeding siteContent/main...");
+  const mainContent = {
+    hero: {
+      tagline: "Wangi Dulu",
+      taglineAccent: "Sisanya Nanti",
+      subtitle: "Pilih aroma favorit sesuai karaktermu, jadilah mc di ceritamu",
+      ctaPrimary: "Collection",
+      ctaSecondary: "Our Story",
+      imageUrl: "",
+    },
+    brandStory: {
+      eyebrow: "Our Philosophy",
+      title: "Kore wa,",
+      titleAccent: "kaori no monogatari.",
+      paragraphs: [
+        "Fegance lahir dari rasa penasaran terhadap dunia parfum. Bagi kami, parfum adalah sebuah karya seni. Ia merupakan bagian dari keindahan—meski ia tak memiliki rupa, namun hidup lama di ingatan. Ia bagian dari identitas seseorang, menentukan bagaimana orang menilaimu pertama kali.",
+        "Layaknya sebuah brand yang terus bertumbuh, Fegance berkomitmen untuk selalu berkembang. Kami terus menyempurnakan setiap komposisi, memilih formulasi terbaik, serta menggunakan bahan-bahan premium agar setiap aroma yang kami hadirkan memiliki kualitas yang layak dikenang.",
+        "Di balik setiap judul parfum yang kami ciptakan, selalu ada sebuah cerita. Kami percaya bahwa sebuah parfum adalah medium untuk menyampaikan karakter. Kami ingin setiap parfum Fegance menjadi bagian dari keseharianmu, dan menceritakan identitasmu—tanpa perlu banyak kata.",
+      ],
+      stats: [
+        { value: "100%", label: "Authentic Ingredients" },
+        { value: "12+ Hrs", label: "Longevity" },
+        { value: "In-House", label: "Formulation" },
+      ],
+      images: {
+        main: "",
+        secondary: "",
+        accent: "",
+      },
+    },
+    whyChooseUs: {
+      sectionTitle: "The Maison Standards",
+      sectionSubtitle: "Why Choose Fegance",
+      pillars: [
+        {
+          title: "Masterfully Crafted",
+          description:
+            "Setiap botol kami racik dengan pilihan formulasi terbaik dan disempurnakan melalui komposisi kami sendiri.",
+          icon: "sparkles",
+        },
+        {
+          title: "Long-Lasting Performance",
+          description:
+            "Dirancang untuk memberikan projection dan longevity terbaik, sehingga aromanya tetap bersama kamu sepanjang hari.",
+          icon: "hourglass",
+        },
+        {
+          title: "Satisfaction Promises",
+          description:
+            "Setiap pengalaman bersama Fegance sangat berarti bagi kami. Kami siap membantu untuk langkah perjalananmu.",
+          icon: "shield",
+        },
+      ],
+    },
+    contact: {
+      eyebrow: "Get In Touch",
+      title: "Let's start a conversation.",
+      description:
+        "Punya pertanyaan, ingin melacak pesanan, atau sekadar menyapa? Kami akan dengan senang hati membantu.",
+      address: "Kab. Cirebon",
+      businessHours: "Mon – Sat · 09.00 – 20.00 WIB",
+      contacts: [
+        {
+          name: "WhatsApp",
+          handle: "+62 851 7237 2101",
+          link: "https://wa.me/6285172372101",
+          external: true,
+        },
+        {
+          name: "Instagram",
+          handle: "@fegance.id",
+          link: "https://www.instagram.com/fegance.id",
+          external: true,
+        },
+      ],
+    },
+    announcement: {
+      messages: [
+        "Free Shipping Worldwide On Orders Over Rp 250.000",
+        "Complimentary Discovery Sample With Every Bottle",
+      ],
+      enabled: true,
+    },
+  };
+
+  await setDoc(doc(db, "siteContent", "main"), mainContent);
+  console.log("  - siteContent/main updated.");
+
+  console.log("Seeding siteContent/ourStory...");
+  await setDoc(doc(db, "siteContent", "ourStory"), defaultOurStoryArticle);
+  console.log("  - siteContent/ourStory updated.");
+}
+
+async function main() {
+  try {
+    console.log("Starting Firestore Database Seed...");
+    await seedProducts();
+    await seedScentFamilies();
+    await seedSiteContent();
+    console.log("Firestore Database successfully seeded!");
+    process.exit(0);
+  } catch (err) {
+    console.error("Error seeding database:", err);
+    process.exit(1);
+  }
+}
+
+main();

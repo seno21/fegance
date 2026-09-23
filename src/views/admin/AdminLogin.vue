@@ -43,8 +43,8 @@
             required
             autocomplete="email"
             placeholder="admin@fegance.com"
-            class="w-full px-4 py-3 rounded-xl border border-line bg-surface text-black text-sm placeholder:text-faint focus:outline-none focus:border-ink focus:ring-1 focus:ring-ink/30 transition-colors font-sans"
-            style="color: #000000; -webkit-text-fill-color: #000000;"
+            class="w-full px-4 py-3 rounded-xl border border-line bg-white text-ink text-sm placeholder:text-faint focus:outline-none focus:border-ink focus:ring-1 focus:ring-ink/30 transition-colors"
+            style="color: #111111 !important; -webkit-text-fill-color: #111111 !important; font-family: ui-sans-serif, system-ui, -apple-system, sans-serif !important; background-color: #ffffff !important;"
           />
         </div>
 
@@ -63,8 +63,8 @@
               required
               autocomplete="current-password"
               placeholder="••••••••"
-              class="w-full px-4 py-3 pr-10 rounded-xl border border-line bg-surface text-black text-sm placeholder:text-faint focus:outline-none focus:border-ink focus:ring-1 focus:ring-ink/30 transition-colors font-sans"
-              style="color: #000000; -webkit-text-fill-color: #000000;"
+              class="w-full px-4 py-3 pr-10 rounded-xl border border-line bg-white text-ink text-sm placeholder:text-faint focus:outline-none focus:border-ink focus:ring-1 focus:ring-ink/30 transition-colors"
+              style="color: #111111 !important; -webkit-text-fill-color: #111111 !important; font-family: ui-sans-serif, system-ui, -apple-system, sans-serif !important; background-color: #ffffff !important;"
             />
             <button
               type="button"

@@ -45,10 +45,6 @@ function formatPrice(n: number) {
           Featured Collection
         </h2>
         <span class="gold-rule mt-5 mx-auto" />
-        <p class="mt-5 text-sm sm:text-base text-muted leading-relaxed">
-          Pilih wangi parfum favorite yang kamu mau — biarkan ia jadi teman
-          sehari-hari kamu.
-        </p>
       </div>
 
       <!-- Filter chips -->
@@ -74,8 +70,15 @@ function formatPrice(n: number) {
       </div>
 
       <!-- Loading skeleton -->
-      <div v-if="loading" class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-7">
-        <div v-for="n in 8" :key="n" class="rounded-[20px] border border-line/70 overflow-hidden">
+      <div
+        v-if="loading"
+        class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-7"
+      >
+        <div
+          v-for="n in 8"
+          :key="n"
+          class="rounded-[20px] border border-line/70 overflow-hidden"
+        >
           <div class="aspect-square bg-surface animate-pulse" />
           <div class="p-4 sm:p-5 space-y-3">
             <div class="h-3 w-16 bg-line rounded animate-pulse" />
@@ -137,7 +140,9 @@ function formatPrice(n: number) {
 
             <!-- Content -->
             <div class="p-4 sm:p-5">
-              <p class="text-[10px] tracking-[0.2em] uppercase text-faint mb-1.5">
+              <p
+                class="text-[10px] tracking-[0.2em] uppercase text-faint mb-1.5"
+              >
                 {{ product.category }}
               </p>
               <h3
@@ -170,12 +175,15 @@ function formatPrice(n: number) {
 
 <style scoped>
 .fade-slide-enter-active {
-  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+  transition:
+    opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .fade-slide-leave-active {
-  transition: opacity 0.15s ease-in, transform 0.15s ease-in;
+  transition:
+    opacity 0.15s ease-in,
+    transform 0.15s ease-in;
 }
 
 .fade-slide-enter-from {

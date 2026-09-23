@@ -157,10 +157,8 @@ const { content, loading } = useSiteContent();
             {{ content?.brandStory?.eyebrow ?? "Our Philosophy" }}
           </p>
           <h2 class="h-display text-3xl sm:text-4xl lg:text-5xl text-ink">
-            {{ content?.brandStory?.title ?? "Let Us Tell You a Little" }}
-            <span class="block italic font-medium text-ink/70">{{
-              content?.brandStory?.titleAccent ?? "About Who We Are"
-            }}</span>
+            {{ content?.brandStory?.title ?? "Kore wa," }}
+            <span class="italic font-medium text-ink/70">{{ content?.brandStory?.titleAccent ?? "kaori no monogatari." }}</span>
           </h2>
           <span class="gold-rule mt-6" />
 
