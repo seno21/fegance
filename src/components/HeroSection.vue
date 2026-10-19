@@ -39,7 +39,7 @@ const featured = () => {
     <!-- Background Anime Countryside Scenery -->
     <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
       <img
-        src="/images/anime/up.jpg"
+        :src="content?.hero?.bgUrl || '/images/anime/up.jpg'"
         alt="Anime Japanese Countryside Scenery"
         class="w-full h-full object-cover object-center filter saturate-[1.15] brightness-[0.98] transition-transform duration-1000 transform hover:scale-105 opacity-60 sm:opacity-75"
       />

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, onMounted } from "vue";
 import { useProducts } from "@/composables/useProducts";
+import { useWishlist } from "@/composables/useWishlist";
 import { useRouter, useRoute } from "vue-router";
 import Navbar from "@/components/Navbar.vue";
 import FooterSection from "@/components/FooterSection.vue";
@@ -9,6 +10,7 @@ import logoShopee from "@/assets/logo-shopee.png";
 const router = useRouter();
 const route = useRoute();
 const { products, loading } = useProducts();
+const { isInWishlist, toggleWishlist } = useWishlist();
 
 const validFamilies = ["floral", "woody", "oriental", "fresh", "citrus"];
 const initialFamily = route.query.family;
@@ -261,7 +263,7 @@ function formatPrice(n: number) {
                 loading="lazy"
               />
 
-              <div class="absolute top-3 left-3 flex flex-col gap-1.5">
+              <div class="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
                 <span
                   v-if="product.isNew"
                   class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase rounded-pill bg-ink text-canvas"
@@ -275,6 +277,28 @@ function formatPrice(n: number) {
                   Best Seller
                 </span>
               </div>
+
+              <!-- Wishlist Button -->
+              <button
+                type="button"
+                @click.stop="toggleWishlist(product)"
+                class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-ink shadow-sm hover:scale-110 active:scale-95 transition-all"
+                :title="isInWishlist(product.id) ? 'Hapus dari Wishlist' : 'Tambah ke Wishlist'"
+              >
+                <svg
+                  class="w-4 h-4 transition-colors"
+                  :class="isInWishlist(product.id) ? 'fill-red-500 text-red-500' : 'fill-none text-ink'"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                  />
+                </svg>
+              </button>
             </div>
 
             <!-- Content -->

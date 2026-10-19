@@ -9,6 +9,7 @@ export interface HeroContent {
   ctaPrimary: string;
   ctaSecondary: string;
   imageUrl: string;
+  bgUrl?: string;
 }
 
 export interface BrandStoryContent {
@@ -26,7 +27,7 @@ export interface WhyChooseUsContent {
   pillars: {
     title: string;
     description: string;
-    icon: "sparkles" | "hourglass" | "shield";
+    icon: string;
   }[];
 }
 
@@ -42,6 +43,27 @@ export interface ContactContent {
 export interface AnnouncementContent {
   messages: string[];
   enabled: boolean;
+  promoBannerUrl?: string;
+  promoBannerLink?: string;
+}
+
+export interface HeaderContent {
+  logoText?: string;
+  shopCtaText?: string;
+  shopCtaLink?: string;
+}
+
+export interface FooterContent {
+  brandDescription?: string;
+  address?: string;
+  businessHours?: string;
+  copyright?: string;
+  socials?: {
+    whatsapp?: string;
+    instagram?: string;
+    tiktok?: string;
+    shopee?: string;
+  };
 }
 
 export interface SiteContent {
@@ -50,6 +72,8 @@ export interface SiteContent {
   whyChooseUs: WhyChooseUsContent;
   contact: ContactContent;
   announcement: AnnouncementContent;
+  header?: HeaderContent;
+  footer?: FooterContent;
 }
 
 export function useSiteContent() {

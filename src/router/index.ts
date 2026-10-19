@@ -8,12 +8,21 @@ import ProductListing from "@/views/ProductListing.vue";
 import Linktree from "@/views/Linktree.vue";
 import OurStory from "@/views/OurStory.vue";
 
+// Customer views
+const Login = () => import("@/views/Login.vue");
+const Register = () => import("@/views/Register.vue");
+const Wishlist = () => import("@/views/Wishlist.vue");
+
+// Admin views
 const AdminLogin = () => import("@/views/admin/AdminLogin.vue");
 const AdminLayout = () => import("@/components/admin/AdminSidebar.vue");
 const AdminDashboard = () => import("@/views/admin/AdminDashboard.vue");
+const AdminHero = () => import("@/views/admin/AdminHero.vue");
 const AdminProducts = () => import("@/views/admin/AdminProducts.vue");
-const AdminOurStory = () => import("@/views/admin/AdminOurStory.vue");
-const AdminContent = () => import("@/views/admin/AdminContent.vue");
+const AdminPhilosophy = () => import("@/views/admin/AdminPhilosophy.vue");
+const AdminStandards = () => import("@/views/admin/AdminStandards.vue");
+const AdminUsers = () => import("@/views/admin/AdminUsers.vue");
+const AdminSettings = () => import("@/views/admin/AdminSettings.vue");
 
 let authResolved = false;
 let currentUser: any = null;
@@ -59,6 +68,21 @@ const router = createRouter({
       component: ProductDetail,
     },
     {
+      path: "/wishlist",
+      name: "wishlist",
+      component: Wishlist,
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: Login,
+    },
+    {
+      path: "/register",
+      name: "register",
+      component: Register,
+    },
+    {
       path: "/linktree",
       name: "linktree",
       component: Linktree,
@@ -80,19 +104,43 @@ const router = createRouter({
           component: AdminDashboard,
         },
         {
+          path: "hero",
+          name: "admin-hero",
+          component: AdminHero,
+        },
+        {
           path: "products",
           name: "admin-products",
           component: AdminProducts,
         },
         {
+          path: "philosophy",
+          name: "admin-philosophy",
+          component: AdminPhilosophy,
+        },
+        {
+          path: "standards",
+          name: "admin-standards",
+          component: AdminStandards,
+        },
+        {
+          path: "users",
+          name: "admin-users",
+          component: AdminUsers,
+        },
+        {
+          path: "settings",
+          name: "admin-settings",
+          component: AdminSettings,
+        },
+        // Backward-compatibility aliases
+        {
           path: "our-story",
-          name: "admin-our-story",
-          component: AdminOurStory,
+          redirect: "/admin/philosophy",
         },
         {
           path: "content",
-          name: "admin-content",
-          component: AdminContent,
+          redirect: "/admin/settings",
         },
       ],
     },

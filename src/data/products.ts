@@ -26,6 +26,9 @@ export interface Product {
   performance: ProductPerformance;
   isNew?: boolean;
   isBestseller?: boolean;
+  isFeatured?: boolean;
+  showOnLanding?: boolean;
+  landingOrder?: number;
 }
 
 export interface ScentFamily {
