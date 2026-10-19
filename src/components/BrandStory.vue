@@ -172,9 +172,8 @@ const { content, loading } = useSiteContent();
                 'Di balik setiap judul parfum yang kami ciptakan, selalu ada sebuah cerita. Kami percaya bahwa sebuah parfum adalah medium untuk menyampaikan karakter. Kami ingin setiap parfum Fegance menjadi bagian dari keseharianmu, dan menceritakan identitasmu—tanpa perlu banyak kata.',
               ]"
               :key="i"
-            >
-              {{ paragraph }}
-            </p>
+              v-html="paragraph"
+            />
           </div>
 
           <!-- Read More Button -->

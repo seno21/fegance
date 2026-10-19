@@ -2,6 +2,7 @@
 import { ref, watch } from "vue";
 import { useSiteContent, type BrandStoryContent } from "@/composables/useSiteContent";
 import { useOurStory, type OurStoryArticle, type StoryBlock } from "@/composables/useOurStory";
+import RichTextEditor from "@/components/admin/RichTextEditor.vue";
 
 const activeTab = ref<"landing" | "fullStory">("landing");
 
@@ -209,8 +210,10 @@ function moveBlock(idx: number, dir: -1 | 1) {
           </div>
           <div class="space-y-3">
             <div v-for="(_, i) in brandStory.paragraphs" :key="i" class="flex items-start gap-2">
-              <textarea v-model="brandStory.paragraphs[i]" rows="2" class="flex-1 px-3 py-2 rounded-xl border border-gray-200 text-xs text-ink focus:border-[#c9a227] focus:outline-none" />
-              <button type="button" @click="removeParagraph(i)" class="p-2 text-red-500 hover:bg-red-50 rounded-lg">
+              <div class="flex-1">
+                <RichTextEditor v-model="brandStory.paragraphs[i]" placeholder="Tuliskan narasi filosofi..." min-height="70px" />
+              </div>
+              <button type="button" @click="removeParagraph(i)" class="p-2 text-red-500 hover:bg-red-50 rounded-lg mt-1" title="Hapus paragraf">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
             </div>
@@ -312,7 +315,7 @@ function moveBlock(idx: number, dir: -1 | 1) {
 
               <!-- Paragraph block content -->
               <div v-if="block.type === 'paragraph'">
-                <textarea v-model="block.content" rows="3" placeholder="Tulis narasi cerita di sini…" class="w-full px-3 py-2 rounded-xl border border-gray-200 bg-white text-xs text-ink" />
+                <RichTextEditor v-model="block.content" placeholder="Tulis narasi cerita di sini…" min-height="90px" />
               </div>
 
               <!-- Image block content -->

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { useUserAuth } from "@/composables/useUserAuth";
+import { useUserAuth, formatAuthError } from "@/composables/useUserAuth";
 import logoSvg from "@/assets/logo.svg";
 
 const router = useRouter();
@@ -26,11 +26,7 @@ async function handleEmailLogin() {
     router.push(redirectPath);
   } catch (err: any) {
     console.error("Login error:", err);
-    if (err.code === "auth/user-not-found" || err.code === "auth/wrong-password" || err.code === "auth/invalid-credential") {
-      errorMsg.value = "Email atau kata sandi tidak sesuai.";
-    } else {
-      errorMsg.value = err.message || "Gagal masuk. Silakan coba lagi.";
-    }
+    errorMsg.value = formatAuthError(err);
   } finally {
     loading.value = false;
   }
@@ -40,11 +36,13 @@ async function handleGoogleLogin() {
   googleLoading.value = true;
   errorMsg.value = "";
   try {
-    await loginWithGoogle();
-    router.push(redirectPath);
+    const res = await loginWithGoogle();
+    if (res) {
+      router.push(redirectPath);
+    }
   } catch (err: any) {
     console.error("Google sign-in error:", err);
-    errorMsg.value = err.message || "Gagal masuk dengan Google.";
+    errorMsg.value = formatAuthError(err);
   } finally {
     googleLoading.value = false;
   }

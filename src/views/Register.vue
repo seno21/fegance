@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { useUserAuth } from "@/composables/useUserAuth";
+import { useUserAuth, formatAuthError } from "@/composables/useUserAuth";
 import logoSvg from "@/assets/logo.svg";
 
 const router = useRouter();
@@ -37,11 +37,7 @@ async function handleRegister() {
     router.push(redirectPath);
   } catch (err: any) {
     console.error("Registration error:", err);
-    if (err.code === "auth/email-already-in-use") {
-      errorMsg.value = "Email ini sudah terdaftar. Silakan langsung masuk.";
-    } else {
-      errorMsg.value = err.message || "Gagal mendaftar. Silakan coba lagi.";
-    }
+    errorMsg.value = formatAuthError(err);
   } finally {
     loading.value = false;
   }
@@ -51,11 +47,13 @@ async function handleGoogleLogin() {
   googleLoading.value = true;
   errorMsg.value = "";
   try {
-    await loginWithGoogle();
-    router.push(redirectPath);
+    const res = await loginWithGoogle();
+    if (res) {
+      router.push(redirectPath);
+    }
   } catch (err: any) {
     console.error("Google sign-in error:", err);
-    errorMsg.value = err.message || "Gagal masuk dengan Google.";
+    errorMsg.value = formatAuthError(err);
   } finally {
     googleLoading.value = false;
   }

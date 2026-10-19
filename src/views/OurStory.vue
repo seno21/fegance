@@ -86,16 +86,16 @@ const firstParagraphIndex = computed(() => {
             :key="block.id || index"
           >
             <!-- PARAGRAPH BLOCK -->
-            <p
+            <div
               v-if="block.type === 'paragraph'"
               :class="
                 index === firstParagraphIndex
                   ? 'relative pl-5 border-l-2 border-ink text-ink font-medium leading-relaxed'
                   : ''
               "
-            >
-              {{ block.content }}
-            </p>
+              class="story-html-content"
+              v-html="block.content"
+            />
 
             <!-- IMAGE BLOCK (Rendered wherever placed: Top, Middle, Bottom) -->
             <div
@@ -159,3 +159,47 @@ const firstParagraphIndex = computed(() => {
     <FooterSection />
   </div>
 </template>
+
+<style scoped>
+.story-html-content :deep(h2) {
+  font-family: var(--font-playfair, serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111111;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.story-html-content :deep(h3) {
+  font-family: var(--font-playfair, serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111111;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.story-html-content :deep(blockquote) {
+  border-left: 3px solid #c9a227;
+  padding-left: 1rem;
+  margin: 1.25rem 0;
+  font-style: italic;
+  color: #4b5563;
+}
+
+.story-html-content :deep(ul) {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.story-html-content :deep(ol) {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.story-html-content :deep(p) {
+  margin-bottom: 1rem;
+}
+</style>
