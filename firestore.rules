@@ -1,35 +1,65 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Public read for all content
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && request.auth.token.email == 'fegasusena@gmail.com';
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Public content: readable by anyone, writable ONLY by Admin
     match /products/{productId} {
       allow read: if true;
-      allow write: if true;
+      allow write: if isAdmin();
     }
 
     match /ourStory/{storyId} {
       allow read: if true;
-      allow write: if true;
+      allow write: if isAdmin();
     }
 
     match /scentFamilies/{familyId} {
       allow read: if true;
-      allow write: if true;
+      allow write: if isAdmin();
     }
 
     match /siteContent/{docId} {
       allow read: if true;
-      allow write: if true;
+      allow write: if isAdmin();
     }
 
+    // User accounts and wishlists
     match /users/{userId} {
-      allow read, write: if true;
+      // Admin can read all users; User can only read their own document
+      allow read: if isAdmin() || isOwner(userId);
+      // User can create their profile as 'user'; Admin can create any profile
+      allow create: if isAdmin() || (isOwner(userId) && (!('role' in request.resource.data) || request.resource.data.role == 'user'));
+      // User can update their own profile (cannot change role); Admin can update anything
+      allow update: if isAdmin() || (isOwner(userId) && (!('role' in request.resource.data) || request.resource.data.role == resource.data.role));
+      // Only admin can delete user profiles
+      allow delete: if isAdmin();
+
+      // Customer Wishlist subcollection
+      match /wishlist/{wishlistId} {
+        allow read: if isAdmin() || isOwner(userId);
+        allow write: if isAdmin() || isOwner(userId);
+      }
+
+      // Any other user subcollections
       match /{allSubcollections=**} {
-        allow read, write: if true;
+        allow read, write: if isAdmin() || isOwner(userId);
       }
     }
 
-    // Default: deny all
+    // Default deny for everything else
     match /{document=**} {
       allow read, write: if false;
     }

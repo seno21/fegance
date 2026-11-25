@@ -27,6 +27,12 @@ const currentUser = ref<User | null>(null);
 const userProfile = ref<UserProfile | null>(null);
 const loading = ref(true);
 
+const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || "fegasusena@gmail.com";
+
+function resolveRole(email?: string | null): "user" | "admin" {
+  return email && email.toLowerCase() === ADMIN_EMAIL.toLowerCase() ? "admin" : "user";
+}
+
 let initialized = false;
 
 export function formatAuthError(err: any): string {
@@ -79,7 +85,7 @@ function initAuth() {
             email: u.email || "",
             displayName: u.displayName || u.email?.split("@")[0] || "User",
             photoURL: u.photoURL || "",
-            role: "user",
+            role: resolveRole(u.email),
             createdAt: serverTimestamp(),
           };
           await setDoc(userDocRef, profile);
@@ -107,7 +113,7 @@ function initAuth() {
             email: u.email || "",
             displayName: u.displayName || u.email?.split("@")[0] || "User",
             photoURL: u.photoURL || "",
-            role: "user",
+            role: resolveRole(u.email),
             createdAt: serverTimestamp(),
           };
           await setDoc(userDocRef, newProfile);
@@ -145,7 +151,7 @@ export function useUserAuth() {
           email: u.email || "",
           displayName: u.displayName || u.email?.split("@")[0] || "User",
           photoURL: u.photoURL || "",
-          role: "user",
+          role: resolveRole(u.email),
           createdAt: serverTimestamp(),
         };
         await setDoc(userDocRef, profile);
@@ -182,7 +188,7 @@ export function useUserAuth() {
       email: u.email || "",
       displayName: name || u.email?.split("@")[0] || "User",
       photoURL: "",
-      role: "user",
+      role: resolveRole(u.email),
       createdAt: serverTimestamp(),
     };
     await setDoc(doc(db, "users", u.uid), profile);

@@ -150,6 +150,8 @@ const router = createRouter({
   },
 });
 
+const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || "fegasusena@gmail.com";
+
 router.beforeEach(async (to) => {
   const needsAuth = to.matched.some((r) => r.meta.requiresAuth);
   const needsGuest = to.meta.requiresGuest;
@@ -171,6 +173,12 @@ router.beforeEach(async (to) => {
       }
       return { name: "admin-login" };
     }
+
+    // Verify user is an authorized admin
+    if (currentUser?.email !== ADMIN_EMAIL) {
+      console.warn("Akses rute admin ditolak untuk:", currentUser?.email);
+      return { name: "home" };
+    }
   }
 
   if (needsGuest && isAuthed) {
@@ -183,7 +191,10 @@ router.beforeEach(async (to) => {
       }
       return true;
     }
-    return { name: "admin-dashboard" };
+    if (currentUser?.email === ADMIN_EMAIL) {
+      return { name: "admin-dashboard" };
+    }
+    return true;
   }
 
   return true;
